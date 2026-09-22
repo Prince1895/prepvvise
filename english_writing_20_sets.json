@@ -1,0 +1,446 @@
+{
+  "module": "English Communication",
+  "section": "Writing",
+  "version": "1.0",
+  "assessmentRules": {
+    "totalSets": 20,
+    "questionsPerSet": 2,
+    "essayPerSet": 1,
+    "articlePerSet": 1,
+    "totalQuestions": 40,
+    "timeLimitMinutes": 30,
+    "maxWordsPerResponse": 200,
+    "aiEvaluation": true,
+    "evaluationCriteria": [
+      "relevance",
+      "content",
+      "organization",
+      "grammar",
+      "vocabulary",
+      "clarity",
+      "coherence"
+    ]
+  },
+  "sets": [
+    {
+      "setId": "writing-01",
+      "title": "Modern Student Life",
+      "difficulty": "Easy",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-01-q1",
+          "type": "essay",
+          "prompt": "Students today often spend a considerable amount of time using smartphones for entertainment, communication, and study. While mobile devices can be useful, excessive use may affect sleep, concentration, physical activity, and social interaction. What are your views on this situation? Discuss the possible effects and suggest practical ways to encourage healthier mobile usage.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-01-q2",
+          "type": "article",
+          "prompt": "Young people increasingly depend on digital devices for studying, communicating, shopping, and entertainment. Although technology makes many activities easier, spending too much time online can reduce time for physical activity and face-to-face interaction. Write an article for a college magazine explaining how students can maintain a healthy balance between digital and offline activities.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-02",
+      "title": "Education and Learning",
+      "difficulty": "Easy",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-02-q1",
+          "type": "essay",
+          "prompt": "Education is no longer restricted to classrooms, textbooks, and fixed schedules. Students can now access lectures, courses, libraries, and educational resources from almost anywhere. Do you think these changes have improved the learning experience? Discuss the benefits and challenges of technology-supported education.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-02-q2",
+          "type": "article",
+          "prompt": "Many students find it difficult to develop a regular reading habit because of academic pressure and digital entertainment. However, reading can improve vocabulary, knowledge, concentration, and imagination. Write an article for your college magazine explaining why students should develop a regular reading habit and how they can do so.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-03",
+      "title": "Social Media",
+      "difficulty": "Easy",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-03-q1",
+          "type": "essay",
+          "prompt": "Social media has become an important part of everyday communication. It helps people remain connected and discover information quickly, but excessive or careless use can affect productivity, privacy, and relationships. Discuss the positive and negative effects of social media on young people.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-03-q2",
+          "type": "article",
+          "prompt": "Students frequently use social media to communicate, learn new things, and follow current events. At the same time, sharing personal information without caution can create privacy and security risks. Write an article explaining practical steps students can take to use social media responsibly.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-04",
+      "title": "Learning Methods",
+      "difficulty": "Easy",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-04-q1",
+          "type": "essay",
+          "prompt": "Online education has made it possible for students to attend classes and access study materials from home. Traditional classrooms, however, provide direct interaction with teachers and classmates. Both approaches have advantages and limitations. Discuss the important features of online and classroom-based learning.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-04-q2",
+          "type": "article",
+          "prompt": "Many students struggle to remain focused during online classes because of notifications, entertainment, and distractions at home. Write an article for a student newsletter suggesting practical methods that can help students make online learning more effective.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-05",
+      "title": "Communication Skills",
+      "difficulty": "Easy",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-05-q1",
+          "type": "essay",
+          "prompt": "Good communication is important in academic life, professional work, and personal relationships. A person may have excellent knowledge but still face difficulties if ideas cannot be expressed clearly. Discuss why effective communication skills are important for students and how they can develop them.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-05-q2",
+          "type": "article",
+          "prompt": "College students regularly participate in presentations, group discussions, interviews, and teamwork. Many students feel nervous while speaking in front of others. Write an article giving useful suggestions that can help students improve their confidence and communication skills.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-06",
+      "title": "Technology and Daily Life",
+      "difficulty": "Easy",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-06-q1",
+          "type": "essay",
+          "prompt": "Technology has changed the way people study, work, travel, communicate, and manage everyday tasks. These developments have made many activities faster and more convenient, but they may also create new challenges. Discuss how technology has changed daily life and whether people need to use it responsibly.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-06-q2",
+          "type": "article",
+          "prompt": "Smart devices and digital applications can help students organize schedules, track tasks, access information, and communicate with others. Write an article for a college newsletter describing useful ways students can use technology to improve their daily productivity.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-07",
+      "title": "Teamwork",
+      "difficulty": "Easy",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-07-q1",
+          "type": "essay",
+          "prompt": "In colleges and workplaces, people often have to work with others who have different ideas, skills, and personalities. Successful teamwork requires communication, cooperation, responsibility, and respect. Discuss why teamwork is important and what makes a team effective.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-07-q2",
+          "type": "article",
+          "prompt": "Students often work on group projects where differences of opinion can lead to disagreements. Write an article explaining how students can handle differences within a team and work together toward a common goal.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-08",
+      "title": "Environment",
+      "difficulty": "Easy",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-08-q1",
+          "type": "essay",
+          "prompt": "Environmental problems such as increasing waste, pollution, and excessive consumption are becoming important concerns for communities. Individual choices can also influence the environment. Discuss how ordinary people, especially students, can contribute to protecting the environment.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-08-q2",
+          "type": "article",
+          "prompt": "College campuses generate considerable amounts of paper, plastic, food waste, and electronic waste. Write an article for your college magazine suggesting practical steps that students and institutions can take to reduce waste on campus.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-09",
+      "title": "Health and Lifestyle",
+      "difficulty": "Easy",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-09-q1",
+          "type": "essay",
+          "prompt": "Modern students often have demanding schedules involving classes, assignments, examinations, and career preparation. As a result, physical activity and healthy routines may receive less attention. Discuss why maintaining a healthy lifestyle is important for students.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-09-q2",
+          "type": "article",
+          "prompt": "Many young people spend long periods sitting while studying or using computers and phones. Write an article explaining simple ways students can include physical activity in their daily routines without affecting their studies.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-10",
+      "title": "Artificial Intelligence",
+      "difficulty": "Medium",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-10-q1",
+          "type": "essay",
+          "prompt": "Artificial intelligence is becoming increasingly common in education, workplaces, search tools, and everyday applications. It can help people perform tasks more efficiently, but its use also raises questions about dependence, accuracy, creativity, and responsibility. Discuss the opportunities and challenges created by AI for students.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-10-q2",
+          "type": "article",
+          "prompt": "Students are increasingly using AI tools to understand concepts, generate ideas, and improve their work. Write an article explaining how students can use AI as a learning aid while still developing their own knowledge, creativity, and problem-solving skills.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-11",
+      "title": "Critical Thinking",
+      "difficulty": "Medium",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-11-q1",
+          "type": "essay",
+          "prompt": "People receive large amounts of information through social media, websites, videos, advertisements, and conversations. Not all information is accurate or complete. Discuss why critical thinking is important when people make decisions or evaluate information.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-11-q2",
+          "type": "article",
+          "prompt": "Students often encounter conflicting information while researching academic topics online. Write an article for students explaining how they can check information carefully before accepting or sharing it.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-12",
+      "title": "Failure and Success",
+      "difficulty": "Medium",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-12-q1",
+          "type": "essay",
+          "prompt": "Students and young professionals may sometimes feel discouraged when they fail an examination, lose an opportunity, or make a mistake. However, such experiences can also provide valuable lessons. Discuss how failure can influence personal growth and what people can learn from unsuccessful experiences.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-12-q2",
+          "type": "article",
+          "prompt": "People often focus heavily on achievements and may hesitate to discuss mistakes. Write an article explaining why learning from mistakes can help students improve their skills, confidence, and future performance.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-13",
+      "title": "Work-Life Balance",
+      "difficulty": "Medium",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-13-q1",
+          "type": "essay",
+          "prompt": "Students preparing for examinations, internships, and careers may spend most of their time studying or working on projects. Continuous pressure without sufficient rest can affect productivity and well-being. Discuss why maintaining a balance between responsibilities and personal time is important.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-13-q2",
+          "type": "article",
+          "prompt": "Many students find it difficult to manage academics, hobbies, friendships, family responsibilities, and rest. Write an article providing practical suggestions for creating a balanced daily routine.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-14",
+      "title": "Creativity",
+      "difficulty": "Medium",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-14-q1",
+          "type": "essay",
+          "prompt": "Creativity is often associated with art and design, but it is also useful when solving problems, developing products, communicating ideas, and finding new approaches to challenges. Discuss why creativity is valuable in education and professional life.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-14-q2",
+          "type": "article",
+          "prompt": "Students sometimes avoid sharing unusual ideas because they are afraid that others may criticize them. Write an article explaining how educational institutions can create an environment where students feel comfortable experimenting and expressing creative ideas.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-15",
+      "title": "Online Safety",
+      "difficulty": "Medium",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-15-q1",
+          "type": "essay",
+          "prompt": "People share personal information online while creating accounts, shopping, communicating, and using social media. Careless online behaviour can expose users to scams, identity theft, privacy problems, and other risks. Discuss why digital safety has become important in modern life.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-15-q2",
+          "type": "article",
+          "prompt": "College students frequently use public Wi-Fi, online payment services, social media, and cloud applications. Write an article giving practical online safety advice that students should follow while using digital services.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-16",
+      "title": "Leadership",
+      "difficulty": "Medium",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-16-q1",
+          "type": "essay",
+          "prompt": "Leadership is not limited to people holding official positions. Students may demonstrate leadership while organizing events, managing projects, helping teammates, or taking responsibility during difficult situations. Discuss the qualities that make someone an effective leader.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-16-q2",
+          "type": "article",
+          "prompt": "Student clubs and college events often require people to coordinate volunteers, divide responsibilities, and solve unexpected problems. Write an article explaining how students can develop leadership skills through such activities.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-17",
+      "title": "Career Preparation",
+      "difficulty": "Medium",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-17-q1",
+          "type": "essay",
+          "prompt": "The transition from college to professional life can be challenging because employers may expect more than academic qualifications. Communication, problem-solving, teamwork, adaptability, and practical knowledge can also be important. Discuss how students can prepare themselves for their future careers.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-17-q2",
+          "type": "article",
+          "prompt": "Many students begin preparing for placements only shortly before recruitment drives. Write an article for final-year students suggesting activities they can start early to become better prepared for internships and employment opportunities.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-18",
+      "title": "Financial Awareness",
+      "difficulty": "Medium",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-18-q1",
+          "type": "essay",
+          "prompt": "Young adults often begin making independent financial decisions when they enter college or start earning. Poor planning can lead to unnecessary spending and difficulty managing limited resources. Discuss why financial awareness is important for students and young professionals.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-18-q2",
+          "type": "article",
+          "prompt": "Students may receive a limited monthly allowance and still have expenses related to travel, food, education, and entertainment. Write an article explaining simple habits that can help students manage their money responsibly.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-19",
+      "title": "Future Skills",
+      "difficulty": "Hard",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-19-q1",
+          "type": "essay",
+          "prompt": "The workplace is changing because of automation, artificial intelligence, remote collaboration, and rapidly developing technologies. Some traditional tasks are being transformed while new roles and skills are emerging. Discuss how students can prepare for a changing employment landscape.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-19-q2",
+          "type": "article",
+          "prompt": "Employers increasingly look for candidates who can learn new tools and adapt when requirements change. Write an article explaining why continuous learning can be important for students beginning their professional careers.",
+          "maxWords": 200
+        }
+      ]
+    },
+    {
+      "setId": "writing-20",
+      "title": "Responsible Technology Use",
+      "difficulty": "Hard",
+      "timeLimitMinutes": 30,
+      "maxWordsPerResponse": 200,
+      "questions": [
+        {
+          "questionId": "writing-20-q1",
+          "type": "essay",
+          "prompt": "Digital technology provides enormous opportunities for education, communication, business, and entertainment. At the same time, careless use can contribute to misinformation, privacy concerns, excessive screen time, and reduced face-to-face interaction. Discuss how society can encourage responsible use of technology.",
+          "maxWords": 200
+        },
+        {
+          "questionId": "writing-20-q2",
+          "type": "article",
+          "prompt": "Digital platforms influence how people receive news, communicate with others, and form opinions. Write an article explaining how young people can become responsible digital citizens and contribute positively to online communities.",
+          "maxWords": 200
+        }
+      ]
+    }
+  ]
+}

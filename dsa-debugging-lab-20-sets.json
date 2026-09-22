@@ -1,0 +1,1138 @@
+{
+  "name": "DSA Debugging Lab",
+  "version": "1.0",
+  "totalSets": 20,
+  "questionsPerSet": 1,
+  "totalQuestions": 20,
+  "codeVariants": 100,
+  "difficulty": "Medium",
+  "supportedLanguages": [
+    "Java",
+    "C++",
+    "C",
+    "Python",
+    "JavaScript"
+  ],
+  "sets": [
+    {
+      "setId": 1,
+      "title": "Debugging Lab - Set 1",
+      "question": {
+        "id": "DL-001",
+        "title": "First Duplicate",
+        "difficulty": "Medium",
+        "topic": "Arrays + Hashing",
+        "description": "Return the first value whose duplicate is encountered while scanning left to right; return -1 if none.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "duplicate detection / first occurrence semantics",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static int solve(int[] a){ Set<Integer> seen=new HashSet<>(); for(int x:a){ if(seen.contains(x)) return x; seen.add(x); } return -1; }"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "int solve(vector<int> a){ unordered_set<int> s; for(int x:a){ if(s.count(x)) return x; s.insert(x); } return -1; }"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "int solve(int a[],int n){ int seen[100001]={0}; for(int i=0;i<n;i++){ if(seen[a[i]]) return a[i]; seen[a[i]]=1; } return -1; }"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def solve(a):\n    seen=set()\n    for x in a:\n        if x in seen: return x\n        seen.add(x)\n    return -1"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function solve(a){ const s=new Set(); for(const x of a){ if(s.has(x)) return x; s.add(x); } return -1; }"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "[2,1,3,1,4]",
+            "output": "1"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "[1,2,3,4]",
+            "expectedOutput": "-1"
+          },
+          {
+            "input": "[7,3,5,7,3]",
+            "expectedOutput": "7"
+          },
+          {
+            "input": "[4,4,2,1]",
+            "expectedOutput": "4"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 2,
+      "title": "Debugging Lab - Set 2",
+      "question": {
+        "id": "DL-002",
+        "title": "Remove Duplicates",
+        "difficulty": "Medium",
+        "topic": "Two Pointers",
+        "description": "Given a sorted array, remove duplicates in-place and return the number of unique elements.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "returned unique-count index",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static int solve(int[] a){int j=0;for(int i=1;i<a.length;i++)if(a[i]!=a[j])a[++j]=a[i];return j;}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "int solve(vector<int>&a){int j=0;for(int i=1;i<a.size();i++)if(a[i]!=a[j])a[++j]=a[i];return j;}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "int solve(int a[],int n){int j=0;for(int i=1;i<n;i++)if(a[i]!=a[j])a[++j]=a[i];return j;}"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def solve(a):\n    j=0\n    for i in range(1,len(a)):\n        if a[i]!=a[j]: j+=1; a[j]=a[i]\n    return j"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function solve(a){let j=0;for(let i=1;i<a.length;i++)if(a[i]!==a[j])a[++j]=a[i];return j;}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "[1,1,2,2,3,3,4]",
+            "output": "4"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "[1,1,1]",
+            "expectedOutput": "1"
+          },
+          {
+            "input": "[1,2,3]",
+            "expectedOutput": "3"
+          },
+          {
+            "input": "[0,0,1,1,2]",
+            "expectedOutput": "3"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 3,
+      "title": "Debugging Lab - Set 3",
+      "question": {
+        "id": "DL-003",
+        "title": "Longest Subarray With Sum K",
+        "difficulty": "Medium",
+        "topic": "Sliding Window",
+        "description": "For an array of positive integers, return the maximum length subarray whose sum is exactly K.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "window length off-by-one",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static int solve(int[]a,int k){int l=0,sum=0,ans=0;for(int r=0;r<a.length;r++){sum+=a[r];while(sum>k)sum-=a[l++];if(sum==k)ans=Math.max(ans,r-l);}return ans;}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "int solve(vector<int>&a,int k){int l=0,s=0,ans=0;for(int r=0;r<a.size();r++){s+=a[r];while(s>k)s-=a[l++];if(s==k)ans=max(ans,r-l);}return ans;}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "int solve(int a[],int n,int k){int l=0,s=0,ans=0;for(int r=0;r<n;r++){s+=a[r];while(s>k)s-=a[l++];if(s==k)ans=ans>r-l?ans:r-l;}return ans;}"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def solve(a,k):\n    l=s=ans=0\n    for r,x in enumerate(a):\n        s+=x\n        while s>k: s-=a[l]; l+=1\n        if s==k: ans=max(ans,r-l)\n    return ans"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function solve(a,k){let l=0,s=0,ans=0;for(let r=0;r<a.length;r++){s+=a[r];while(s>k)s-=a[l++];if(s===k)ans=Math.max(ans,r-l);}return ans;}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "[1,2,1,1,1,3], K=3",
+            "output": "3"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "[1,1,1,1], K=2",
+            "expectedOutput": "2"
+          },
+          {
+            "input": "[5,1,1,1], K=3",
+            "expectedOutput": "3"
+          },
+          {
+            "input": "[2,3,1,2], K=5",
+            "expectedOutput": "2"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 4,
+      "title": "Debugging Lab - Set 4",
+      "question": {
+        "id": "DL-004",
+        "title": "First Occurrence",
+        "difficulty": "Medium",
+        "topic": "Binary Search",
+        "description": "In a sorted array, return the first index of target, or -1 when target is absent.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "binary-search boundary direction",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static int solve(int[]a,int t){int l=0,r=a.length-1,ans=-1;while(l<=r){int m=(l+r)/2;if(a[m]>=t){ans=m;l=m+1;}else r=m-1;}return ans;}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "int solve(vector<int>&a,int t){int l=0,r=a.size()-1,ans=-1;while(l<=r){int m=(l+r)/2;if(a[m]>=t){ans=m;l=m+1;}else r=m-1;}return ans;}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "int solve(int*a,int n,int t){int l=0,r=n-1,ans=-1;while(l<=r){int m=(l+r)/2;if(a[m]>=t){ans=m;l=m+1;}else r=m-1;}return ans;}"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def solve(a,t):\n    l,r=0,len(a)-1; ans=-1\n    while l<=r:\n        m=(l+r)//2\n        if a[m]>=t: ans=m; l=m+1\n        else: r=m-1\n    return ans"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function solve(a,t){let l=0,r=a.length-1,ans=-1;while(l<=r){let m=Math.floor((l+r)/2);if(a[m]>=t){ans=m;l=m+1;}else r=m-1;}return ans;}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "[1,2,2,2,3], target=2",
+            "output": "1"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "[2,2,2], target=2",
+            "expectedOutput": "0"
+          },
+          {
+            "input": "[1,2,3,4], target=4",
+            "expectedOutput": "3"
+          },
+          {
+            "input": "[1,3,5], target=2",
+            "expectedOutput": "-1"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 5,
+      "title": "Debugging Lab - Set 5",
+      "question": {
+        "id": "DL-005",
+        "title": "Merge Intervals",
+        "difficulty": "Medium",
+        "topic": "Sorting",
+        "description": "Merge all overlapping intervals and return the resulting non-overlapping intervals.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "interval endpoint update",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static int[][] solve(int[][]a){Arrays.sort(a,(x,y)->x[0]-y[0]);List<int[]>o=new ArrayList<>();for(int[]c:a){if(o.isEmpty()||c[0]>o.get(o.size()-1)[1])o.add(c);else o.get(o.size()-1)[1]=c[1];}return o.toArray(new int[0][]);}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "vector<vector<int>> solve(vector<vector<int>>&a){sort(a.begin(),a.end());vector<vector<int>>o;for(auto c:a){if(o.empty()||c[0]>o.back()[1])o.push_back(c);else o.back()[1]=c[1];}return o;}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "/* BUG: merged end must be max(oldEnd,currentEnd). */\nint solve(int a[][2],int n){ return 0; }"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def solve(a):\n    a.sort(); o=[]\n    for c in a:\n        if not o or c[0]>o[-1][1]: o.append(c[:])\n        else: o[-1][1]=c[1]\n    return o"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function solve(a){a.sort((x,y)=>x[0]-y[0]);let o=[];for(const c of a){if(!o.length||c[0]>o[o.length-1][1])o.push([...c]);else o[o.length-1][1]=c[1];}return o;}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "[[1,3],[2,6],[8,10],[9,12]]",
+            "output": "[[1,6],[8,12]]"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "[[1,4],[4,5]]",
+            "expectedOutput": "[[1,5]]"
+          },
+          {
+            "input": "[[5,7],[1,2]]",
+            "expectedOutput": "[[1,2],[5,7]]"
+          },
+          {
+            "input": "[[1,10],[2,3],[4,8]]",
+            "expectedOutput": "[[1,10]]"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 6,
+      "title": "Debugging Lab - Set 6",
+      "question": {
+        "id": "DL-006",
+        "title": "Detect Cycle",
+        "difficulty": "Medium",
+        "topic": "Linked List",
+        "description": "Return true if a singly linked list contains a cycle, otherwise false.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "fast-pointer speed",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static boolean solve(Node h){Node s=h,f=h;while(f!=null&&f.next!=null){s=s.next;f=f.next;if(s==f)return true;}return false;}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "bool solve(Node*h){Node*s=h,*f=h;while(f&&f->next){s=s->next;f=f->next;if(s==f)return true;}return false;}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "int solve(Node*h){Node*s=h,*f=h;while(f&&f->next){s=s->next;f=f->next;if(s==f)return 1;}return 0;}"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def solve(h):\n    s=f=h\n    while f and f.next:\n        s=s.next; f=f.next\n        if s is f:return True\n    return False"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function solve(h){let s=h,f=h;while(f&&f.next){s=s.next;f=f.next;if(s===f)return true;}return false;}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "1->2->3->4->2",
+            "output": "true"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "1->2->3->null",
+            "expectedOutput": "false"
+          },
+          {
+            "input": "1->1",
+            "expectedOutput": "true"
+          },
+          {
+            "input": "1->null",
+            "expectedOutput": "false"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 7,
+      "title": "Debugging Lab - Set 7",
+      "question": {
+        "id": "DL-007",
+        "title": "Valid Parentheses",
+        "difficulty": "Medium",
+        "topic": "Stack",
+        "description": "Return true when every bracket is correctly matched and nested.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "opening/closing bracket matching",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static boolean solve(String s){Stack<Character>st=new Stack<>();for(char c:s.toCharArray()){if(\"([{\".indexOf(c)>=0)st.push(c);else if(st.isEmpty()||st.pop()!=c)return false;}return st.isEmpty();}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "bool solve(string s){stack<char>st;for(char c:s){if(c=='('||c=='['||c=='{')st.push(c);else{if(st.empty()||st.top()!=c)return false;st.pop();}}return st.empty();}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "int solve(char*s){char st[1000];int t=-1;for(int i=0;s[i];i++){char c=s[i];if(c=='('||c=='['||c=='{')st[++t]=c;else if(t<0||st[t--]!=c)return 0;}return t==-1;}"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def solve(s):\n    st=[]\n    for c in s:\n        if c in \"([{\": st.append(c)\n        elif not st or st.pop()!=c: return False\n    return not st"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function solve(s){let st=[];for(const c of s){if(\"([{\".includes(c))st.push(c);else if(!st.length||st.pop()!==c)return false;}return !st.length;}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "{[()]}",
+            "output": "true"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "([)]",
+            "expectedOutput": "false"
+          },
+          {
+            "input": "()[]{}",
+            "expectedOutput": "true"
+          },
+          {
+            "input": "(((",
+            "expectedOutput": "false"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 8,
+      "title": "Debugging Lab - Set 8",
+      "question": {
+        "id": "DL-008",
+        "title": "First Non-Repeating Character",
+        "difficulty": "Medium",
+        "topic": "Queue / Frequency",
+        "description": "Return the index of the first character whose total frequency is one, or -1.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "frequency queue state",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static int solve(String s){int[]f=new int[256];Queue<Integer>q=new LinkedList<>();for(int i=0;i<s.length();i++){f[s.charAt(i)]++;if(f[s.charAt(i)]==1)q.add(i);}while(!q.isEmpty()&&f[s.charAt(q.peek())]>1)q.poll();return q.isEmpty()?-1:q.peek();}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "int solve(string s){int f[256]={};queue<int>q;for(int i=0;i<s.size();i++){f[(unsigned char)s[i]]++;if(f[(unsigned char)s[i]]==1)q.push(i);}while(!q.empty()&&f[(unsigned char)s[q.front()]]>1)q.pop();return q.empty()?-1:q.front();}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "int solve(char*s){int f[256]={},q[1000],h=0,t=0;for(int i=0;s[i];i++){f[(unsigned char)s[i]]++;if(f[(unsigned char)s[i]]==1)q[t++]=i;}while(h<t&&f[(unsigned char)s[q[h]]]>1)h++;return h==t?-1:q[h];}"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def solve(s):\n    from collections import deque\n    f={};q=deque()\n    for i,c in enumerate(s): f[c]=f.get(c,0)+1; q.append(i) if f[c]==1 else None\n    while q and f[s[q[0]]]>1:q.popleft()\n    return q[0] if q else -1"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function solve(s){let f={},q=[];for(let i=0;i<s.length;i++){f[s[i]]=(f[s[i]]||0)+1;if(f[s[i]]===1)q.push(i);}while(q.length&&f[s[q[0]]]>1)q.shift();return q.length?q[0]:-1;}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "aabbcdde",
+            "output": "4"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "aabbcc",
+            "expectedOutput": "-1"
+          },
+          {
+            "input": "swiss",
+            "expectedOutput": "1"
+          },
+          {
+            "input": "leetcode",
+            "expectedOutput": "0"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 9,
+      "title": "Debugging Lab - Set 9",
+      "question": {
+        "id": "DL-009",
+        "title": "Longest Palindromic Substring",
+        "difficulty": "Medium",
+        "topic": "Strings",
+        "description": "Return any longest palindromic substring of the input string.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "substring right boundary",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static String solve(String s){int bl=0,br=0;for(int c=0;c<s.length();c++){int l=c,r=c;while(l>=0&&r<s.length()&&s.charAt(l)==s.charAt(r)){if(r-l>br-bl){bl=l;br=r;}l--;r++;}}return s.substring(bl,br);}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "string solve(string s){int bl=0,br=0;for(int c=0;c<s.size();c++){int l=c,r=c;while(l>=0&&r<s.size()&&s[l]==s[r]){if(r-l>br-bl)bl=l,br=r;l--;r++;}}return s.substr(bl,br-bl);}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "/* BUG: returned substring excludes the right endpoint. */\nchar* solve(char*s){return s;}"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def solve(s):\n    best=s[0] if s else \"\"\n    for c in range(len(s)):\n        l=r=c\n        while l>=0 and r<len(s) and s[l]==s[r]:\n            if r-l+1>len(best): best=s[l:r]\n            l-=1;r+=1\n    return best"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function solve(s){let bl=0,br=0;for(let c=0;c<s.length;c++){let l=c,r=c;while(l>=0&&r<s.length&&s[l]===s[r]){if(r-l>br-bl){bl=l;br=r;}l--;r++;}}return s.slice(bl,br);}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "babad",
+            "output": "bab"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "cbbd",
+            "expectedOutput": "bb"
+          },
+          {
+            "input": "a",
+            "expectedOutput": "a"
+          },
+          {
+            "input": "abbae",
+            "expectedOutput": "abba"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 10,
+      "title": "Debugging Lab - Set 10",
+      "question": {
+        "id": "DL-010",
+        "title": "Sum of Digits",
+        "difficulty": "Medium",
+        "topic": "Recursion",
+        "description": "Return the sum of all decimal digits of a non-negative integer.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "recursion base case",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static int solve(int n){if(n==0)return 1;return n%10+solve(n/10);}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "int solve(int n){if(n==0)return 1;return n%10+solve(n/10);}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "int solve(int n){if(n==0)return 1;return n%10+solve(n/10);}"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def solve(n):\n    if n==0:return 1\n    return n%10+solve(n//10)"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function solve(n){if(n===0)return 1;return n%10+solve(Math.floor(n/10));}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "12345",
+            "output": "15"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "0",
+            "expectedOutput": "0"
+          },
+          {
+            "input": "999",
+            "expectedOutput": "27"
+          },
+          {
+            "input": "10001",
+            "expectedOutput": "2"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 11,
+      "title": "Debugging Lab - Set 11",
+      "question": {
+        "id": "DL-011",
+        "title": "Subsets",
+        "difficulty": "Medium",
+        "topic": "Backtracking",
+        "description": "Return all subsets of an array of distinct integers.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "backtracking state restoration",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static void gen(int[]a,int i,List<Integer>c,List<List<Integer>>o){if(i==a.length){o.add(new ArrayList<>(c));return;}gen(a,i+1,c,o);c.add(a[i]);gen(a,i+1,c,o);/* BUG: missing c.remove(c.size()-1) */}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "void gen(vector<int>&a,int i,vector<int>&c,vector<vector<int>>&o){if(i==a.size()){o.push_back(c);return;}gen(a,i+1,c,o);c.push_back(a[i]);gen(a,i+1,c,o);/* BUG: no pop_back */}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "/* BUG: backtracking state is not restored after the recursive call. */\nvoid gen(int*a,int n,int i){ /* complete the debugger fix */ }"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def gen(a,i,c,o):\n    if i==len(a): o.append(c[:]); return\n    gen(a,i+1,c,o)\n    c.append(a[i]); gen(a,i+1,c,o) # BUG: no pop()"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function gen(a,i,c,o){if(i===a.length){o.push([...c]);return;}gen(a,i+1,c,o);c.push(a[i]);gen(a,i+1,c,o);/* BUG: no pop() */}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "[1,2,3]",
+            "output": "8 subsets"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "[]",
+            "expectedOutput": "1 subset"
+          },
+          {
+            "input": "[5]",
+            "expectedOutput": "2 subsets"
+          },
+          {
+            "input": "[1,2]",
+            "expectedOutput": "4 subsets"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 12,
+      "title": "Debugging Lab - Set 12",
+      "question": {
+        "id": "DL-012",
+        "title": "Maximum Depth",
+        "difficulty": "Medium",
+        "topic": "Binary Tree",
+        "description": "Return the maximum number of nodes on a root-to-leaf path.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "min vs max subtree depth",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static int solve(Node r){if(r==null)return 0;return 1+Math.min(solve(r.left),solve(r.right));}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "int solve(Node*r){if(!r)return 0;return 1+min(solve(r->left),solve(r->right));}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "int solve(Node*r){if(!r)return 0;int l=solve(r->left),q=solve(r->right);return 1+(l<q?l:q);}"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def solve(r):\n    if not r:return 0\n    return 1+min(solve(r.left),solve(r.right))"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function solve(r){if(!r)return 0;return 1+Math.min(solve(r.left),solve(r.right));}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "[3,9,20,null,null,15,7]",
+            "output": "3"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "[]",
+            "expectedOutput": "0"
+          },
+          {
+            "input": "[1]",
+            "expectedOutput": "1"
+          },
+          {
+            "input": "[1,2,3,4]",
+            "expectedOutput": "3"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 13,
+      "title": "Debugging Lab - Set 13",
+      "question": {
+        "id": "DL-013",
+        "title": "Validate BST",
+        "difficulty": "Medium",
+        "topic": "BST",
+        "description": "Return true if the binary tree satisfies the strict BST property.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "BST bound propagation",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static boolean check(Node r,long lo,long hi){if(r==null)return true;if(r.val<=lo||r.val>=hi)return false;return check(r.left,lo,r.val)&&check(r.right,r.val,hi);}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "bool check(Node*r,long lo,long hi){if(!r)return true;if(r->val<=lo||r->val>=hi)return false;return check(r->left,lo,r->val)&&check(r->right,r->val,hi);}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "int check(Node*r,int lo,int hi){if(!r)return 1;if(r->val<=lo||r->val>=hi)return 0;return check(r->left,lo,r->val)&&check(r->right,r->val,hi);}"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def check(r,lo,hi):\n    if not r:return True\n    if r.val<=lo or r.val>=hi:return False\n    return check(r.left,lo,r.val) and check(r.right,r.val,hi)"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function check(r,lo,hi){if(!r)return true;if(r.val<=lo||r.val>=hi)return false;return check(r.left,lo,r.val)&&check(r.right,r.val,hi)}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "[5,3,7,2,4,6,8]",
+            "output": "true"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "[5,1,4,null,null,3,6]",
+            "expectedOutput": "false"
+          },
+          {
+            "input": "[2,2]",
+            "expectedOutput": "false"
+          },
+          {
+            "input": "[1]",
+            "expectedOutput": "true"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 14,
+      "title": "Debugging Lab - Set 14",
+      "question": {
+        "id": "DL-014",
+        "title": "Kth Largest",
+        "difficulty": "Medium",
+        "topic": "Heap / Priority Queue",
+        "description": "Return the kth largest value in the array.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "heap invariant",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static int solve(int[]a,int k){PriorityQueue<Integer>p=new PriorityQueue<>();for(int x:a){p.add(x);if(p.size()>k)p.poll();}return p.peek();}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "int solve(vector<int>a,int k){priority_queue<int,vector<int>,greater<int>>p;for(int x:a){p.push(x);if(p.size()>k)p.pop();}return p.top();}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "/* BUG: this implementation does not maintain a size-k min heap. */\nint solve(int*a,int n,int k){return a[0];}"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def solve(a,k):\n    import heapq\n    h=[]\n    for x in a:\n        heapq.heappush(h,x)\n        if len(h)>k:heapq.heappop(h)\n    return h[0]"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function solve(a,k){let h=[];for(const x of a){h.push(x);h.sort((p,q)=>p-q);if(h.length>k)h.shift();}return h[0];}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "[3,2,1,5,6,4], k=2",
+            "output": "5"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "[1], k=1",
+            "expectedOutput": "1"
+          },
+          {
+            "input": "[3,3,2,1], k=3",
+            "expectedOutput": "2"
+          },
+          {
+            "input": "[7,6,5,4], k=4",
+            "expectedOutput": "4"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 15,
+      "title": "Debugging Lab - Set 15",
+      "question": {
+        "id": "DL-015",
+        "title": "Activity Selection",
+        "difficulty": "Medium",
+        "topic": "Greedy",
+        "description": "Select the maximum number of non-overlapping activities.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "greedy ordering",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static int solve(int[]s,int[]e){int ans=0,last=-1;for(int i=0;i<s.length;i++)if(s[i]>=last){ans++;last=e[i];}return ans;}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "int solve(vector<int>s,vector<int>e){int ans=0,last=-1;for(int i=0;i<s.size();i++)if(s[i]>=last){ans++;last=e[i];}return ans;}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "int solve(int*s,int*e,int n){int ans=0,last=-1;for(int i=0;i<n;i++)if(s[i]>=last){ans++;last=e[i];}return ans;}"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def solve(s,e):\n    ans=0;last=-1\n    for i in range(len(s)):\n        if s[i]>=last:ans+=1;last=e[i]\n    return ans"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function solve(s,e){let ans=0,last=-1;for(let i=0;i<s.length;i++)if(s[i]>=last){ans++;last=e[i];}return ans;}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "start=[1,3,0,5,8], end=[2,4,6,7,9]",
+            "output": "4"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "start=[1,2,3], end=[2,3,4]",
+            "expectedOutput": "3"
+          },
+          {
+            "input": "start=[0,1,1], end=[10,2,3]",
+            "expectedOutput": "2"
+          },
+          {
+            "input": "start=[1], end=[2]",
+            "expectedOutput": "1"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 16,
+      "title": "Debugging Lab - Set 16",
+      "question": {
+        "id": "DL-016",
+        "title": "Shortest Path in Unweighted Graph",
+        "difficulty": "Medium",
+        "topic": "Graph BFS",
+        "description": "Return the minimum number of edges from source to target, or -1 if unreachable.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "BFS source distance initialization",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static int solve(List<Integer>[]g,int s,int t){Queue<Integer>q=new LinkedList<>();int[]d=new int[g.length];Arrays.fill(d,-1);q.add(s);while(!q.isEmpty()){int u=q.poll();if(u==t)return d[u];for(int v:g[u])if(d[v]==-1){d[v]=d[u]+1;q.add(v);}}return -1;}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "int solve(vector<vector<int>>&g,int s,int t){queue<int>q;vector<int>d(g.size(),-1);q.push(s);while(!q.empty()){int u=q.front();q.pop();if(u==t)return d[u];for(int v:g[u])if(d[v]==-1){d[v]=d[u]+1;q.push(v);}}return -1;}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "/* BUG: source distance must be initialized to 0. */\nint solve(int g[][10],int n,int s,int t){return -1;}"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def solve(g,s,t):\n    from collections import deque\n    q=deque([s]);d=[-1]*len(g)\n    while q:\n        u=q.popleft()\n        if u==t:return d[u]\n        for v in g[u]:\n            if d[v]==-1:d[v]=d[u]+1;q.append(v)\n    return -1"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function solve(g,s,t){let q=[s],d=Array(g.length).fill(-1);while(q.length){let u=q.shift();if(u===t)return d[u];for(const v of g[u])if(d[v]===-1){d[v]=d[u]+1;q.push(v);}}return -1;}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "edges=[[0,1],[0,2],[1,3],[2,3]], s=0, t=3",
+            "output": "2"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "edges=[[0,1],[1,2]], s=0, t=2",
+            "expectedOutput": "2"
+          },
+          {
+            "input": "edges=[[0,1]], s=1, t=0",
+            "expectedOutput": "1"
+          },
+          {
+            "input": "edges=[[0,1]], s=0, t=2",
+            "expectedOutput": "-1"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 17,
+      "title": "Debugging Lab - Set 17",
+      "question": {
+        "id": "DL-017",
+        "title": "Connected Components",
+        "difficulty": "Medium",
+        "topic": "Graph DFS",
+        "description": "Return the number of connected components in an undirected graph.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "DFS visitation timing",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static void dfs(int u,List<Integer>[]g,boolean[]v){for(int x:g[u])if(!v[x]){v[u]=true;dfs(x,g,v);}}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "void dfs(int u,vector<vector<int>>&g,vector<int>&v){for(int x:g[u])if(!v[x]){v[u]=1;dfs(x,g,v);}}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "void dfs(int u,int g[][10],int n,int*v){for(int x=0;x<n;x++)if(g[u][x]&&!v[x]){v[u]=1;dfs(x,g,n,v);}}"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def dfs(u,g,v):\n    for x in g[u]:\n        if not v[x]:v[u]=True;dfs(x,g,v)"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function dfs(u,g,v){for(const x of g[u])if(!v[x]){v[u]=true;dfs(x,g,v);}}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "n=5, edges=[[0,1],[1,2],[3,4]]",
+            "output": "2"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "n=4, edges=[]",
+            "expectedOutput": "4"
+          },
+          {
+            "input": "n=3, edges=[[0,1],[1,2]]",
+            "expectedOutput": "1"
+          },
+          {
+            "input": "n=5, edges=[[0,1],[2,3],[3,4]]",
+            "expectedOutput": "2"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 18,
+      "title": "Debugging Lab - Set 18",
+      "question": {
+        "id": "DL-018",
+        "title": "House Robber",
+        "difficulty": "Medium",
+        "topic": "Dynamic Programming",
+        "description": "Return the maximum sum without selecting adjacent elements.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "DP transition",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static int solve(int[]a){if(a.length==0)return 0;int[]d=new int[a.length];d[0]=a[0];for(int i=1;i<a.length;i++)d[i]=Math.max(d[i-1],a[i]+(i>1?d[i-1]:0));return d[a.length-1];}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "int solve(vector<int>a){if(a.empty())return 0;vector<int>d(a.size());d[0]=a[0];for(int i=1;i<a.size();i++)d[i]=max(d[i-1],a[i]+(i>1?d[i-1]:0));return d.back();}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "int solve(int*a,int n){if(!n)return 0;int d[1000];d[0]=a[0];for(int i=1;i<n;i++){int take=a[i]+(i>1?d[i-1]:0);d[i]=d[i-1]>take?d[i-1]:take;}return d[n-1];}"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def solve(a):\n    if not a:return 0\n    d=[0]*len(a);d[0]=a[0]\n    for i in range(1,len(a)):d[i]=max(d[i-1],a[i]+(d[i-1] if i>1 else 0))\n    return d[-1]"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function solve(a){if(!a.length)return 0;let d=Array(a.length);d[0]=a[0];for(let i=1;i<a.length;i++)d[i]=Math.max(d[i-1],a[i]+(i>1?d[i-1]:0));return d.at(-1);}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "[2,7,9,3,1]",
+            "output": "12"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "[1,2,3,1]",
+            "expectedOutput": "4"
+          },
+          {
+            "input": "[2,1,1,2]",
+            "expectedOutput": "4"
+          },
+          {
+            "input": "[5]",
+            "expectedOutput": "5"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 19,
+      "title": "Debugging Lab - Set 19",
+      "question": {
+        "id": "DL-019",
+        "title": "Subarray Sum Equals K",
+        "difficulty": "Medium",
+        "topic": "Prefix Sum",
+        "description": "Count continuous subarrays whose sum is exactly K.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "prefix-frequency update order",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static int solve(int[]a,int k){Map<Integer,Integer>m=new HashMap<>();m.put(0,1);int s=0,ans=0;for(int x:a){s+=x;m.put(s,m.getOrDefault(s,0)+1);ans+=m.getOrDefault(s-k,0);}return ans;}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "int solve(vector<int>a,int k){unordered_map<int,int>m{{0,1}};int s=0,ans=0;for(int x:a){s+=x;m[s]++;ans+=m[s-k];}return ans;}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "/* BUG: prefix frequency should be queried before adding the current prefix. */\nint solve(int*a,int n,int k){return 0;}"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def solve(a,k):\n    m={0:1};s=ans=0\n    for x in a:\n        s+=x;m[s]=m.get(s,0)+1;ans+=m.get(s-k,0)\n    return ans"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function solve(a,k){let m=new Map([[0,1]]),s=0,ans=0;for(const x of a){s+=x;m.set(s,(m.get(s)||0)+1);ans+=m.get(s-k)||0;}return ans;}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "[1,1,1], K=2",
+            "output": "2"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "[1,2,3], K=3",
+            "expectedOutput": "2"
+          },
+          {
+            "input": "[0,0,0], K=0",
+            "expectedOutput": "6"
+          },
+          {
+            "input": "[1,-1,0], K=0",
+            "expectedOutput": "3"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    },
+    {
+      "setId": 20,
+      "title": "Debugging Lab - Set 20",
+      "question": {
+        "id": "DL-020",
+        "title": "Dijkstra",
+        "difficulty": "Medium",
+        "topic": "Shortest Path",
+        "description": "Return shortest distances from source in a graph with non-negative edge weights.",
+        "debugTask": "Find and fix the bug in the provided implementation. Preserve the intended algorithm and input/output contract.",
+        "bugCategory": "Dijkstra relaxation/state",
+        "languages": {
+          "Java": {
+            "language": "Java",
+            "wrongCode": "static int[] solve(List<int[]>[]g,int s){int[]d=new int[g.length];Arrays.fill(d,Integer.MAX_VALUE);d[s]=0;PriorityQueue<int[]>p=new PriorityQueue<>((a,b)->a[1]-b[1]);p.add(new int[]{s,0});while(!p.isEmpty()){int[]u=p.poll();for(int[]e:g[u[0]])if(d[e[0]]>u[1]+e[1]){d[e[0]]=u[1]+e[1];p.add(new int[]{e[0],d[e[0]]});}}return d;}"
+          },
+          "C++": {
+            "language": "C++",
+            "wrongCode": "vector<int> solve(vector<vector<pair<int,int>>>&g,int s){vector<int>d(g.size(),1e9);priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;d[s]=0;p.push({0,s});while(!p.empty()){auto [du,u]=p.top();p.pop();for(auto [v,w]:g[u])if(d[v]>du+w){d[v]=du+w;p.push({d[v],v});}}return d;}"
+          },
+          "C": {
+            "language": "C",
+            "wrongCode": "/* BUG: relaxation uses the wrong distance/state. */\nint* solve(int g[][3],int m,int n,int s){return 0;}"
+          },
+          "Python": {
+            "language": "Python",
+            "wrongCode": "def solve(g,s):\n    import heapq\n    d=[10**18]*len(g);d[s]=0;p=[(0,s)]\n    while p:\n        du,u=heapq.heappop(p)\n        for v,w in g[u]:\n            if d[v]>d[u]+w:d[v]=d[u]+w;heapq.heappush(p,(d[v],v))\n    return d"
+          },
+          "JavaScript": {
+            "language": "JavaScript",
+            "wrongCode": "function solve(g,s){let d=Array(g.length).fill(Infinity);d[s]=0;let p=[[0,s]];while(p.length){p.sort((a,b)=>a[0]-b[0]);let [du,u]=p.shift();for(const [v,w] of g[u])if(d[v]>d[u]+w){d[v]=d[u]+w;p.push([d[v],v]);}}return d;}"
+          }
+        },
+        "sampleTestCases": [
+          {
+            "input": "edges=[[0,1,4],[0,2,1],[2,1,2]], source=0",
+            "output": "[0,3,1]"
+          }
+        ],
+        "hiddenTestCases": [
+          {
+            "input": "edges=[[0,1,1],[1,2,2],[0,2,5]], source=0",
+            "expectedOutput": "[0,1,3]"
+          },
+          {
+            "input": "edges=[[0,1,7]], source=1",
+            "expectedOutput": "[0,0,inf]"
+          },
+          {
+            "input": "edges=[[0,1,2],[0,2,10],[1,2,3]], source=0",
+            "expectedOutput": "[0,2,5]"
+          }
+        ],
+        "judgePolicy": "Hidden test cases must not be displayed to learners."
+      }
+    }
+  ]
+}

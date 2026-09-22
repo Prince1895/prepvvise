@@ -1,0 +1,1 @@
+ALTER TABLE "assessment_modules" ADD COLUMN "duration_minutes" integer DEFAULT 20 NOT NULL;

@@ -1,0 +1,2133 @@
+{
+  "id": "debugging-learn",
+  "name": "Debugging Lab Learn",
+  "title": "Debugging Curriculum & Mastery Guide",
+  "description": "Master debugging fundamentals, error diagnosis, data structure bugs, algorithm pitfalls, and language-specific troubleshooting.",
+  "version": "1.0.0",
+  "sections": [
+    {
+      "id": "sec-1",
+      "position": 1,
+      "title": "Debugging Fundamentals",
+      "slug": "debugging-fundamentals",
+      "description": "Core concepts, mindsets, and distinction between bugs and errors in software development.",
+      "lessons": [
+        {
+          "id": "les-1-1",
+          "position": 1,
+          "title": "What is Debugging?",
+          "slug": "what-is-debugging",
+          "description": "Learn what debugging is, how it fits into the development cycle, and the systematic process of finding bugs.",
+          "durationMinutes": 5,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Definition"
+            },
+            {
+              "type": "paragraph",
+              "text": "Debugging is the systematic process of identifying, analyzing, and resolving bugs, flaws, or unexpected behaviors in computer software or hardware. Named after the physical removal of a moth from a Harvard Mark II computer relay in 1947 by Admiral Grace Hopper's team, debugging transforms faulty code into functional software."
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "2. Explanation"
+            },
+            {
+              "type": "paragraph",
+              "text": "When code runs, it follows a strict sequence of instructions. If the output disagrees with expectations, a bug exists. Debugging involves isolating the line or state where the software's execution diverges from the intended logic."
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "3. Why It Matters"
+            },
+            {
+              "type": "paragraph",
+              "text": "Writing code is only 30% of software engineering; 70% is spent reading, testing, and debugging code. Strong debugging skills dramatically reduce feature delivery time and prevent critical runtime failures in production."
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "4. Simple Example & Demonstration"
+            },
+            {
+              "type": "example",
+              "title": "Calculating Average of Numbers",
+              "description": "Computing the average of two numbers with operator precedence bug.",
+              "language": "cpp",
+              "buggyCode": {
+                "cpp": "#include <iostream>\nusing namespace std;\n\ndouble getAverage(int a, int b) {\n    return a + b / 2.0; // Bug: division happens before addition!\n}\n\nint main() {\n    cout << getAverage(10, 20); // Expected: 15, Got: 20\n    return 0;\n}",
+                "java": "public class Main {\n    public static double getAverage(int a, int b) {\n        return a + b / 2.0; // Bug: operator precedence!\n    }\n    public static void main(String[] args) {\n        System.out.println(getAverage(10, 20)); // Expected: 15, Got: 20.0\n    }\n}",
+                "python": "def get_average(a, b):\n    return a + b / 2.0  # Bug: missing parentheses\n\nprint(get_average(10, 20))  # Expected: 15.0, Got: 20.0",
+                "javascript": "function getAverage(a, b) {\n    return a + b / 2.0; // Bug: precedence error\n}\nconsole.log(getAverage(10, 20)); // Expected: 15, Got: 20"
+              },
+              "correctCode": {
+                "cpp": "#include <iostream>\nusing namespace std;\n\ndouble getAverage(int a, int b) {\n    return (a + b) / 2.0; // Correct: explicit parentheses\n}\n\nint main() {\n    cout << getAverage(10, 20); // Output: 15\n    return 0;\n}",
+                "java": "public class Main {\n    public static double getAverage(int a, int b) {\n        return (a + b) / 2.0; // Corrected\n    }\n    public static void main(String[] args) {\n        System.out.println(getAverage(10, 20)); // Output: 15.0\n    }\n}",
+                "python": "def get_average(a, b):\n    return (a + b) / 2.0  # Corrected\n\nprint(get_average(10, 20))  # Output: 15.0",
+                "javascript": "function getAverage(a, b) {\n    return (a + b) / 2.0; // Corrected\n}\nconsole.log(getAverage(10, 20)); // Output: 15"
+              },
+              "whyItFails": "In mathematics and programming, division (/) has higher precedence than addition (+). Thus `a + b / 2.0` calculates `a + (b / 2.0)`. For inputs 10 and 20, it evaluates as 10 + 10.0 = 20.0.",
+              "explanation": "Adding parentheses `(a + b)` forces addition to evaluate first before division, producing `(10 + 20) / 2.0 = 30 / 2.0 = 15.0`."
+            },
+            {
+              "type": "steps",
+              "items": [
+                {
+                  "stepNumber": 1,
+                  "title": "Reproduce the Bug",
+                  "description": "Consistently recreate the failure using minimal test inputs."
+                },
+                {
+                  "stepNumber": 2,
+                  "title": "Isolate the Cause",
+                  "description": "Locate the specific function or statement causing unexpected behavior."
+                },
+                {
+                  "stepNumber": 3,
+                  "title": "Apply the Fix",
+                  "description": "Modify the code to fix the logic without breaking other features."
+                },
+                {
+                  "stepNumber": 4,
+                  "title": "Verify & Regression Test",
+                  "description": "Confirm the fix with edge cases and run past test suites."
+                }
+              ]
+            },
+            {
+              "type": "note",
+              "title": "Pro Tip",
+              "text": "Never guess where a bug is. Use print statements, loggers, or debuggers to inspect actual runtime values."
+            }
+          ],
+          "keyTakeaways": [
+            "Debugging is a methodical process of finding why runtime behavior differs from expected logic.",
+            "Always isolate variables and reproduce bugs with simple test cases.",
+            "Operator precedence and type conversion errors are extremely common beginner bugs."
+          ],
+          "quiz": {
+            "question": "What is the primary objective of debugging?",
+            "options": [
+              "To rewrite the entire codebase from scratch",
+              "To systematically find, analyze, and correct flaws in software",
+              "To make code compile faster",
+              "To convert high-level code into assembly code"
+            ],
+            "answerIndex": 1,
+            "explanation": "Debugging is the systematic process of finding, analyzing, and correcting bugs or unwanted behavior in software."
+          }
+        },
+        {
+          "id": "les-1-2",
+          "position": 2,
+          "title": "Why Debugging is Important",
+          "slug": "why-debugging-is-important",
+          "description": "Understand the financial, performance, and reliability impacts of debugging in software engineering.",
+          "durationMinutes": 5,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Overview"
+            },
+            {
+              "type": "paragraph",
+              "text": "Software powers critical systems—from banking transactions to medical devices. Unchecked bugs lead to software crashes, security vulnerabilities, and significant financial loss."
+            },
+            {
+              "type": "bulletList",
+              "items": [
+                "Ensures Reliability: Guarantees software behaves accurately under all valid conditions.",
+                "Improves Security: Many security exploits (e.g. buffer overflows, SQL injection) stem from unhandled edge-case bugs.",
+                "Enhances Performance: Debugging bottlenecks reduces CPU and memory usage.",
+                "Saves Engineering Time: Quick debugging workflows reduce feature development cycles."
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Debugging prevents system downtime and security vulnerabilities.",
+            "Mastering debugging makes you a significantly faster problem solver."
+          ],
+          "quiz": {
+            "question": "Which of the following is a direct benefit of effective debugging?",
+            "options": [
+              "Decreased security coverage",
+              "Increased software reliability and reduced runtime crashes",
+              "Slower code execution",
+              "Removal of compiler requirements"
+            ],
+            "answerIndex": 1,
+            "explanation": "Effective debugging increases software reliability and eliminates runtime crashes before production."
+          }
+        },
+        {
+          "id": "les-1-3",
+          "position": 3,
+          "title": "Bug vs Error",
+          "slug": "bug-vs-error",
+          "description": "Learn the crucial differences between errors, bugs, faults, and failures in computing.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Terminology Breakdown"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Term",
+                "Definition",
+                "Example"
+              ],
+              "rows": [
+                [
+                  "Error",
+                  "A mistake or misconception made by a human developer in thought or syntax.",
+                  "Misunderstanding loop termination condition."
+                ],
+                [
+                  "Bug / Fault",
+                  "The flaw or defect in the source code caused by an error.",
+                  "Writing `i <= n` instead of `i < n`."
+                ],
+                [
+                  "Failure",
+                  "An observable incorrect runtime behavior or crash when executing code.",
+                  "IndexOutOfBoundsException at runtime."
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "In short: Humans make Errors, which introduce Bugs in code, resulting in system Failures during execution."
+            }
+          ],
+          "keyTakeaways": [
+            "Errors are human mistakes during coding.",
+            "Bugs are static code defects resulting from errors.",
+            "Failures are runtime manifestations of bugs."
+          ],
+          "quiz": {
+            "question": "What is the relation between error, bug, and failure?",
+            "options": [
+              "A failure leads to a bug, which creates an error",
+              "An error is made by a developer, creating a bug in code, leading to a failure at runtime",
+              "Bugs are hardware issues; errors are software issues",
+              "They are exact synonyms with no distinction"
+            ],
+            "answerIndex": 1,
+            "explanation": "Errors are human mistakes, bugs are defects in code, and failures are observable execution errors."
+          }
+        },
+        {
+          "id": "les-1-4",
+          "position": 4,
+          "title": "Debugging Mindset",
+          "slug": "debugging-mindset",
+          "description": "Develop the analytical mindset required to systematically solve complex programming bugs.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. The Scientific Method in Debugging"
+            },
+            {
+              "type": "numberedList",
+              "items": [
+                "Observe: Read the error message or observe faulty output.",
+                "Hypothesize: Formulate a guess about what variable or branch is incorrect.",
+                "Test: Add print statements, assertions, or breakpoints to test the hypothesis.",
+                "Conclude: Validate whether hypothesis was correct. Repeat if necessary."
+              ]
+            },
+            {
+              "type": "tip",
+              "title": "Key Mindset Rule",
+              "text": "Don't blame the compiler or language interpreter. The computer strictly executes what you wrote, not what you intended!"
+            }
+          ],
+          "keyTakeaways": [
+            "Treat debugging like a scientific experiment with hypotheses and tests.",
+            "Be patient and break complex problems into small testable units."
+          ],
+          "quiz": {
+            "question": "What is the first step in the scientific debugging process?",
+            "options": [
+              "Change random lines of code until it works",
+              "Observe the error message and reproduce the faulty behavior",
+              "Complain to senior developers",
+              "Delete the database"
+            ],
+            "answerIndex": 1,
+            "explanation": "The first step is observing the problem clearly and reproducing the exact failure."
+          }
+        }
+      ]
+    },
+    {
+      "id": "sec-2",
+      "position": 2,
+      "title": "Types of Errors",
+      "slug": "types-of-errors",
+      "description": "Syntax, compilation, runtime, logical, wrong answer, TLE, and MLE errors.",
+      "lessons": [
+        {
+          "id": "les-2-1",
+          "position": 1,
+          "title": "Syntax Errors",
+          "slug": "syntax-errors",
+          "description": "Recognize and fix grammar violations of programming language rules.",
+          "durationMinutes": 5,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Definition & Causes"
+            },
+            {
+              "type": "paragraph",
+              "text": "A syntax error occurs when source code violates the grammar rules of the programming language. The compiler or interpreter cannot parse the source file."
+            },
+            {
+              "type": "example",
+              "title": "Missing Semicolon / Parenthesis",
+              "language": "cpp",
+              "buggyCode": {
+                "cpp": "int main() {\n    int x = 10\n    if (x > 5 {\n        cout << x;\n    }\n}",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        int x = 10\n        System.out.println(x);\n    }\n}",
+                "python": "def check_number(x)\n    if x > 5\n        print(x)",
+                "javascript": "function checkNumber(x) {\n    if (x > 5 {\n        console.log(x);\n    }\n}"
+              },
+              "correctCode": {
+                "cpp": "int main() {\n    int x = 10;\n    if (x > 5) {\n        cout << x;\n    }\n}",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        int x = 10;\n        System.out.println(x);\n    }\n}",
+                "python": "def check_number(x):\n    if x > 5:\n        print(x)",
+                "javascript": "function checkNumber(x) {\n    if (x > 5) {\n        console.log(x);\n    }\n}"
+              },
+              "whyItFails": "Missing trailing semicolons in C++/Java or missing colons/closing parentheses prevents compiler parsing.",
+              "explanation": "Adding required colons, closing braces, and semicolons restores valid language syntax."
+            }
+          ],
+          "keyTakeaways": [
+            "Syntax errors occur before code execution during parsing.",
+            "Carefully check line numbers reported by compilers."
+          ],
+          "quiz": {
+            "question": "When are syntax errors caught?",
+            "options": [
+              "During code execution at runtime",
+              "During compilation/parsing before execution",
+              "After program completion",
+              "Never caught automatically"
+            ],
+            "answerIndex": 1,
+            "explanation": "Syntax errors prevent code from compiling or being parsed, caught before execution begins."
+          }
+        },
+        {
+          "id": "les-2-2",
+          "position": 2,
+          "title": "Compilation Errors",
+          "slug": "compilation-errors",
+          "description": "Type mismatches, undeclared symbols, missing imports, and linker errors.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Overview"
+            },
+            {
+              "type": "paragraph",
+              "text": "Compilation errors happen when code is syntactically valid but fails static type checking, variable declaration resolution, or linking in compiled languages like C++, Java, or Rust."
+            },
+            {
+              "type": "example",
+              "title": "Undeclared Variable & Type Mismatch",
+              "language": "java",
+              "buggyCode": {
+                "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    total = 50; // Error: 'total' was not declared in this scope\n    return 0;\n}",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        int val = \"100\"; // Error: incompatible types: String cannot be converted to int\n    }\n}"
+              },
+              "correctCode": {
+                "cpp": "#include <iostream>\nusing namespace std;\nint main() {\n    int total = 50;\n    return 0;\n}",
+                "java": "public class Main {\n    public static void main(String[] args) {\n        int val = Integer.parseInt(\"100\");\n    }\n}"
+              },
+              "whyItFails": "C++ requires all variables to be declared with a type. Java strictly enforces type matching during compilation.",
+              "explanation": "Declare types explicitly and use conversion functions like Integer.parseInt for string conversion."
+            }
+          ],
+          "keyTakeaways": [
+            "Static type checkers flag symbol and type mismatches at compile time.",
+            "Read compiler messages from top to bottom."
+          ],
+          "quiz": {
+            "question": "Which error occurs when assigning a String literal to an int variable in Java?",
+            "options": [
+              "Runtime Exception",
+              "Compilation Error (Type Mismatch)",
+              "Segmentation Fault",
+              "Time Limit Exceeded"
+            ],
+            "answerIndex": 1,
+            "explanation": "Java performs strict type checking during compilation, triggering a type mismatch compile error."
+          }
+        },
+        {
+          "id": "les-2-3",
+          "position": 3,
+          "title": "Runtime Errors",
+          "slug": "runtime-errors",
+          "description": "Null pointers, index out of bounds, divide by zero, and stack overflow exceptions.",
+          "durationMinutes": 7,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Common Runtime Exceptions"
+            },
+            {
+              "type": "bulletList",
+              "items": [
+                "NullPointerException / AttributeError: Accessing methods on an uninitialized/null reference.",
+                "IndexOutOfBoundsException / IndexError: Accessing array/list indices outside [0, length-1].",
+                "ArithmeticException: Division or modulo by zero.",
+                "StackOverflowError: Infinite recursion exceeding memory stack limit."
+              ]
+            },
+            {
+              "type": "example",
+              "title": "Index Out of Bounds Bug",
+              "language": "python",
+              "buggyCode": {
+                "cpp": "int arr[3] = {10, 20, 30};\nfor(int i = 0; i <= 3; i++) { // Bug: i=3 accesses out of bounds!\n    cout << arr[i] << endl;\n}",
+                "python": "nums = [10, 20, 30]\nfor i in range(len(nums) + 1):  # Bug: IndexError when i = 3\n    print(nums[i])"
+              },
+              "correctCode": {
+                "cpp": "int arr[3] = {10, 20, 30};\nfor(int i = 0; i < 3; i++) {\n    cout << arr[i] << endl;\n}",
+                "python": "nums = [10, 20, 30]\nfor i in range(len(nums)):\n    print(nums[i])"
+              },
+              "whyItFails": "Arrays with length N have valid indices 0 to N-1. Index N is out of bounds.",
+              "explanation": "Change loop bound condition from `i <= N` to `i < N` or `range(len(nums))`."
+            }
+          ],
+          "keyTakeaways": [
+            "Runtime errors occur while the program is actively executing.",
+            "Always check boundary conditions before array indexing."
+          ],
+          "quiz": {
+            "question": "What exception occurs when accessing index 5 on an array of size 5?",
+            "options": [
+              "Compilation Error",
+              "ArrayIndexOutOfBoundsException / IndexError",
+              "StackOverflowError",
+              "Time Limit Exceeded"
+            ],
+            "answerIndex": 1,
+            "explanation": "Array indices are 0-based. An array of size 5 has valid indices 0, 1, 2, 3, 4. Index 5 causes IndexOutOfBounds."
+          }
+        },
+        {
+          "id": "les-2-4",
+          "position": 4,
+          "title": "Logical Errors",
+          "slug": "logical-errors",
+          "description": "Subtle bugs where program compiles and runs without crashing but produces incorrect answers.",
+          "durationMinutes": 7,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Understanding Logical Bugs"
+            },
+            {
+              "type": "paragraph",
+              "text": "Logical errors are the hardest bugs to detect because the language compiler and interpreter raise zero warnings or exceptions. The program runs cleanly, but the logic produces wrong outputs."
+            },
+            {
+              "type": "example",
+              "title": "Off-by-one and Incorrect Operator",
+              "language": "cpp",
+              "buggyCode": {
+                "cpp": "// Find max element in array\nint findMax(int arr[], int n) {\n    int maxVal = 0; // Bug: fails if all elements in arr are negative!\n    for(int i = 0; i < n; i++) {\n        if (arr[i] < maxVal) maxVal = arr[i]; // Bug: < instead of >\n    }\n    return maxVal;\n}"
+              },
+              "correctCode": {
+                "cpp": "int findMax(int arr[], int n) {\n    if (n == 0) return -1;\n    int maxVal = arr[0]; // Initialize with first element\n    for(int i = 1; i < n; i++) {\n        if (arr[i] > maxVal) maxVal = arr[i];\n    }\n    return maxVal;\n}"
+              },
+              "whyItFails": "1. Initializing maxVal to 0 fails if array contains negative numbers (e.g. [-5, -2]). 2. Using `<` finds minimum instead of maximum.",
+              "explanation": "Set initial maxVal to `arr[0]` and compare using `>` operator."
+            }
+          ],
+          "keyTakeaways": [
+            "Logical errors produce incorrect results without throwing exceptions.",
+            "Initialize variables carefully using problem context or first elements."
+          ],
+          "quiz": {
+            "question": "Why are logical errors dangerous?",
+            "options": [
+              "They prevent the code from compiling",
+              "They run cleanly without crashing, making output incorrect silently",
+              "They crash the server immediately",
+              "They delete files from disk"
+            ],
+            "answerIndex": 1,
+            "explanation": "Logical errors do not trigger crashes or syntax warnings, so incorrect results go unnoticed unless verified against test cases."
+          }
+        },
+        {
+          "id": "les-2-5",
+          "position": 5,
+          "title": "Wrong Answer",
+          "slug": "wrong-answer",
+          "description": "Diagnose why code fails specific competitive programming or assessment test cases.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Root Causes of Wrong Answer (WA)"
+            },
+            {
+              "type": "bulletList",
+              "items": [
+                "Integer Overflow: Using 32-bit `int` when numbers exceed 2*10^9 (use `long long` / `long`).",
+                "Precision Loss: Comparing floating point numbers with `==` instead of threshold `abs(a - b) < 1e-9`.",
+                "Off-by-One Errors: Incorrect loop bounds (`<=` vs `<`).",
+                "Uninitialized State: Reusing global variables across multiple test cases without resetting."
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Check for integer overflow on large input constraints.",
+            "Reset global or stateful variables for multiple test case inputs."
+          ],
+          "quiz": {
+            "question": "In C++, what causes `int` to wrap around to negative values when computing factorial of 20?",
+            "options": [
+              "Compilation Error",
+              "32-bit Integer Overflow",
+              "Memory Limit Exceeded",
+              "Syntax Error"
+            ],
+            "answerIndex": 1,
+            "explanation": "32-bit signed integers overflow above ~2x10^9. Factorial of 20 requires a 64-bit `long long`."
+          }
+        },
+        {
+          "id": "les-2-6",
+          "position": 6,
+          "title": "Time Limit Exceeded",
+          "slug": "time-limit-exceeded",
+          "description": "Identify suboptimal O(N^2) algorithms and infinite loops triggering TLE.",
+          "durationMinutes": 7,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. What is TLE?"
+            },
+            {
+              "type": "paragraph",
+              "text": "Time Limit Exceeded occurs when your solution takes longer than the allowed CPU time limit (usually 1.0 to 2.0 seconds, corresponding to ~10^8 operations in C++)."
+            },
+            {
+              "type": "table",
+              "headers": [
+                "N Constraint",
+                "Required Time Complexity",
+                "Unacceptable Complexity"
+              ],
+              "rows": [
+                [
+                  "N <= 10^5",
+                  "O(N) or O(N log N)",
+                  "O(N^2)"
+                ],
+                [
+                  "N <= 10^3",
+                  "O(N^2)",
+                  "O(N^3)"
+                ],
+                [
+                  "N <= 20",
+                  "O(2^N) or O(N!)",
+                  "O(3^N)"
+                ]
+              ]
+            },
+            {
+              "type": "warning",
+              "title": "Infinite Loops",
+              "text": "Missing loop increment statements (`i++`) cause infinite loops which immediately result in TLE."
+            }
+          ],
+          "keyTakeaways": [
+            "Calculate operations based on input size N. Aim for <= 10^8 ops per second.",
+            "Verify loop termination variables update properly on every iteration."
+          ],
+          "quiz": {
+            "question": "An input constraint has N = 10^5. Which time complexity will likely cause TLE?",
+            "options": [
+              "O(N)",
+              "O(N log N)",
+              "O(N^2)",
+              "O(1)"
+            ],
+            "answerIndex": 2,
+            "explanation": "For N = 10^5, N^2 = 10^10 operations, exceeding the ~10^8 per second threshold."
+          }
+        },
+        {
+          "id": "les-2-7",
+          "position": 7,
+          "title": "Memory Limit Exceeded",
+          "slug": "memory-limit-exceeded",
+          "description": "Analyze memory complexity, large matrix allocations, and recursion stack overflow.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Causes of MLE"
+            },
+            {
+              "type": "paragraph",
+              "text": "Memory Limit Exceeded happens when your program allocates more RAM than permitted (typically 256MB)."
+            },
+            {
+              "type": "bulletList",
+              "items": [
+                "Over-allocation: Allocating static arrays like `int dp[10000][10000]` consumes 10000*10000*4 bytes = 400MB.",
+                "Memory Leaks: Allocating memory in loops without freeing (in C/C++).",
+                "Deep Recursion: Recursion depth exceeding stack space without tail optimization."
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Calculate memory footprint before allocating large multi-dimensional arrays.",
+            "Optimize DP table space (e.g. reducing 2D DP to 1D array when possible)."
+          ],
+          "quiz": {
+            "question": "How much RAM does a 2D integer array `int dp[5000][5000]` occupy in C++?",
+            "options": [
+              "100 MB",
+              "25 MB",
+              "1 MB",
+              "500 KB"
+            ],
+            "answerIndex": 0,
+            "explanation": "5000 x 5000 = 25,000,000 integers. Each 4-byte int yields 100,000,000 bytes = ~100 MB."
+          }
+        }
+      ]
+    },
+    {
+      "id": "sec-3",
+      "position": 3,
+      "title": "Debugging Workflow",
+      "slug": "debugging-workflow",
+      "description": "Structured workflows for reading error messages, stack traces, variable tracing, and print debugging.",
+      "lessons": [
+        {
+          "id": "les-3-1",
+          "position": 1,
+          "title": "Reading Error Messages",
+          "slug": "reading-error-messages",
+          "description": "Learn how to decipher compiler and interpreter error outputs quickly.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Anatomy of an Error Message"
+            },
+            {
+              "type": "code",
+              "language": "text",
+              "code": "Main.java:14: error: cannot find symbol\n        System.out.println(result);\n                           ^\n  symbol:   variable result\n  location: class Main"
+            },
+            {
+              "type": "numberedList",
+              "items": [
+                "File & Line Number: `Main.java:14` specifies exact file and line where compiler gave up.",
+                "Error Category: `cannot find symbol` indicates an undefined variable or method name.",
+                "Caret (^): Points to exact column where identifier was expected."
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Always read the FIRST error message listed; subsequent errors are often cascading noise.",
+            "Locate file name, line number, and error type."
+          ],
+          "quiz": {
+            "question": "Why should you fix the first compiler error in a long list of errors first?",
+            "options": [
+              "Later errors are often phantom errors caused by the first broken line",
+              "Compilers ignore the first error anyway",
+              "First errors are always warning messages",
+              "It makes no difference which order you fix errors"
+            ],
+            "answerIndex": 0,
+            "explanation": "Compilers can get out of sync after the first error, generating cascading false errors below it."
+          }
+        },
+        {
+          "id": "les-3-2",
+          "position": 2,
+          "title": "Stack Traces",
+          "slug": "stack-traces",
+          "description": "Navigate call stacks to locate execution crashes across multi-function programs.",
+          "durationMinutes": 7,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. What is a Stack Trace?"
+            },
+            {
+              "type": "paragraph",
+              "text": "A stack trace lists active function calls at the exact moment an exception occurred. Call frames are stacked top-to-bottom or bottom-to-top."
+            },
+            {
+              "type": "code",
+              "language": "text",
+              "code": "Exception in thread \"main\" java.lang.NullPointerException\n\tat com.app.Service.processUser(Service.java:42)\n\tat com.app.Controller.handleRequest(Controller.java:18)\n\tat com.app.Main.main(Main.java:8)"
+            },
+            {
+              "type": "paragraph",
+              "text": "Look for your custom application code lines first, rather than standard library or framework lines."
+            }
+          ],
+          "keyTakeaways": [
+            "Top-most frame in stack trace shows where the crash occurred.",
+            "Filter out third-party framework lines to locate your custom code."
+          ],
+          "quiz": {
+            "question": "In a stack trace, where is the immediate site of the exception located?",
+            "options": [
+              "At the top-most line of the stack trace call stack",
+              "At the very bottom of the trace",
+              "In the center frame",
+              "Outside the file entirely"
+            ],
+            "answerIndex": 0,
+            "explanation": "The top-most call frame indicates the precise method and line number where the exception was thrown."
+          }
+        },
+        {
+          "id": "les-3-3",
+          "position": 3,
+          "title": "Variable Tracing",
+          "slug": "variable-tracing",
+          "description": "Construct execution trace tables to track state changes line-by-line.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Trace Table Technique"
+            },
+            {
+              "type": "paragraph",
+              "text": "A trace table tracks values of variables at every step of execution."
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Step / Loop",
+                "i",
+                "sum",
+                "Condition (i < 4)"
+              ],
+              "rows": [
+                [
+                  "Init",
+                  "-",
+                  "0",
+                  "-"
+                ],
+                [
+                  "Iter 1",
+                  "0",
+                  "0 + 0 = 0",
+                  "True"
+                ],
+                [
+                  "Iter 2",
+                  "1",
+                  "0 + 1 = 1",
+                  "True"
+                ],
+                [
+                  "Iter 3",
+                  "2",
+                  "1 + 2 = 3",
+                  "True"
+                ],
+                [
+                  "Iter 4",
+                  "3",
+                  "3 + 3 = 6",
+                  "True"
+                ],
+                [
+                  "Exit",
+                  "4",
+                  "6",
+                  "False"
+                ]
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Use pen and paper or a spreadsheet trace table to trace loop state changes.",
+            "Essential for understanding recursion and nested loops."
+          ],
+          "quiz": {
+            "question": "What is the purpose of a variable trace table?",
+            "options": [
+              "To measure CPU temperature",
+              "To record variable values step-by-step through execution",
+              "To generate random test cases",
+              "To format source code style"
+            ],
+            "answerIndex": 1,
+            "explanation": "A trace table records variable states after every line/iteration to verify state transitions."
+          }
+        },
+        {
+          "id": "les-3-4",
+          "position": 4,
+          "title": "Print Debugging Workflow",
+          "slug": "print-debugging",
+          "description": "Systematic insertion of structured print statements for fast local debugging.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Structured Print Debugging"
+            },
+            {
+              "type": "paragraph",
+              "text": "Avoid plain `print(x)`. Instead, print variable names, loop indices, and context labels:"
+            },
+            {
+              "type": "code",
+              "language": "python",
+              "code": "# Bad:\nprint(val)\n\n# Good:\nprint(f\"[DEBUG] idx={i}, val={val}, current_sum={total_sum}\")"
+            },
+            {
+              "type": "tip",
+              "title": "Clean Up",
+              "text": "Always remove or disable print statements before submitting code to production or online judges."
+            }
+          ],
+          "keyTakeaways": [
+            "Include context labels and iteration counts in debug print statements.",
+            "Remove debug logs prior to final code submission."
+          ],
+          "quiz": {
+            "question": "Which print statement is most effective for debugging?",
+            "options": [
+              "print(\"here\")",
+              "print(x)",
+              "print(f\"[DEBUG] step={step}, val={x}, state={state}\")",
+              "print(123)"
+            ],
+            "answerIndex": 2,
+            "explanation": "Labeled print statements showing variable names, values, and execution steps provide clear context."
+          }
+        }
+      ]
+    },
+    {
+      "id": "sec-4",
+      "position": 4,
+      "title": "Debugging Patterns",
+      "slug": "debugging-patterns",
+      "description": "Identify and resolve recurring bugs in loops, conditions, variables, and function calls.",
+      "lessons": [
+        {
+          "id": "les-4-1",
+          "position": 1,
+          "title": "Loops",
+          "slug": "loops",
+          "description": "Debug off-by-one errors, infinite loops, and boundary condition failures in for/while loops.",
+          "durationMinutes": 7,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Common Loop Pitfalls"
+            },
+            {
+              "type": "bulletList",
+              "items": [
+                "Off-By-One (OBOE): Iterating `i <= len` instead of `i < len`.",
+                "Stale Loop Condition: Forgetting to increment counter in while loop (`while(i < n)` without `i++`).",
+                "Incorrect Termination: Using wrong comparison operators (`>` vs `>=`)."
+              ]
+            },
+            {
+              "type": "example",
+              "title": "Infinite Loop Bug",
+              "language": "python",
+              "buggyCode": {
+                "python": "i = 0\nwhile i < 5:\n    print(i)\n    # Bug: forgot i += 1, infinite loop!"
+              },
+              "correctCode": {
+                "python": "i = 0\nwhile i < 5:\n    print(i)\n    i += 1  # Corrected"
+              },
+              "whyItFails": "Loop counter `i` is never modified inside loop body, causing `i < 5` to remain true infinitely.",
+              "explanation": "Increment `i` on each loop iteration to reach loop termination condition."
+            }
+          ],
+          "keyTakeaways": [
+            "Verify that loop counters approach the termination condition every iteration.",
+            "Watch out for 0-based vs 1-based index boundaries."
+          ],
+          "quiz": {
+            "question": "What happens if a while loop condition never evaluates to false?",
+            "options": [
+              "Syntax Error",
+              "Infinite Loop (resulting in TLE or crash)",
+              "Automatic termination after 10 steps",
+              "Compilation failure"
+            ],
+            "answerIndex": 1,
+            "explanation": "If loop condition never becomes false, execution loops endlessly until terminated or killed by TLE."
+          }
+        },
+        {
+          "id": "les-4-2",
+          "position": 2,
+          "title": "Conditions",
+          "slug": "conditions",
+          "description": "Debug assignment in condition, boolean operator precedence, and dangling else bugs.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Common Condition Errors"
+            },
+            {
+              "type": "example",
+              "title": "Assignment vs Comparison",
+              "language": "cpp",
+              "buggyCode": {
+                "cpp": "int x = 5;\nif (x = 10) { // Bug: '=' is assignment, NOT '==' comparison!\n    cout << \"X is 10\";\n}"
+              },
+              "correctCode": {
+                "cpp": "int x = 5;\nif (x == 10) {\n    cout << \"X is 10\";\n}"
+              },
+              "whyItFails": "Using `=` assigns 10 to `x`. Since 10 is non-zero, condition evaluates to true every time.",
+              "explanation": "Use `==` for relational equality comparison."
+            }
+          ],
+          "keyTakeaways": [
+            "Use `==` for comparison, not `=`.",
+            "Parenthesize complex boolean conditions: `(a && b) || c`."
+          ],
+          "quiz": {
+            "question": "In C/C++, what is the result of `if (x = 0)`?",
+            "options": [
+              "Checks if x equals 0 (true)",
+              "Assigns 0 to x and evaluates condition as false",
+              "Syntax error",
+              "Compiler warning only"
+            ],
+            "answerIndex": 1,
+            "explanation": "`x = 0` assigns 0 to `x`. Since 0 is treated as false in boolean context, condition evaluates to false."
+          }
+        },
+        {
+          "id": "les-4-3",
+          "position": 3,
+          "title": "Variables",
+          "slug": "variables",
+          "description": "Uninitialized variables, variable shadowing, global scope contamination, and type coercion bugs.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Variable Scope & Shadowing"
+            },
+            {
+              "type": "paragraph",
+              "text": "Variable shadowing occurs when an inner block declares a variable with the same name as an outer variable, hiding the outer variable."
+            }
+          ],
+          "keyTakeaways": [
+            "Avoid re-declaring variables with identical names in nested blocks.",
+            "Always initialize local variables before reading them."
+          ],
+          "quiz": {
+            "question": "What is variable shadowing?",
+            "options": [
+              "Deleting a variable from RAM",
+              "Declaring an inner variable with the same name as an outer variable, obscuring access to outer variable",
+              "Encrypting variable values in memory",
+              "Copying variables across threads"
+            ],
+            "answerIndex": 1,
+            "explanation": "Shadowing occurs when an inner scope variable hides an outer variable of the same name."
+          }
+        },
+        {
+          "id": "les-4-4",
+          "position": 4,
+          "title": "Functions",
+          "slug": "functions",
+          "description": "Pass-by-value vs pass-by-reference bugs, missing return values, and side effects.",
+          "durationMinutes": 7,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Pass-By-Value vs Pass-By-Reference"
+            },
+            {
+              "type": "example",
+              "title": "Swap Function in C++",
+              "language": "cpp",
+              "buggyCode": {
+                "cpp": "void swap(int a, int b) { // Bug: pass by value\n    int temp = a; a = b; b = temp;\n}"
+              },
+              "correctCode": {
+                "cpp": "void swap(int &a, int &b) { // Correct: pass by reference\n    int temp = a; a = b; b = temp;\n}"
+              },
+              "whyItFails": "Passing by value creates copies of `a` and `b`. Swapping local copies leaves caller variables unchanged.",
+              "explanation": "Use reference `&a, &b` in C++ or pass mutable objects/pointers to modify original caller data."
+            }
+          ],
+          "keyTakeaways": [
+            "Primitive types are passed by value in C++/Java/Python.",
+            "Ensure functions return values on all execution control branches."
+          ],
+          "quiz": {
+            "question": "Why does `swap(a, b)` fail to modify original variables when parameters are passed by value?",
+            "options": [
+              "Compiler deletes the function",
+              "The function operates on local copies of variables rather than original memory locations",
+              "Syntax error",
+              "Memory limit exceeded"
+            ],
+            "answerIndex": 1,
+            "explanation": "Pass-by-value copies variable values into new local memory frames; changes do not affect original variables."
+          }
+        }
+      ]
+    },
+    {
+      "id": "sec-5",
+      "position": 5,
+      "title": "Data Structure Debugging",
+      "slug": "data-structure-debugging",
+      "description": "Debug common pitfalls in Arrays, Strings, Hashing, Linked Lists, Stacks, Queues, Trees, and Graphs.",
+      "lessons": [
+        {
+          "id": "les-5-1",
+          "position": 1,
+          "title": "Array Debugging",
+          "slug": "arrays",
+          "description": "Troubleshoot off-by-one indices, sub-array bounds, and array modification during iteration.",
+          "durationMinutes": 7,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Array Indexing Rules"
+            },
+            {
+              "type": "bulletList",
+              "items": [
+                "Valid Index Range: `0` to `array.length - 1`.",
+                "Two Pointer Bugs: `left` and `right` pointers crossing each other (`left <= right` vs `left < right`).",
+                "Prefix Sum Bounds: `prefix[r] - prefix[l-1]` handling for `l = 0`."
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Check bounds for empty arrays (length == 0).",
+            "Be cautious when modifying array size while iterating."
+          ],
+          "quiz": {
+            "question": "What is the correct 1D array index range for an array with N elements?",
+            "options": [
+              "1 to N",
+              "0 to N - 1",
+              "0 to N",
+              "-1 to N - 1"
+            ],
+            "answerIndex": 1,
+            "explanation": "Standard zero-indexed arrays span indices 0 up to N - 1."
+          }
+        },
+        {
+          "id": "les-5-2",
+          "position": 2,
+          "title": "String Debugging",
+          "slug": "strings",
+          "description": "Immutability, substring index bounds, character encoding, and string comparison.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. String Immutability"
+            },
+            {
+              "type": "example",
+              "title": "Java / Python String Modification",
+              "language": "java",
+              "buggyCode": {
+                "java": "String str = \"hello\";\nstr.concat(\" world\"); // Bug: String is immutable; return value ignored!\nSystem.out.println(str); // Prints \"hello\""
+              },
+              "correctCode": {
+                "java": "String str = \"hello\";\nstr = str.concat(\" world\"); // Reassign return value\nSystem.out.println(str); // Prints \"hello world\""
+              },
+              "whyItFails": "Strings in Java and Python are immutable. `concat()` returns a new String without modifying original.",
+              "explanation": "Reassign the returned string or use StringBuilder."
+            }
+          ],
+          "keyTakeaways": [
+            "In Java/Python, Strings are immutable; reassign method return values.",
+            "Compare String contents with `.equals()` in Java, not `==`."
+          ],
+          "quiz": {
+            "question": "In Java, how should string contents be compared for equality?",
+            "options": [
+              "str1 == str2",
+              "str1.equals(str2)",
+              "str1 = str2",
+              "str1.compareTo(str2) == 1"
+            ],
+            "answerIndex": 1,
+            "explanation": "`==` compares object references in memory. `str1.equals(str2)` checks character sequence content equality."
+          }
+        },
+        {
+          "id": "les-5-3",
+          "position": 3,
+          "title": "Hash Map & Hash Set Debugging",
+          "slug": "hashing",
+          "description": "Troubleshoot hash key collisions, mutable keys, and missing custom hashCode/equals implementations.",
+          "durationMinutes": 7,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Hash Map Pitfalls"
+            },
+            {
+              "type": "bulletList",
+              "items": [
+                "Mutable Objects as Keys: Modifying an object after inserting into HashMap changes its hashCode, rendering it unreachable.",
+                "Missing Key Check: Calling `map.get(key)` for non-existent key returns `null` or throws KeyError.",
+                "Custom Objects: Classes used as HashMap keys MUST override both `equals()` and `hashCode()`."
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Use immutable types (String, Integer, Tuple) as map keys.",
+            "Always check `map.containsKey(key)` or use `getOrDefault()` before accessing values."
+          ],
+          "quiz": {
+            "question": "What happens if you use a mutable object as a HashMap key and then modify the object?",
+            "options": [
+              "HashMap updates key automatically",
+              "Object becomes unreachable via `map.get()` because its hash code changed",
+              "Compilation Error",
+              "HashMap throws MemoryLimitExceeded"
+            ],
+            "answerIndex": 1,
+            "explanation": "Modifying key attributes alters its hash code, so subsequent `get()` queries look in wrong bucket."
+          }
+        },
+        {
+          "id": "les-5-4",
+          "position": 4,
+          "title": "Linked List Debugging",
+          "slug": "linked-lists",
+          "description": "Fix NullPointerExceptions, lost pointer references, and infinite cycle loops in linked lists.",
+          "durationMinutes": 7,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Common Pointer Errors"
+            },
+            {
+              "type": "paragraph",
+              "text": "When updating pointers, changing `node.next` before preserving `node.next` breaks the list connection."
+            },
+            {
+              "type": "tip",
+              "title": "Dummy Head Node",
+              "text": "Using a dummy head node (`ListNode dummy = new ListNode(0); dummy.next = head;`) simplifies edge cases when deleting/inserting head."
+            }
+          ],
+          "keyTakeaways": [
+            "Store next node reference before overwriting `curr.next`.",
+            "Use dummy head nodes to avoid null checks for head operations."
+          ],
+          "quiz": {
+            "question": "Why is a dummy head node useful in linked list problems?",
+            "options": [
+              "It speeds up execution by 10x",
+              "It handles edge cases at head insertion/deletion without special null checks",
+              "It converts linked list into array",
+              "It prevents memory leaks automatically"
+            ],
+            "answerIndex": 1,
+            "explanation": "Dummy nodes eliminate special edge-case branching when operating on the first list node."
+          }
+        },
+        {
+          "id": "les-5-5",
+          "position": 5,
+          "title": "Stack Debugging",
+          "slug": "stack",
+          "description": "Debug EmptyStackException, stack frame overflow, and monotonic stack boundary logic.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Empty Stack Access"
+            },
+            {
+              "type": "paragraph",
+              "text": "Calling `pop()` or `peek()` on an empty stack throws runtime exception. Always verify `!stack.isEmpty()` before access."
+            }
+          ],
+          "keyTakeaways": [
+            "Always check `!stack.isEmpty()` before calling `pop()` or `peek()`.",
+            "Monotonic stack loops need clear comparison conditions (`<` vs `<=`)."
+          ],
+          "quiz": {
+            "question": "Which check prevents EmptyStackException before calling `stack.pop()`?",
+            "options": [
+              "stack != null",
+              "!stack.isEmpty()",
+              "stack.size() == 0",
+              "stack.peek() != null"
+            ],
+            "answerIndex": 1,
+            "explanation": "Checking `!stack.isEmpty()` ensures elements exist prior to popping."
+          }
+        },
+        {
+          "id": "les-5-6",
+          "position": 6,
+          "title": "Queue Debugging",
+          "slug": "queue",
+          "description": "Troubleshoot BFS queue termination, null queue elements, and priority queue ordering.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. BFS Queue Traversal"
+            },
+            {
+              "type": "paragraph",
+              "text": "In Breadth-First Search (BFS), mark nodes as visited *when pushing* to queue, NOT when popping. Pushing unvisited nodes causes duplicate queue insertions."
+            }
+          ],
+          "keyTakeaways": [
+            "Mark nodes visited immediately when adding to BFS queue.",
+            "Specify custom comparator for PriorityQueue sorting behavior."
+          ],
+          "quiz": {
+            "question": "In BFS graph traversal, when should a node be marked as visited?",
+            "options": [
+              "When pushing the node into the queue",
+              "When popping the node from the queue",
+              "At the very end of the function",
+              "Never mark nodes visited"
+            ],
+            "answerIndex": 0,
+            "explanation": "Marking visited upon push prevents duplicate identical nodes from being queued repeatedly."
+          }
+        },
+        {
+          "id": "les-5-7",
+          "position": 7,
+          "title": "Tree Debugging",
+          "slug": "trees",
+          "description": "Debug base case recursion, binary search tree invariant violations, and null child references.",
+          "durationMinutes": 7,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Recursive Tree Base Cases"
+            },
+            {
+              "type": "code",
+              "language": "cpp",
+              "code": "// Standard Tree Base Case Pattern\nint maxDepth(TreeNode* root) {\n    if (root == nullptr) return 0;\n    return 1 + max(maxDepth(root->left), maxDepth(root->right));\n}"
+            }
+          ],
+          "keyTakeaways": [
+            "Ensure recursive tree traversals return explicit values for null roots.",
+            "Validate BST properties across range bounds `(min, max)`, not just immediate parent/child."
+          ],
+          "quiz": {
+            "question": "Why is comparing only `node.left.val < node.val < node.right.val` insufficient to validate a Binary Search Tree?",
+            "options": [
+              "It fails to ensure descendants in left subtree are smaller than all ancestor nodes",
+              "Binary trees cannot have nodes",
+              "It causes syntax error",
+              "It runs in O(N^2) time"
+            ],
+            "answerIndex": 0,
+            "explanation": "BST property requires ALL nodes in left subtree to be smaller than ancestor, requiring range validation `(min, max)`."
+          }
+        },
+        {
+          "id": "les-5-8",
+          "position": 8,
+          "title": "Graph Debugging",
+          "slug": "graphs",
+          "description": "Fix infinite recursion cycles in undirected graphs, disconnected components, and matrix bounds.",
+          "durationMinutes": 8,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Graph Cycle Prevention"
+            },
+            {
+              "type": "paragraph",
+              "text": "Undirected graphs create bidirectional edges (`u -> v` and `v -> u`). Traversal without a `visited` array causes infinite recursion/loops."
+            }
+          ],
+          "keyTakeaways": [
+            "Always maintain `visited` set or array for cyclic graphs.",
+            "Check matrix boundary bounds (`r >= 0 && r < rows && c >= 0 && c < cols`) before grid access."
+          ],
+          "quiz": {
+            "question": "What happens if you run DFS on an undirected graph without a visited array?",
+            "options": [
+              "Graph collapses",
+              "Infinite recursion loop leading to StackOverflowError",
+              "Memory Limit Exceeded immediately",
+              "Returns correct output"
+            ],
+            "answerIndex": 1,
+            "explanation": "Without tracking visited nodes, DFS bounces infinitely between adjacent connected nodes until stack overflow."
+          }
+        }
+      ]
+    },
+    {
+      "id": "sec-6",
+      "position": 6,
+      "title": "Algorithm Debugging",
+      "slug": "algorithm-debugging",
+      "description": "Debug Searching, Sorting, Recursion, Greedy, and Dynamic Programming algorithms.",
+      "lessons": [
+        {
+          "id": "les-6-1",
+          "position": 1,
+          "title": "Searching Algorithm Debugging",
+          "slug": "searching",
+          "description": "Debug Binary Search mid overflow, infinite loop bounds, and search space reduction.",
+          "durationMinutes": 7,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Binary Search Integer Overflow"
+            },
+            {
+              "type": "code",
+              "language": "cpp",
+              "code": "// Buggy:\nint mid = (low + high) / 2; // Overflows if low + high > 2^31 - 1\n\n// Correct:\nint mid = low + (high - low) / 2;"
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "2. Loop Termination (`low <= high` vs `low < high`)"
+            },
+            {
+              "type": "paragraph",
+              "text": "Use `low <= high` when searching for exact element; use `low < high` for lower/upper bound predicate search."
+            }
+          ],
+          "keyTakeaways": [
+            "Calculate `mid = low + (high - low) / 2` to prevent integer overflow.",
+            "Verify loop progress: ensure search space decreases every step."
+          ],
+          "quiz": {
+            "question": "Why is `mid = low + (high - low) / 2` preferred over `(low + high) / 2`?",
+            "options": [
+              "It runs twice as fast",
+              "It prevents integer overflow when `low + high` exceeds 32-bit integer limits",
+              "It works on unsorted arrays",
+              "It converts mid to double"
+            ],
+            "answerIndex": 1,
+            "explanation": "For large array indices, `low + high` can overflow 32-bit signed ints, producing negative mid values."
+          }
+        },
+        {
+          "id": "les-6-2",
+          "position": 2,
+          "title": "Sorting Algorithm Debugging",
+          "slug": "sorting",
+          "description": "Troubleshoot comparator contract violations, non-stable sort bugs, and QuickSort pivot selection.",
+          "durationMinutes": 7,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Strict Weak Ordering Contract"
+            },
+            {
+              "type": "paragraph",
+              "text": "Custom comparators MUST satisfy strict weak ordering:"
+            },
+            {
+              "type": "bulletList",
+              "items": [
+                "Irreflexive: `comp(a, a)` MUST return false.",
+                "Asymmetric: If `comp(a, b)` is true, `comp(b, a)` MUST be false.",
+                "Transitive: If `comp(a, b)` and `comp(b, c)` are true, `comp(a, c)` MUST be true."
+              ]
+            },
+            {
+              "type": "warning",
+              "title": "Comparator Pitfall",
+              "text": "Returning `>=` or `<=` in C++ `std::sort` comparator violates strict weak ordering and leads to segmentation faults!"
+            }
+          ],
+          "keyTakeaways": [
+            "Use strictly `<` or `>` in custom comparators, never `<=` or `>=` in C++.",
+            "Be aware of stability when sorting multi-attribute objects."
+          ],
+          "quiz": {
+            "question": "In C++, what occurs if custom comparator for `std::sort` returns `a <= b` instead of `a < b`?",
+            "options": [
+              "Undefined behavior or Segmentation Fault due to strict weak ordering violation",
+              "Compiles and sorts stably",
+              "Syntax Error",
+              "Memory Limit Exceeded"
+            ],
+            "answerIndex": 0,
+            "explanation": "`std::sort` requires strict weak ordering where `comp(a, a)` is false. Returning true for equal elements causes pointer out-of-bounds crashes."
+          }
+        },
+        {
+          "id": "les-6-3",
+          "position": 3,
+          "title": "Recursion Debugging",
+          "slug": "recursion",
+          "description": "Trace stack overflow, missing base cases, and return value accumulation in recursive trees.",
+          "durationMinutes": 7,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Three Rules of Recursion"
+            },
+            {
+              "type": "numberedList",
+              "items": [
+                "Base Case: Must exist and stop recursive invocation.",
+                "State Reduction: Each recursive call must move closer to base case.",
+                "Return Combination: Return values from recursive subproblems must combine correctly."
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Draw a recursion tree diagram to visualize call stack depth.",
+            "Ensure every execution branch hits a defined base case."
+          ],
+          "quiz": {
+            "question": "What error occurs when a recursive function lacks a valid base case?",
+            "options": [
+              "Compilation Error",
+              "StackOverflowError / RecursionError",
+              "Time Limit Exceeded only",
+              "NullPointerException"
+            ],
+            "answerIndex": 1,
+            "explanation": "Without a base case, recursive calls continue indefinitely until stack memory is exhausted."
+          }
+        },
+        {
+          "id": "les-6-4",
+          "position": 4,
+          "title": "Greedy Algorithm Debugging",
+          "slug": "greedy",
+          "description": "Identify non-optimal greedy choices, counterexamples, and proof of correctness.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Greedy Choice Failure"
+            },
+            {
+              "type": "paragraph",
+              "text": "Greedy algorithms make locally optimal choices. If problem lacks optimal substructure or greedy choice property, greedy yields wrong answers."
+            },
+            {
+              "type": "example",
+              "title": "Coin Change Problem (Non-Greedy)",
+              "language": "cpp",
+              "buggyCode": {
+                "cpp": "// Greedy coin change fails for coins {1, 3, 4} with amount 6!\n// Greedy picks: 4 + 1 + 1 (3 coins)\n// Optimal DP solution: 3 + 3 (2 coins)"
+              },
+              "correctCode": {
+                "cpp": "// Use Dynamic Programming for Coin Change when coins are arbitrary"
+              },
+              "whyItFails": "Greedy choice is not optimal for non-canonical coin systems.",
+              "explanation": "Test greedy logic against small counterexamples. Switch to DP if counterexample exists."
+            }
+          ],
+          "keyTakeaways": [
+            "Test greedy hypotheses with counterexamples before coding.",
+            "If locally optimal choice fails global optimum, switch to Dynamic Programming."
+          ],
+          "quiz": {
+            "question": "Why does greedy coin change fail for coins {1, 3, 4} and target amount 6?",
+            "options": [
+              "It runs in O(N^3) time",
+              "Greedy chooses 4+1+1 (3 coins), whereas optimal choice is 3+3 (2 coins)",
+              "It throws NullPointerException",
+              "Memory Limit Exceeded"
+            ],
+            "answerIndex": 1,
+            "explanation": "Greedy chooses highest coin 4 first, producing 3 coins instead of 2."
+          }
+        },
+        {
+          "id": "les-6-5",
+          "position": 5,
+          "title": "Dynamic Programming Debugging",
+          "slug": "dynamic-programming",
+          "description": "Debug state definition, transition relation, base case initialization, and iteration order.",
+          "durationMinutes": 8,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. DP Debugging Checklist"
+            },
+            {
+              "type": "numberedList",
+              "items": [
+                "State Definition: What does `dp[i][j]` represent precisely?",
+                "Base Cases: Are `dp[0]` or boundary initializations accurate?",
+                "Transition Formula: Does `dp[i]` depend strictly on ALREADY solved subproblems?",
+                "Iteration Direction: Is bottom-up loop iterating in correct order (left-to-right vs right-to-left)?"
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Print small 1D or 2D DP tables to verify subproblem values.",
+            "Verify loop iteration direction fills dependent subproblems first."
+          ],
+          "quiz": {
+            "question": "In 0/1 Knapsack 1D space optimization, why must space loop iterate backwards `w = W down to weight[i]`?",
+            "options": [
+              "To prevent using the same item multiple times in the same step",
+              "To make loop execute faster",
+              "To avoid syntax error",
+              "To sort item weights"
+            ],
+            "answerIndex": 0,
+            "explanation": "Iterating backwards ensures `dp[w - weight[i]]` references previous item state, preventing item re-use."
+          }
+        }
+      ]
+    },
+    {
+      "id": "sec-7",
+      "position": 7,
+      "title": "Test Case Design",
+      "slug": "test-case-design",
+      "description": "Master test case design, boundary case identification, and edge case coverage.",
+      "lessons": [
+        {
+          "id": "les-7-1",
+          "position": 1,
+          "title": "Test Case Design Fundamentals",
+          "slug": "test-case-design",
+          "description": "Learn equivalence partitioning, stress testing, and systematic test design.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Equivalence Partitioning"
+            },
+            {
+              "type": "paragraph",
+              "text": "Divide input domains into valid and invalid partitions. Test one representative input from each group."
+            }
+          ],
+          "keyTakeaways": [
+            "Test small inputs, max inputs, zero/negative inputs, and duplicate inputs.",
+            "Stress test custom solutions against brute force implementations using random generators."
+          ],
+          "quiz": {
+            "question": "What is equivalence partitioning?",
+            "options": [
+              "Testing every single integer from 1 to 1 billion",
+              "Dividing input domain into classes where program handles all elements in a class similarly",
+              "Deleting half the test cases",
+              "Sorting test case inputs"
+            ],
+            "answerIndex": 1,
+            "explanation": "Partitioning groups similar inputs so testing one representative validates the entire group."
+          }
+        },
+        {
+          "id": "les-7-2",
+          "position": 2,
+          "title": "Boundary Cases",
+          "slug": "boundary-cases",
+          "description": "Identify limits: min/max constraints, array limits, and integer bounds.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Critical Boundary Categories"
+            },
+            {
+              "type": "bulletList",
+              "items": [
+                "Array Size Bounds: `N = 0`, `N = 1`, `N = max_limit` (e.g. 10^5).",
+                "Integer Limits: `INT_MIN`, `0`, `INT_MAX`, `10^18` for long long.",
+                "Graph Topology: Single node, disconnected graph, complete graph, linear line graph."
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Always test `N = 0` and `N = 1` first.",
+            "Verify max input limits do not exceed data type limits."
+          ],
+          "quiz": {
+            "question": "Which of the following represents a boundary test case for an array function?",
+            "options": [
+              "An array of average size 50",
+              "An empty array `N = 0` and single-element array `N = 1`",
+              "A random array of length 25",
+              "An array with numbers 1 to 10"
+            ],
+            "answerIndex": 1,
+            "explanation": "Limits `N = 0` and `N = 1` test boundary handling where standard loop logic often fails."
+          }
+        },
+        {
+          "id": "les-7-3",
+          "position": 3,
+          "title": "Edge Cases",
+          "slug": "edge-cases",
+          "description": "Uncover tricky edge cases: duplicate values, negative numbers, all elements equal, and sorted inputs.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Common Hidden Edge Cases"
+            },
+            {
+              "type": "bulletList",
+              "items": [
+                "Duplicates: `[5, 5, 5, 5]` when searching or sorting.",
+                "All Negative Numbers: `[-10, -5, -20]` when finding max subarray sum.",
+                "Sorted / Reverse Sorted: `[1, 2, 3, 4]` or `[4, 3, 2, 1]` for QuickSort pivots.",
+                "Floating Point Precision: `0.1 + 0.2 != 0.3` in binary floating point representation."
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Construct edge cases specifically aimed at breaking your algorithm's assumptions.",
+            "Ensure Kadane's algorithm handles all negative number arrays."
+          ],
+          "quiz": {
+            "question": "Why is an array with all negative numbers `[-5, -2, -8]` an edge case for maximum subarray sum?",
+            "options": [
+              "Initializing max_sum to 0 yields wrong answer 0 instead of -2",
+              "It causes syntax error",
+              "Arrays cannot hold negative numbers",
+              "It triggers memory limit exceeded"
+            ],
+            "answerIndex": 0,
+            "explanation": "If max_sum is initialized to 0, returning 0 is incorrect because all elements are negative; maximum sum is -2."
+          }
+        }
+      ]
+    },
+    {
+      "id": "sec-8",
+      "position": 8,
+      "title": "Language-Specific Debugging",
+      "slug": "language-specific-debugging",
+      "description": "Troubleshoot pitfalls in C/C++, Java, Python, and JavaScript.",
+      "lessons": [
+        {
+          "id": "les-8-1",
+          "position": 1,
+          "title": "C/C++ Debugging",
+          "slug": "cpp-debugging",
+          "description": "Fix segmentation faults, memory leaks, dangling pointers, and undefined behavior in C/C++.",
+          "durationMinutes": 7,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Segmentation Faults"
+            },
+            {
+              "type": "paragraph",
+              "text": "A Segmentation Fault (SIGSEGV) occurs when reading or writing restricted RAM memory."
+            },
+            {
+              "type": "bulletList",
+              "items": [
+                "Dereferencing NULL pointer: `int *p = nullptr; *p = 10;`",
+                "Array index out of bounds.",
+                "Stack overflow from deep recursion."
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Use address sanitizers (`-fsanitize=address`) when compiling C++ locally.",
+            "Initialize all raw pointers to `nullptr`."
+          ],
+          "quiz": {
+            "question": "What causes a Segmentation Fault in C++?",
+            "options": [
+              "Writing invalid C++ syntax",
+              "Attempting to access unauthorized or unallocated memory",
+              "Using a for loop",
+              "Printing a string"
+            ],
+            "answerIndex": 1,
+            "explanation": "SIGSEGV is triggered by illegal memory access, such as dereferencing null or invalid pointers."
+          }
+        },
+        {
+          "id": "les-8-2",
+          "position": 2,
+          "title": "Java Debugging",
+          "slug": "java-debugging",
+          "description": "Fix NullPointerExceptions, Integer object equality `==`, and ConcurrentModificationException.",
+          "durationMinutes": 7,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Integer Wrapper Object Comparison"
+            },
+            {
+              "type": "example",
+              "title": "Integer Caching Bug",
+              "language": "java",
+              "buggyCode": {
+                "java": "Integer a = 200;\nInteger b = 200;\nif (a == b) { // Bug: evaluates FALSE! '==' compares object references\n    System.out.println(\"Equal\");\n}"
+              },
+              "correctCode": {
+                "java": "Integer a = 200;\nInteger b = 200;\nif (a.equals(b)) { // Correct: compares primitive values\n    System.out.println(\"Equal\");\n}"
+              },
+              "whyItFails": "Java caches Integer objects between -128 and 127. For values >= 128, `==` compares distinct object memory addresses.",
+              "explanation": "Always use `.equals()` for wrapper object value comparisons."
+            }
+          ],
+          "keyTakeaways": [
+            "Use `.equals()` when comparing Java wrapper objects (`Integer`, `Long`).",
+            "Avoid modifying Collection objects while iterating with a standard for-each loop."
+          ],
+          "quiz": {
+            "question": "In Java, why does `Integer a = 200; Integer b = 200; (a == b)` evaluate to false?",
+            "options": [
+              "200 is too large for Integer",
+              "`==` compares object references, and 200 is outside Java's -128..127 Integer cache range",
+              "Syntax error",
+              "Java converts them to float"
+            ],
+            "answerIndex": 1,
+            "explanation": "Java caches Integer objects from -128 to 127. Values outside range create separate objects with different addresses."
+          }
+        },
+        {
+          "id": "les-8-3",
+          "position": 3,
+          "title": "Python Debugging",
+          "slug": "python-debugging",
+          "description": "Troubleshoot mutable default arguments, indentation errors, and shallow vs deep copies.",
+          "durationMinutes": 7,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Mutable Default Arguments"
+            },
+            {
+              "type": "example",
+              "title": "Default List Parameter Bug",
+              "language": "python",
+              "buggyCode": {
+                "python": "def add_item(item, target_list=[]):  # Bug: target_list shared across all function calls!\n    target_list.append(item)\n    return target_list\n\nprint(add_item(1))  # [1]\nprint(add_item(2))  # [1, 2] - Unexpected retention!"
+              },
+              "correctCode": {
+                "python": "def add_item(item, target_list=None):\n    if target_list is None:\n        target_list = []\n    target_list.append(item)\n    return target_list\n\nprint(add_item(1))  # [1]\nprint(add_item(2))  # [2]"
+              },
+              "whyItFails": "Default parameter expressions are evaluated ONCE when function is defined, creating a persistent shared list.",
+              "explanation": "Use `None` as default argument and instantiate new list inside function body."
+            }
+          ],
+          "keyTakeaways": [
+            "Never use mutable default arguments (`[]` or `{}`) in Python function signatures.",
+            "Use `copy.deepcopy()` when cloning nested lists."
+          ],
+          "quiz": {
+            "question": "Why should you avoid `def fn(items=[])` in Python?",
+            "options": [
+              "Python prohibits default parameters",
+              "The default list `[]` is evaluated once at definition time and shared across subsequent function calls",
+              "It causes indentation error",
+              "It runs in O(N^2) time"
+            ],
+            "answerIndex": 1,
+            "explanation": "Mutable default arguments persist state across multiple function invocations."
+          }
+        },
+        {
+          "id": "les-8-4",
+          "position": 4,
+          "title": "JavaScript Debugging",
+          "slug": "javascript-debugging",
+          "description": "Debug implicit type coercion, asynchronous Promises, `this` binding, and loose equality `==`.",
+          "durationMinutes": 7,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Type Coercion & Equality"
+            },
+            {
+              "type": "example",
+              "title": "Loose vs Strict Equality",
+              "language": "javascript",
+              "buggyCode": {
+                "javascript": "console.log(0 == '0'); // true (type coercion)\nconsole.log([] == false); // true\nconsole.log(null == undefined); // true"
+              },
+              "correctCode": {
+                "javascript": "console.log(0 === '0'); // false (strict comparison)\nconsole.log([] === false); // false\nconsole.log(null === undefined); // false"
+              },
+              "whyItFails": "Loose equality `==` performs unexpected type conversions before comparing.",
+              "explanation": "Always use strict equality `===` in JavaScript."
+            }
+          ],
+          "keyTakeaways": [
+            "Always use strict equality `===` and `!==` in JavaScript.",
+            "Handle async Promise rejections with `try/catch` in `async/await` functions."
+          ],
+          "quiz": {
+            "question": "What is the key difference between `==` and `===` in JavaScript?",
+            "options": [
+              "`==` compares speed; `===` compares memory",
+              "`==` performs type coercion before comparison; `===` checks both value and type strictly",
+              "`===` converts strings to numbers automatically",
+              "They are identical"
+            ],
+            "answerIndex": 1,
+            "explanation": "Strict equality `===` compares values without performing automatic type coercion."
+          }
+        }
+      ]
+    },
+    {
+      "id": "sec-9",
+      "position": 9,
+      "title": "Debugging Techniques",
+      "slug": "debugging-techniques",
+      "description": "Advanced techniques: assertion-driven development, binary search debugging, and state diagrams.",
+      "lessons": [
+        {
+          "id": "les-9-1",
+          "position": 1,
+          "title": "Print Debugging Techniques",
+          "slug": "advanced-print-debugging",
+          "description": "Leverage conditional logging, log levels, and formatted output for complex algorithms.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Conditional Debug Printing"
+            },
+            {
+              "type": "code",
+              "language": "cpp",
+              "code": "#define DEBUG 1\n#if DEBUG\n    #define debug(x) cout << #x << \" = \" << x << endl;\n#else\n    #define debug(x)\n#endif"
+            }
+          ],
+          "keyTakeaways": [
+            "Use preprocessor directives or flags to toggle debug logging instantaneously.",
+            "Format debug output clearly using label-value pairs."
+          ],
+          "quiz": {
+            "question": "What is the advantage of using a conditional `DEBUG` flag for logging?",
+            "options": [
+              "It deletes source code files",
+              "It enables toggling all debug messages on/off instantly without deleting lines",
+              "It converts C++ to Python",
+              "It eliminates runtime errors"
+            ],
+            "answerIndex": 1,
+            "explanation": "A single boolean or macro flag toggles all debug logs cleanly across the program."
+          }
+        },
+        {
+          "id": "les-9-2",
+          "position": 2,
+          "title": "Variable Tracing & State Diagrams",
+          "slug": "state-variable-tracing",
+          "description": "Map complex state machines and recursion trees visually.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. State Transition Diagrams"
+            },
+            {
+              "type": "paragraph",
+              "text": "For stateful problems (e.g. string parsing, state machines, DP), draw state transition diagrams on paper."
+            }
+          ],
+          "keyTakeaways": [
+            "Draw state transitions visually when debugging finite state machines.",
+            "Track variable mutations across loop boundaries."
+          ],
+          "quiz": {
+            "question": "When is state diagram visual tracing most valuable?",
+            "options": [
+              "For single linear print statements",
+              "For multi-state parsers, state machines, and dynamic programming transitions",
+              "When writing HTML code",
+              "When installing compilers"
+            ],
+            "answerIndex": 1,
+            "explanation": "Visualizing state machine transitions prevents missing branch state transitions."
+          }
+        },
+        {
+          "id": "les-9-3",
+          "position": 3,
+          "title": "Common Debugging Mistakes",
+          "slug": "common-debugging-mistakes",
+          "description": "Avoid shotgun debugging, assuming working code, and emotional debugging traps.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Anti-Patterns to Avoid"
+            },
+            {
+              "type": "bulletList",
+              "items": [
+                "Shotgun Debugging: Randomly changing lines without understanding the underlying issue.",
+                "Confirmation Bias: Assuming a function works without actually inspecting its return output.",
+                "Ignoring Compiler Warnings: Ignoring warnings about unused variables or uninitialized state."
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Never make random edits hoping code will magically compile or work.",
+            "Always investigate compiler warnings immediately."
+          ],
+          "quiz": {
+            "question": "What is 'shotgun debugging'?",
+            "options": [
+              "Systematically tracing state using debuggers",
+              "Making random code changes blindly hoping one fixes the problem",
+              "Writing unit tests for all functions",
+              "Compiling code with optimization flags"
+            ],
+            "answerIndex": 1,
+            "explanation": "Shotgun debugging refers to making random, unguided changes without understanding root causes."
+          }
+        }
+      ]
+    },
+    {
+      "id": "sec-10",
+      "position": 10,
+      "title": "Debugging Strategy",
+      "slug": "debugging-strategy",
+      "description": "Comprehensive step-by-step checklist and quick reference cheat sheet for exam and interview debugging.",
+      "lessons": [
+        {
+          "id": "les-10-1",
+          "position": 1,
+          "title": "Debugging Checklist",
+          "slug": "debugging-checklist",
+          "description": "The ultimate 10-step checklist to run through whenever code produces Wrong Answer or TLE.",
+          "durationMinutes": 6,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. The 10-Step Universal Debugging Checklist"
+            },
+            {
+              "type": "steps",
+              "items": [
+                {
+                  "stepNumber": 1,
+                  "title": "Check Array Bounds",
+                  "description": "Verify array indices span 0 to N-1."
+                },
+                {
+                  "stepNumber": 2,
+                  "title": "Check Data Types & Overflow",
+                  "description": "Use 64-bit int (`long long`) if values exceed 2*10^9."
+                },
+                {
+                  "stepNumber": 3,
+                  "title": "Check Initialization",
+                  "description": "Reset global arrays and variables between test cases."
+                },
+                {
+                  "stepNumber": 4,
+                  "title": "Check Loop Termination",
+                  "description": "Ensure loop counter increments/decrements towards base case."
+                },
+                {
+                  "stepNumber": 5,
+                  "title": "Check Recursion Base Cases",
+                  "description": "Verify null/zero checks at top of recursive functions."
+                },
+                {
+                  "stepNumber": 6,
+                  "title": "Check Edge Cases",
+                  "description": "Test N=0, N=1, negative inputs, and duplicates."
+                },
+                {
+                  "stepNumber": 7,
+                  "title": "Check Floating Point Comparison",
+                  "description": "Use `abs(a - b) < 1e-9` instead of `a == b`."
+                },
+                {
+                  "stepNumber": 8,
+                  "title": "Check Time Complexity",
+                  "description": "Ensure N <= 10^5 uses O(N) or O(N log N)."
+                },
+                {
+                  "stepNumber": 9,
+                  "title": "Check Memory Allocation",
+                  "description": "Ensure static matrix sizes do not exceed ~256MB limit."
+                },
+                {
+                  "stepNumber": 10,
+                  "title": "Read Error Messages Carefully",
+                  "description": "Read the top-most line of compiler/interpreter error message."
+                }
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Bookmark and run through the 10-step checklist systematically whenever stuck.",
+            "Verify data types, bounds, and initializations first."
+          ],
+          "quiz": {
+            "question": "What is the second item on the universal debugging checklist?",
+            "options": [
+              "Delete source code",
+              "Check Data Types & Integer Overflow limits",
+              "Install new operating system",
+              "Re-run build command 10 times"
+            ],
+            "answerIndex": 1,
+            "explanation": "Checking data types and potential integer overflow is a critical early step when debugging wrong answers."
+          }
+        },
+        {
+          "id": "les-10-2",
+          "position": 2,
+          "title": "Debugging Cheat Sheet",
+          "slug": "debugging-cheat-sheet",
+          "description": "Quick reference guide for error codes, complexity thresholds, and diagnostic commands.",
+          "durationMinutes": 5,
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "1. Quick Reference Table"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Error Verdict",
+                "Primary Cause",
+                "Immediate Fix Action"
+              ],
+              "rows": [
+                [
+                  "CE (Compile Error)",
+                  "Syntax or symbol error",
+                  "Read top line of compiler error trace."
+                ],
+                [
+                  "RE (Runtime Error)",
+                  "Array out of bounds, Null pointer, Divide by 0",
+                  "Check array indices, pointer null checks, and divisor != 0."
+                ],
+                [
+                  "TLE (Time Limit)",
+                  "O(N^2) on N=10^5, infinite loop",
+                  "Optimize algorithm or check loop increment statements."
+                ],
+                [
+                  "MLE (Memory Limit)",
+                  "Large 2D static arrays, recursion stack",
+                  "Reduce array size or optimize DP matrix to 1D."
+                ],
+                [
+                  "WA (Wrong Answer)",
+                  "Integer overflow, off-by-one, bad logic",
+                  "Switch to long long, test edge cases (N=0, N=1, negative)."
+                ]
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Use verdict quick references to narrow down root causes instantly.",
+            "Maintain a structured, calm approach to troubleshooting code errors."
+          ],
+          "quiz": {
+            "question": "Which immediate fix action corresponds to a Runtime Error (RE)?",
+            "options": [
+              "Optimize algorithm from O(N^2) to O(N)",
+              "Check array indexing boundaries, null pointer checks, and division by zero",
+              "Rewrite UI styles",
+              "Increase server memory"
+            ],
+            "answerIndex": 1,
+            "explanation": "Runtime errors are caused by invalid operations during execution like out-of-bounds indexing, null dereferencing, or division by zero."
+          }
+        }
+      ]
+    }
+  ]
+}

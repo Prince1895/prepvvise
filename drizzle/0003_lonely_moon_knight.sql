@@ -1,0 +1,2 @@
+ALTER TABLE "coding_submissions" ADD COLUMN "provider_job_id" text;--> statement-breakpoint
+CREATE UNIQUE INDEX "coding_submissions_provider_job_id_idx" ON "coding_submissions" USING btree ("provider_job_id");

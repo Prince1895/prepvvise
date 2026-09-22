@@ -1,0 +1,5065 @@
+{
+  "id": "ai-coding",
+  "name": "AI-Assisted Coding",
+  "title": "AI-Assisted Coding Master Curriculum",
+  "description": "A comprehensive, interview-oriented, progressive learning curriculum teaching developers how to effectively use AI assistants for code generation, debugging, testing, refactoring, architecture, and agentic workflows.",
+  "version": "1.0",
+  "sections": [
+    {
+      "id": "sec-1-intro",
+      "position": 1,
+      "title": "Section 1 — Introduction to AI Coding",
+      "slug": "introduction-to-ai-coding",
+      "description": "Master the fundamentals of AI coding assistants, LLM code models, capabilities, limitations, and essential workflow patterns.",
+      "level": "beginner",
+      "lessons": [
+        {
+          "id": "les-1-1",
+          "position": 1,
+          "title": "What is AI-Assisted Coding?",
+          "slug": "what-is-ai-assisted-coding",
+          "level": "beginner",
+          "durationMinutes": 8,
+          "objectives": [
+            "Understand core capabilities of AI coding assistants.",
+            "Differentiate completion, chat, and agentic modalities.",
+            "Adopt AI as a high-speed junior pair programmer."
+          ],
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "Understanding AI-Assisted Coding"
+            },
+            {
+              "type": "paragraph",
+              "text": "AI-assisted coding leverages Large Language Models trained on open-source and enterprise repositories to assist software engineers in generating code, explaining logic, debugging stack traces, and writing unit tests."
+            },
+            {
+              "type": "workflow",
+              "title": "The AI-Assisted Coding Triad",
+              "steps": [
+                {
+                  "number": 1,
+                  "title": "Developer Intent",
+                  "description": "Define requirements, architecture, constraints, and edge cases.",
+                  "badge": "HUMAN"
+                },
+                {
+                  "number": 2,
+                  "title": "AI Generation",
+                  "description": "Synthesize candidate solution based on prompt & context.",
+                  "badge": "AI"
+                },
+                {
+                  "number": 3,
+                  "title": "Verification & Test",
+                  "description": "Inspect, compile, unit test, and integrate change.",
+                  "badge": "VERIFIED"
+                }
+              ]
+            },
+            {
+              "type": "tip",
+              "title": "Senior Tech Lead Mindset",
+              "text": "Treat the AI model as an energetic junior developer. Always review, test, and verify before merging into main."
+            }
+          ],
+          "keyTakeaways": [
+            "AI augments human developers, it does not replace accountability.",
+            "Verification through compiler checks and unit tests is mandatory."
+          ]
+        },
+        {
+          "id": "les-1-2",
+          "position": 2,
+          "title": "How AI Coding Assistants Work",
+          "slug": "how-ai-coding-assistants-work",
+          "level": "beginner",
+          "durationMinutes": 10,
+          "objectives": [
+            "Understand tokenization, context windows, and next-token prediction.",
+            "Learn why AI models do not execute code during generation."
+          ],
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "Under the Hood of Code LLMs"
+            },
+            {
+              "type": "paragraph",
+              "text": "LLMs predict next tokens probabilistically based on surrounding context. They do not run compiler or type checks unless provided tools."
+            },
+            {
+              "type": "warning",
+              "title": "Context Window Limits",
+              "text": "Missing interfaces or package exports in context lead directly to hallucinated function signatures."
+            }
+          ],
+          "keyTakeaways": [
+            "AI output is probabilistic next-token generation.",
+            "Provide relevant interfaces and types in prompt context."
+          ]
+        },
+        {
+          "id": "les-1-3",
+          "position": 3,
+          "title": "AI vs Traditional Programming",
+          "slug": "ai-vs-traditional-programming",
+          "level": "beginner",
+          "durationMinutes": 10,
+          "objectives": [
+            "Compare deterministic logic vs probabilistic generation.",
+            "Identify when to prompt vs write code manually."
+          ],
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "Imperative Logic vs AI Specifications"
+            },
+            {
+              "type": "codeComparison",
+              "title": "Manual Code vs AI Specification",
+              "leftTitle": "Manual TypeScript",
+              "rightTitle": "AI Spec Prompt",
+              "leftLanguage": "typescript",
+              "rightLanguage": "markdown",
+              "leftCode": "function active(users: User[]) { return users.filter(u => u.active); }",
+              "rightCode": "Generate a TypeScript function 'active' that filters active Users. Require immutability and unit tests."
+            }
+          ],
+          "keyTakeaways": [
+            "Use manual coding for critical business rules; use AI for boilerplate and test suites."
+          ]
+        },
+        {
+          "id": "les-1-4",
+          "position": 4,
+          "title": "Benefits of AI-Assisted Development",
+          "slug": "benefits-of-ai-assisted-development",
+          "level": "beginner",
+          "durationMinutes": 8,
+          "objectives": [
+            "Quantify velocity improvements in boilerplate, docs, and testing."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "AI accelerates repetitive coding tasks by up to 10x, enabling developers to focus on architectural design and system safety."
+            }
+          ],
+          "keyTakeaways": [
+            "Redirect saved boilerplate time into testing and system safety."
+          ]
+        },
+        {
+          "id": "les-1-5",
+          "position": 5,
+          "title": "Limitations of AI Coding",
+          "slug": "limitations-of-ai-coding",
+          "level": "beginner",
+          "durationMinutes": 10,
+          "objectives": [
+            "Spot hallucinated libraries, stale syntax, and insecure defaults."
+          ],
+          "content": [
+            {
+              "type": "warning",
+              "title": "Common AI Traps",
+              "text": "Insecure default SQL strings, missing input sanitization, and deprecated library methods."
+            }
+          ],
+          "keyTakeaways": [
+            "Verify library existence on npm/PyPI before importing."
+          ]
+        },
+        {
+          "id": "les-1-6",
+          "position": 6,
+          "title": "AI Coding Workflow",
+          "slug": "ai-coding-workflow-basics",
+          "level": "beginner",
+          "durationMinutes": 10,
+          "objectives": [
+            "Master the 5-step workflow: Specify -> Prompt -> Inspect -> Test -> Refine."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Work incrementally function by function, keeping diffs small and easily testable."
+            }
+          ],
+          "keyTakeaways": [
+            "Small incremental steps prevent compounding hallucination errors."
+          ]
+        },
+        {
+          "id": "les-1-7",
+          "position": 7,
+          "title": "Human Reasoning + AI Assistance",
+          "slug": "human-reasoning-and-ai-assistance",
+          "level": "beginner",
+          "durationMinutes": 10,
+          "objectives": [
+            "Combine developer intuition with AI generation speed."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Human judgment defines constraints and evaluates trade-offs; AI executes the typing and boilerplate."
+            }
+          ],
+          "keyTakeaways": [
+            "Humans own the architecture and domain logic."
+          ]
+        },
+        {
+          "id": "les-1-8",
+          "position": 8,
+          "title": "Common Mistakes Beginners Make",
+          "slug": "common-mistakes-beginners-make",
+          "level": "beginner",
+          "durationMinutes": 12,
+          "objectives": [
+            "Avoid blind copy-pasting, huge single prompts, and ignoring linter errors."
+          ],
+          "content": [
+            {
+              "type": "checklist",
+              "title": "Beginner Pitfalls Checklist",
+              "items": [
+                {
+                  "text": "Blind copy-pasting without reading lines",
+                  "checked": false
+                },
+                {
+                  "text": "Asking AI to write an entire complex system in 1 prompt",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Understand every line of code committed to your repository."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-2-prompting",
+      "position": 2,
+      "title": "Section 2 — Prompt Engineering for Coding",
+      "slug": "prompt-engineering-for-coding",
+      "description": "Master structured prompting techniques: Context + Goal + Constraints + I/O + Format to generate correct code on the first attempt.",
+      "level": "beginner",
+      "lessons": [
+        {
+          "id": "les-2-1",
+          "position": 1,
+          "title": "What Makes a Good Coding Prompt?",
+          "slug": "what-makes-a-good-coding-prompt",
+          "level": "beginner",
+          "durationMinutes": 10,
+          "objectives": [
+            "Learn the universal prompt structure.",
+            "Eliminate ambiguous vocabulary in instructions."
+          ],
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "Universal Coding Prompt Architecture"
+            },
+            {
+              "type": "paragraph",
+              "text": "Structure prompts with: Context + Goal + Constraints + Input/Output + Format."
+            },
+            {
+              "type": "example",
+              "title": "Weak vs Strong Prompt",
+              "weakPrompt": "Write user login API.",
+              "strongPrompt": "You are working on Node.js + TypeScript Express app. Write async handleLogin(req, res) validating req.body with Zod, querying Mongo user, comparing password with bcrypt, and returning JWT token with 200 JSON or 401 on failure."
+            }
+          ],
+          "keyTakeaways": [
+            "State tech stack, exact parameters, constraints, and error handling rules explicitly."
+          ]
+        },
+        {
+          "id": "les-2-2",
+          "position": 2,
+          "title": "Giving AI Proper Context",
+          "slug": "giving-ai-proper-context",
+          "level": "beginner",
+          "durationMinutes": 10,
+          "objectives": [
+            "Supply interface definitions, schemas, and file snippets."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Paste relevant TypeScript interfaces and schemas prior to asking for function implementations."
+            }
+          ],
+          "keyTakeaways": [
+            "Context quality determines code generation accuracy."
+          ]
+        },
+        {
+          "id": "les-2-3",
+          "position": 3,
+          "title": "Defining Requirements Clearly",
+          "slug": "defining-requirements-clearly",
+          "level": "beginner",
+          "durationMinutes": 10,
+          "objectives": [
+            "Translate feature specs into explicit prompt instructions."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Specify whether functions should be pure, asynchronous, or immutable."
+            }
+          ],
+          "keyTakeaways": [
+            "Explicit specifications remove guesswork."
+          ]
+        },
+        {
+          "id": "les-2-4",
+          "position": 4,
+          "title": "Specifying Input and Output",
+          "slug": "specifying-input-and-output",
+          "level": "beginner",
+          "durationMinutes": 10,
+          "objectives": [
+            "Use Few-Shot prompting with concrete input/output examples."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Providing 1 or 2 concrete input/output examples prevents subtle string/array transformations errors."
+            }
+          ],
+          "keyTakeaways": [
+            "Few-shot examples clarify edge cases immediately."
+          ]
+        },
+        {
+          "id": "les-2-5",
+          "position": 5,
+          "title": "Constraints and Edge Cases",
+          "slug": "constraints-and-edge-cases",
+          "level": "beginner",
+          "durationMinutes": 10,
+          "objectives": [
+            "Set time/space complexity bounds and zero-dependency rules."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "State asymptotic time complexity bounds (e.g. O(n) time, O(1) space) in the prompt."
+            }
+          ],
+          "keyTakeaways": [
+            "Bound the solution space with explicit constraints."
+          ]
+        },
+        {
+          "id": "les-2-6",
+          "position": 6,
+          "title": "Asking for Step-by-Step Reasoning",
+          "slug": "asking-for-step-by-step-reasoning",
+          "level": "beginner",
+          "durationMinutes": 10,
+          "objectives": [
+            "Apply Chain-of-Thought (CoT) prompting for algorithms."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Instructing the model to \"think step-by-step before writing code\" drastically reduces algorithmic bugs."
+            }
+          ],
+          "keyTakeaways": [
+            "Chain-of-thought prompting improves complex logic outputs."
+          ]
+        },
+        {
+          "id": "les-2-7",
+          "position": 7,
+          "title": "Asking for Multiple Approaches",
+          "slug": "asking-for-multiple-approaches",
+          "level": "beginner",
+          "durationMinutes": 10,
+          "objectives": [
+            "Request 2-3 alternative algorithms with trade-offs."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Compare brute-force, iterative, and dynamic programming options before selecting the optimal approach."
+            }
+          ],
+          "keyTakeaways": [
+            "Evaluate trade-offs between memory, speed, and readability."
+          ]
+        },
+        {
+          "id": "les-2-8",
+          "position": 8,
+          "title": "Asking AI to Review Its Own Code",
+          "slug": "asking-ai-to-review-its-own-code",
+          "level": "beginner",
+          "durationMinutes": 10,
+          "objectives": [
+            "Use reflection prompts to catch self-generated edge case failures."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Ask: \"Review the code above. Are there any edge cases or null pointer risks where it fails?\""
+            }
+          ],
+          "keyTakeaways": [
+            "Reflection prompts catch subtle boundary bugs."
+          ]
+        },
+        {
+          "id": "les-2-9",
+          "position": 9,
+          "title": "Iterative Prompting",
+          "slug": "iterative-prompting",
+          "level": "beginner",
+          "durationMinutes": 10,
+          "objectives": [
+            "Build features iteratively across conversational turns."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Build components in stages: Types -> Core Logic -> Error Handling -> Tests."
+            }
+          ],
+          "keyTakeaways": [
+            "Keep prompt turns focused on small incremental additions."
+          ]
+        },
+        {
+          "id": "les-2-10",
+          "position": 10,
+          "title": "Prompt Refinement",
+          "slug": "prompt-refinement",
+          "level": "beginner",
+          "durationMinutes": 10,
+          "objectives": [
+            "Diagnose and fix prompt specification errors."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "When AI code fails, update the prompt with missing types or negative constraints rather than repeating the same prompt."
+            }
+          ],
+          "keyTakeaways": [
+            "Fix the prompt specification when AI output deviates."
+          ]
+        },
+        {
+          "id": "les-2-11",
+          "position": 11,
+          "title": "Common Bad Coding Prompts",
+          "slug": "common-bad-coding-prompts",
+          "level": "beginner",
+          "durationMinutes": 10,
+          "objectives": [
+            "Identify vague prompts and transform them into precise requests."
+          ],
+          "content": [
+            {
+              "type": "table",
+              "headers": [
+                "Bad Prompt",
+                "Flaw",
+                "Improved Prompt"
+              ],
+              "rows": [
+                [
+                  "\"Make an e-commerce API\"",
+                  "No stack, no endpoints, no schemas",
+                  "Write an Express + TypeScript POST /api/orders endpoint using Zod schema for validation."
+                ]
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Avoid single-sentence vague prompts."
+          ]
+        },
+        {
+          "id": "les-2-12",
+          "position": 12,
+          "title": "Prompt Templates for Developers",
+          "slug": "prompt-templates-for-developers",
+          "level": "beginner",
+          "durationMinutes": 12,
+          "objectives": [
+            "Use standardized prompt templates for daily engineering tasks."
+          ],
+          "content": [
+            {
+              "type": "code",
+              "language": "markdown",
+              "title": "Standard Generation Template",
+              "code": "[ROLE]\nYou are a senior {{STACK}} engineer.\n\n[GOAL]\nWrite a function {{NAME}} that {{PURPOSE}}.\n\n[TYPES]\n{{PASTE_TYPES}}\n\n[CONSTRAINTS]\n- Complexity: {{COMPLEXITY}}\n- Handling: Return standard Result/Option or throw TypedError."
+            }
+          ],
+          "keyTakeaways": [
+            "Use reusable prompt templates for consistent code quality."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-3-codegen",
+      "position": 3,
+      "title": "Section 3 — AI for Code Generation",
+      "slug": "ai-for-code-generation",
+      "description": "Practical generation across functions, classes, APIs, databases, React components, and backend microservices.",
+      "level": "intermediate",
+      "lessons": [
+        {
+          "id": "les-3-1",
+          "position": 1,
+          "title": "Generate a Function",
+          "slug": "generate-a-function",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Generate pure, typed utility functions with boundary validation."
+          ],
+          "content": [
+            {
+              "type": "code",
+              "language": "typescript",
+              "title": "Pure Formatter Function",
+              "code": "export function formatCurrency(amountCents: number, currency = 'USD'): string {\n  if (!Number.isInteger(amountCents)) throw new TypeError('Amount must be integer cents');\n  return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(amountCents / 100);\n}"
+            }
+          ],
+          "keyTakeaways": [
+            "Require explicit parameter and return types."
+          ]
+        },
+        {
+          "id": "les-3-2",
+          "position": 2,
+          "title": "Generate a Class",
+          "slug": "generate-a-class",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Generate OOP classes following SOLID principles."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Generate encapsulated classes with private fields and interface injection."
+            }
+          ],
+          "keyTakeaways": [
+            "Enforce private/protected field visibility."
+          ]
+        },
+        {
+          "id": "les-3-3",
+          "position": 3,
+          "title": "Generate an API",
+          "slug": "generate-an-api",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Generate RESTful endpoints with Zod payload validation."
+          ],
+          "content": [
+            {
+              "type": "code",
+              "language": "typescript",
+              "title": "Express + Zod Route Handler",
+              "code": "import { Request, Response } from 'express';\nimport { z } from 'zod';\nconst Schema = z.object({ email: z.string().email() });\nexport async function handle(req: Request, res: Response) {\n  const parsed = Schema.safeParse(req.body);\n  if (!parsed.success) return res.status(400).json({ error: parsed.error.format() });\n  return res.status(200).json({ ok: true });\n}"
+            }
+          ],
+          "keyTakeaways": [
+            "Validate HTTP request bodies with Zod or Joi schemas."
+          ]
+        },
+        {
+          "id": "les-3-4",
+          "position": 4,
+          "title": "Generate Database Queries",
+          "slug": "generate-database-queries",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Generate safe, parameterized SQL and ORM queries."
+          ],
+          "content": [
+            {
+              "type": "warning",
+              "title": "Injection Risk",
+              "text": "Never allow AI to concatenate raw strings into SQL. Always use parameter bindings."
+            }
+          ],
+          "keyTakeaways": [
+            "Verify parameterized SQL bindings."
+          ]
+        },
+        {
+          "id": "les-3-5",
+          "position": 5,
+          "title": "Generate React Components",
+          "slug": "generate-react-components",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Generate accessible React components with Tailwind CSS."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Specify Props interfaces, local hooks, accessibility ARIA tags, and loading states."
+            }
+          ],
+          "keyTakeaways": [
+            "Require explicit loading and error component states."
+          ]
+        },
+        {
+          "id": "les-3-6",
+          "position": 6,
+          "title": "Generate Backend Services",
+          "slug": "generate-backend-services",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Generate domain service layers decoupled from HTTP transport."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Decouple core business logic from Express/Fastify request objects."
+            }
+          ],
+          "keyTakeaways": [
+            "Keep route handlers slim by generating service modules."
+          ]
+        },
+        {
+          "id": "les-3-7",
+          "position": 7,
+          "title": "Generate Utility Functions",
+          "slug": "generate-utility-functions",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Generate stateless data manipulation utilities."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Generate pure utilities paired with automated unit tests."
+            }
+          ],
+          "keyTakeaways": [
+            "Stateless utilities are perfect candidates for AI generation."
+          ]
+        },
+        {
+          "id": "les-3-8",
+          "position": 8,
+          "title": "Generate Tests",
+          "slug": "generate-tests-basics",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Generate unit tests covering happy paths, edge cases, and errors."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Pass source code to AI and request Jest/Vitest test suites."
+            }
+          ],
+          "keyTakeaways": [
+            "Verify that generated test cases pass when run."
+          ]
+        },
+        {
+          "id": "les-3-9",
+          "position": 9,
+          "title": "Generate Configuration",
+          "slug": "generate-configuration",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Generate Dockerfiles and GitHub Actions workflows safely."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Inspect generated Dockerfiles to ensure non-root execution."
+            }
+          ],
+          "keyTakeaways": [
+            "Never execute container applications as root."
+          ]
+        },
+        {
+          "id": "les-3-10",
+          "position": 10,
+          "title": "Generate Complete Features",
+          "slug": "generate-complete-features",
+          "level": "intermediate",
+          "durationMinutes": 15,
+          "objectives": [
+            "Orchestrate full-stack features incrementally layer by layer."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Build features sequentially: DB schema -> Service -> API -> UI -> Test."
+            }
+          ],
+          "keyTakeaways": [
+            "Avoid single massive prompts for full-stack features."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-4-dsa",
+      "position": 4,
+      "title": "Section 4 — AI for DSA",
+      "slug": "ai-for-dsa",
+      "description": "Use AI to understand DSA problems, generate brute-force vs optimized solutions, analyze Big-O complexities, and practice for interviews.",
+      "level": "intermediate",
+      "lessons": [
+        {
+          "id": "les-4-1",
+          "position": 1,
+          "title": "Using AI to Understand a DSA Problem",
+          "slug": "using-ai-to-understand-a-dsa-problem",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Ask AI to explain core algorithmic patterns conceptually before writing code."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Prompt AI to explain sliding window, two pointer, or graph traversal patterns without revealing code first."
+            }
+          ],
+          "keyTakeaways": [
+            "Grasp the conceptual intuition before generating code."
+          ]
+        },
+        {
+          "id": "les-4-2",
+          "position": 2,
+          "title": "Generate Brute Force Solution",
+          "slug": "generate-brute-force-solution",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Generate baseline brute-force solutions to establish correct behavior."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Brute force solutions provide an unoptimized reference baseline for verification."
+            }
+          ],
+          "keyTakeaways": [
+            "Brute force provides a working test oracle."
+          ]
+        },
+        {
+          "id": "les-4-3",
+          "position": 3,
+          "title": "Generate Optimized Solution",
+          "slug": "generate-optimized-solution",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Optimize O(n²) algorithms to O(n) or O(n log n)."
+          ],
+          "content": [
+            {
+              "type": "codeComparison",
+              "title": "Brute Force O(n²) vs Hash Map O(n)",
+              "leftTitle": "Brute Force O(n²)",
+              "rightTitle": "Hash Map O(n)",
+              "leftLanguage": "typescript",
+              "rightLanguage": "typescript",
+              "leftCode": "function twoSum(nums: number[], target: number) {\n  for (let i = 0; i < nums.length; i++)\n    for (let j = i + 1; j < nums.length; j++)\n      if (nums[i] + nums[j] === target) return [i, j];\n  return [];\n}",
+              "rightCode": "function twoSum(nums: number[], target: number) {\n  const map = new Map<number, number>();\n  for (let i = 0; i < nums.length; i++) {\n    const diff = target - nums[i];\n    if (map.has(diff)) return [map.get(diff)!, i];\n    map.set(nums[i], i);\n  }\n  return [];\n}"
+            }
+          ],
+          "keyTakeaways": [
+            "Hash Maps trade O(n) space for O(n) time performance."
+          ]
+        },
+        {
+          "id": "les-4-4",
+          "position": 4,
+          "title": "Compare Multiple Approaches",
+          "slug": "compare-multiple-approaches-dsa",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Compare recursion vs DP vs iterative state."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Request comparison matrices evaluating time, space, and stack risks."
+            }
+          ],
+          "keyTakeaways": [
+            "Evaluate memory stack limitations for deep recursion."
+          ]
+        },
+        {
+          "id": "les-4-5",
+          "position": 5,
+          "title": "Complexity Analysis",
+          "slug": "complexity-analysis-with-ai",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Derive Big-O time and space bounds."
+          ],
+          "content": [
+            {
+              "type": "warning",
+              "title": "Hidden Operations",
+              "text": "Array.shift() or string concatenation inside loops add implicit O(n) factors."
+            }
+          ],
+          "keyTakeaways": [
+            "Derive best, worst, and average Big-O complexity."
+          ]
+        },
+        {
+          "id": "les-4-6",
+          "position": 6,
+          "title": "Generate Test Cases",
+          "slug": "generate-test-cases-dsa",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Generate adversarial edge cases to catch boundary errors."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Test empty collections, single items, negative values, and duplicates."
+            }
+          ],
+          "keyTakeaways": [
+            "Adversarial test inputs expose loop boundary bugs."
+          ]
+        },
+        {
+          "id": "les-4-7",
+          "position": 7,
+          "title": "Debug DSA Solutions",
+          "slug": "debug-dsa-solutions",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Fix off-by-one errors and pointer increment bugs."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Pass failing input and expected output to AI to trace variable state."
+            }
+          ],
+          "keyTakeaways": [
+            "Provide exact failing test inputs to AI."
+          ]
+        },
+        {
+          "id": "les-4-8",
+          "position": 8,
+          "title": "Find Edge Cases",
+          "slug": "find-edge-cases-dsa",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Detect integer overflow and null root pointers."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Check mid = low + (high - low) / 2 to avoid integer overflow."
+            }
+          ],
+          "keyTakeaways": [
+            "Check for integer overflow in binary search algorithms."
+          ]
+        },
+        {
+          "id": "les-4-9",
+          "position": 9,
+          "title": "Optimize Time Complexity",
+          "slug": "optimize-time-complexity",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Use Heaps, Tries, and Binary Search to reduce time complexity."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Replace linear scans with indexed binary search or map lookups."
+            }
+          ],
+          "keyTakeaways": [
+            "Data structure choice dictates time complexity bounds."
+          ]
+        },
+        {
+          "id": "les-4-10",
+          "position": 10,
+          "title": "Optimize Space Complexity",
+          "slug": "optimize-space-complexity",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Reduce O(n) DP space to O(1) rolling state variables."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Store only required recent states instead of full DP matrices."
+            }
+          ],
+          "keyTakeaways": [
+            "Optimize space by retaining only required state variables."
+          ]
+        },
+        {
+          "id": "les-4-11",
+          "position": 11,
+          "title": "Use AI Without Losing Problem-Solving Ability",
+          "slug": "use-ai-without-losing-problem-solving-ability",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Use Socratic progressive hints during interview practice."
+          ],
+          "content": [
+            {
+              "type": "workflow",
+              "title": "Socratic Hinting Pipeline",
+              "steps": [
+                {
+                  "number": 1,
+                  "title": "Level 1",
+                  "description": "High level conceptual pattern hint.",
+                  "badge": "HINT 1"
+                },
+                {
+                  "number": 2,
+                  "title": "Level 2",
+                  "description": "Data structure choice hint.",
+                  "badge": "HINT 2"
+                },
+                {
+                  "number": 3,
+                  "title": "Level 3",
+                  "description": "Pseudocode outline.",
+                  "badge": "HINT 3"
+                },
+                {
+                  "number": 4,
+                  "title": "Level 4",
+                  "description": "Full code implementation.",
+                  "badge": "SOLUTION"
+                }
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Request Socratic hints to build personal problem-solving strength."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-5-debugging",
+      "position": 5,
+      "title": "Section 5 — AI for Debugging",
+      "slug": "ai-for-debugging",
+      "description": "Master stack trace diagnosis, error message resolution, logical bug fixing, and minimal reproducible example techniques.",
+      "level": "intermediate",
+      "lessons": [
+        {
+          "id": "les-5-1",
+          "position": 1,
+          "title": "Giving AI an Error Message",
+          "slug": "giving-ai-an-error-message",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Pass error text, failing snippet, and expected behavior."
+          ],
+          "content": [
+            {
+              "type": "code",
+              "language": "markdown",
+              "title": "Debugging Prompt",
+              "code": "[ERROR]\nTypeError: Cannot read properties of undefined (reading 'map')\n[CODE]\nfunction renderList(items?: Item[]) { return items.map(i => i.id); }\n[FIX REQUEST]\nAdd optional chaining and default fallback array."
+            }
+          ],
+          "keyTakeaways": [
+            "Pass exact error text + failing code + expected outcome."
+          ]
+        },
+        {
+          "id": "les-5-2",
+          "position": 2,
+          "title": "Giving AI a Stack Trace",
+          "slug": "giving-ai-a-stack-trace",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Highlight top application frame in framework stack traces."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Locate the origin file frame in your application codebase."
+            }
+          ],
+          "keyTakeaways": [
+            "Focus on the first non-framework stack frame."
+          ]
+        },
+        {
+          "id": "les-5-3",
+          "position": 3,
+          "title": "Debugging Compilation Errors",
+          "slug": "debugging-compilation-errors",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Fix TypeScript compiler type mismatches."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Provide type definitions alongside the TS error code."
+            }
+          ],
+          "keyTakeaways": [
+            "Provide full interface context to resolve type errors."
+          ]
+        },
+        {
+          "id": "les-5-4",
+          "position": 4,
+          "title": "Debugging Runtime Errors",
+          "slug": "debugging-runtime-errors",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Fix NullPointer, TypeError, and Segfault crashes."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Introduce null guards, optional chaining, and defensive assertions."
+            }
+          ],
+          "keyTakeaways": [
+            "Add defensive guards to eliminate runtime crashes."
+          ]
+        },
+        {
+          "id": "les-5-5",
+          "position": 5,
+          "title": "Debugging Logical Errors",
+          "slug": "debugging-logical-errors",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Fix silent bugs where output deviates from spec."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Pass input, actual output, and expected output to trace variable state."
+            }
+          ],
+          "keyTakeaways": [
+            "Compare actual vs expected output state changes."
+          ]
+        },
+        {
+          "id": "les-5-6",
+          "position": 6,
+          "title": "Debugging Wrong Answers",
+          "slug": "debugging-wrong-answers",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Fix failing test cases in algorithm problems."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Pass minimal failing test inputs to locate off-by-one errors."
+            }
+          ],
+          "keyTakeaways": [
+            "Isolate the smallest failing test case."
+          ]
+        },
+        {
+          "id": "les-5-7",
+          "position": 7,
+          "title": "Debugging Performance Issues",
+          "slug": "debugging-performance-issues",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Fix CPU bottlenecks and event loop blocking."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Replace nested loops and synchronous I/O on main thread."
+            }
+          ],
+          "keyTakeaways": [
+            "Eliminate synchronous blocking operations."
+          ]
+        },
+        {
+          "id": "les-5-8",
+          "position": 8,
+          "title": "Debugging Memory Problems",
+          "slug": "debugging-memory-problems",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Fix memory leaks and uncleaned event listeners."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Clean up timers, subscriptions, and unbounded cache objects."
+            }
+          ],
+          "keyTakeaways": [
+            "Always provide cleanup functions in subscriptions."
+          ]
+        },
+        {
+          "id": "les-5-9",
+          "position": 9,
+          "title": "Debugging With Minimal Reproduction",
+          "slug": "debugging-with-minimal-reproduction",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Strip framework noise to create 15-line MRE prompts."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Isolate the bug into a minimal reproducible example."
+            }
+          ],
+          "keyTakeaways": [
+            "Minimal code produces maximum AI accuracy."
+          ]
+        },
+        {
+          "id": "les-5-10",
+          "position": 10,
+          "title": "AI-Assisted Root Cause Analysis",
+          "slug": "ai-assisted-root-cause-analysis",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Perform Root Cause Analysis (RCA) and write regression tests."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Fix the underlying structural flaw and add a unit test."
+            }
+          ],
+          "keyTakeaways": [
+            "Write regression tests for every resolved bug."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-6-code-review",
+      "position": 6,
+      "title": "Section 6 — AI Code Review",
+      "slug": "ai-code-review",
+      "description": "Use AI to detect bugs, code smells, readability, maintainability, security risks, and error handling oversights.",
+      "level": "intermediate",
+      "lessons": [
+        {
+          "id": "les-6-1",
+          "position": 1,
+          "title": "What is AI Code Review?",
+          "slug": "what-is-ai-code-review",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Use AI as an automated static code reviewer."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "AI code review inspects pull requests for bugs, security risks, and naming consistency."
+            }
+          ],
+          "keyTakeaways": [
+            "AI code review complements human code review."
+          ]
+        },
+        {
+          "id": "les-6-2",
+          "position": 2,
+          "title": "Finding Bugs",
+          "slug": "finding-bugs-ai-review",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Spot unhandled promises, null pointers, and race conditions."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Prompt AI to audit code specifically for unhandled async rejections."
+            }
+          ],
+          "keyTakeaways": [
+            "Audit async code for missing try/catch blocks."
+          ]
+        },
+        {
+          "id": "les-6-3",
+          "position": 3,
+          "title": "Finding Code Smells",
+          "slug": "finding-code-smells",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Detect long methods, deeply nested loops, and magic numbers."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Identify functions exceeding 30 lines or 3 levels of nesting."
+            }
+          ],
+          "keyTakeaways": [
+            "Extract deeply nested blocks into named helper functions."
+          ]
+        },
+        {
+          "id": "les-6-4",
+          "position": 4,
+          "title": "Checking Readability",
+          "slug": "checking-readability",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Improve variable naming and reduce cognitive complexity."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Replace single-letter variables with domain-descriptive names."
+            }
+          ],
+          "keyTakeaways": [
+            "Descriptive names improve codebase maintainability."
+          ]
+        },
+        {
+          "id": "les-6-5",
+          "position": 5,
+          "title": "Checking Maintainability",
+          "slug": "checking-maintainability",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Check coupling, cohesion, and SOLID compliance."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Ensure modules adhere to Single Responsibility principle."
+            }
+          ],
+          "keyTakeaways": [
+            "Decouple module dependencies via interfaces."
+          ]
+        },
+        {
+          "id": "les-6-6",
+          "position": 6,
+          "title": "Checking Security",
+          "slug": "checking-security-review",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Scan for SQL injection, XSS, and hardcoded secrets."
+          ],
+          "content": [
+            {
+              "type": "warning",
+              "title": "Security Audit",
+              "text": "Prompt AI specifically: \"Audit this handler for SQL injection, XSS, and hardcoded credentials.\""
+            }
+          ],
+          "keyTakeaways": [
+            "Always conduct explicit security review prompts."
+          ]
+        },
+        {
+          "id": "les-6-7",
+          "position": 7,
+          "title": "Checking Performance",
+          "slug": "checking-performance-review",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Spot N+1 queries, unindexed filters, and memory leaks."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Check database ORM queries for missing eager-loading includes."
+            }
+          ],
+          "keyTakeaways": [
+            "Prevent N+1 database queries during code review."
+          ]
+        },
+        {
+          "id": "les-6-8",
+          "position": 8,
+          "title": "Checking Error Handling",
+          "slug": "checking-error-handling",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Audit empty catch blocks and unhandled promise rejections."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Flag empty catch (e) {} blocks in pull requests."
+            }
+          ],
+          "keyTakeaways": [
+            "Never silently swallow exceptions in catch blocks."
+          ]
+        },
+        {
+          "id": "les-6-9",
+          "position": 9,
+          "title": "Reviewing Generated Code",
+          "slug": "reviewing-generated-code",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Inspect AI-generated code with critical developer eyes."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Verify that AI-generated code matches team conventions."
+            }
+          ],
+          "keyTakeaways": [
+            "Inspect AI-generated code as strictly as human PRs."
+          ]
+        },
+        {
+          "id": "les-6-10",
+          "position": 10,
+          "title": "Creating a Code Review Checklist",
+          "slug": "creating-a-code-review-checklist",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Build automated AI code review prompt checklists."
+          ],
+          "content": [
+            {
+              "type": "checklist",
+              "title": "AI Code Review Checklist",
+              "items": [
+                {
+                  "text": "Are all inputs validated with a schema?",
+                  "checked": false
+                },
+                {
+                  "text": "Are database queries parameterized?",
+                  "checked": false
+                },
+                {
+                  "text": "Are async errors caught properly?",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Standardize code review criteria into a prompt checklist."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-7-refactoring",
+      "position": 7,
+      "title": "Section 7 — AI for Refactoring",
+      "slug": "ai-for-refactoring",
+      "description": "Refactor legacy code, extract functions, eliminate duplication, simplify complex conditionals, and verify zero behavioral shifts.",
+      "level": "intermediate",
+      "lessons": [
+        {
+          "id": "les-7-1",
+          "position": 1,
+          "title": "What is Refactoring?",
+          "slug": "what-is-refactoring",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Improve internal code structure without altering external behavior."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Refactoring cleans technical debt while keeping tests passing."
+            }
+          ],
+          "keyTakeaways": [
+            "Refactoring alters internal structure without changing behavior."
+          ]
+        },
+        {
+          "id": "les-7-2",
+          "position": 2,
+          "title": "Extracting Functions",
+          "slug": "extracting-functions",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Break 100-line monolithic methods into single-purpose helpers."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Prompt AI: \"Extract nested loops into pure helper functions.\""
+            }
+          ],
+          "keyTakeaways": [
+            "Keep function body sizes small and focused."
+          ]
+        },
+        {
+          "id": "les-7-3",
+          "position": 3,
+          "title": "Removing Duplication",
+          "slug": "removing-duplication",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Apply DRY (Don't Repeat Yourself) principle."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Consolidate duplicate logic into shared utility modules."
+            }
+          ],
+          "keyTakeaways": [
+            "Eliminate duplicated business logic."
+          ]
+        },
+        {
+          "id": "les-7-4",
+          "position": 4,
+          "title": "Improving Naming",
+          "slug": "improving-naming",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Rename cryptic variables to clear domain terminology."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Replace ambiguous flags with descriptive boolean predicates."
+            }
+          ],
+          "keyTakeaways": [
+            "Use clear domain language for variable names."
+          ]
+        },
+        {
+          "id": "les-7-5",
+          "position": 5,
+          "title": "Simplifying Complex Logic",
+          "slug": "simplifying-complex-logic",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Replace nested if-else ladders with guard clauses and lookup maps."
+          ],
+          "content": [
+            {
+              "type": "codeComparison",
+              "title": "Nested Ifs vs Early Return Guard Clauses",
+              "leftTitle": "Nested IFs",
+              "rightTitle": "Guard Clauses",
+              "leftLanguage": "typescript",
+              "rightLanguage": "typescript",
+              "leftCode": "function process(user?: User) {\n  if (user) {\n    if (user.active) {\n      return user.data;\n    }\n  }\n  return null;\n}",
+              "rightCode": "function process(user?: User) {\n  if (!user || !user.active) return null;\n  return user.data;\n}"
+            }
+          ],
+          "keyTakeaways": [
+            "Use early returns to flatten nested conditional logic."
+          ]
+        },
+        {
+          "id": "les-7-6",
+          "position": 6,
+          "title": "Improving Architecture",
+          "slug": "improving-architecture",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Migrate procedural code to clean layer architecture."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Decouple presentation, application, and persistence layers."
+            }
+          ],
+          "keyTakeaways": [
+            "Separate business logic from persistence frameworks."
+          ]
+        },
+        {
+          "id": "les-7-7",
+          "position": 7,
+          "title": "Refactoring Legacy Code",
+          "slug": "refactoring-legacy-code",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Modernize legacy JavaScript to typed TypeScript."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Add strict interfaces and types to legacy untyped JS files."
+            }
+          ],
+          "keyTakeaways": [
+            "Add TypeScript types to legacy JavaScript files."
+          ]
+        },
+        {
+          "id": "les-7-8",
+          "position": 8,
+          "title": "Refactoring Without Changing Behavior",
+          "slug": "refactoring-without-changing-behavior",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Preserve external behavior contracts using unit tests."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Run unit test suite before and after every refactoring step."
+            }
+          ],
+          "keyTakeaways": [
+            "Green tests prove refactoring preserved behavior."
+          ]
+        },
+        {
+          "id": "les-7-9",
+          "position": 9,
+          "title": "Test-First Refactoring",
+          "slug": "test-first-refactoring",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Write characterization tests prior to refactoring legacy code."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Generate test cases covering existing code before touching implementation."
+            }
+          ],
+          "keyTakeaways": [
+            "Write characterization tests before refactoring legacy code."
+          ]
+        },
+        {
+          "id": "les-7-10",
+          "position": 10,
+          "title": "Verifying AI Refactoring",
+          "slug": "verifying-ai-refactoring",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Diff changes carefully to spot accidental behavior shifts."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Review git diffs line-by-line to verify no logic was omitted."
+            }
+          ],
+          "keyTakeaways": [
+            "Inspect git diffs carefully for omitted logic."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-8-testing",
+      "position": 8,
+      "title": "Section 8 — AI for Testing",
+      "slug": "ai-for-testing",
+      "description": "Generate unit, integration, API, edge case, negative, and property-based tests using AI tools.",
+      "level": "intermediate",
+      "lessons": [
+        {
+          "id": "les-8-1",
+          "position": 1,
+          "title": "Generate Unit Tests",
+          "slug": "generate-unit-tests",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Generate Jest/Vitest unit tests with mocks."
+          ],
+          "content": [
+            {
+              "type": "code",
+              "language": "typescript",
+              "title": "Generated Unit Test",
+              "code": "describe('formatCurrency', () => {\n  it('formats positive cents correctly', () => {\n    expect(formatCurrency(1250)).toBe('$12.50');\n  });\n  it('throws TypeError for floating point inputs', () => {\n    expect(() => formatCurrency(12.5)).toThrow(TypeError);\n  });\n});"
+            }
+          ],
+          "keyTakeaways": [
+            "Unit tests verify isolated function logic."
+          ]
+        },
+        {
+          "id": "les-8-2",
+          "position": 2,
+          "title": "Generate Integration Tests",
+          "slug": "generate-integration-tests",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Write integration tests against database and API boundaries."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Test interactions between Express handlers and test database instances."
+            }
+          ],
+          "keyTakeaways": [
+            "Integration tests verify database and HTTP pipeline wiring."
+          ]
+        },
+        {
+          "id": "les-8-3",
+          "position": 3,
+          "title": "Generate API Tests",
+          "slug": "generate-api-tests",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Generate Supertest HTTP requests testing 200, 400, and 500 routes."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Assert HTTP response status codes, headers, and JSON body shapes."
+            }
+          ],
+          "keyTakeaways": [
+            "Test API endpoints with Supertest or HTTP clients."
+          ]
+        },
+        {
+          "id": "les-8-4",
+          "position": 4,
+          "title": "Generate Edge Cases",
+          "slug": "generate-edge-cases-testing",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Cover boundary values, zero, max integer, empty string."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Prompt AI: \"Generate 5 edge-case inputs for this string parser.\""
+            }
+          ],
+          "keyTakeaways": [
+            "Always cover empty, zero, and maximum bound values."
+          ]
+        },
+        {
+          "id": "les-8-5",
+          "position": 5,
+          "title": "Generate Boundary Tests",
+          "slug": "generate-boundary-tests",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Test off-by-one boundary limits (min-1, min, max, max+1)."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Test exact boundary limits for arrays and numeric ranges."
+            }
+          ],
+          "keyTakeaways": [
+            "Test exact min/max boundary threshold limits."
+          ]
+        },
+        {
+          "id": "les-8-6",
+          "position": 6,
+          "title": "Negative Testing",
+          "slug": "negative-testing",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Test invalid inputs, malformed JSON, and unauthorized headers."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Verify system rejects invalid requests cleanly without crashing."
+            }
+          ],
+          "keyTakeaways": [
+            "Negative testing confirms graceful error handling."
+          ]
+        },
+        {
+          "id": "les-8-7",
+          "position": 7,
+          "title": "Regression Testing",
+          "slug": "regression-testing",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Build regression suites preventing resurfacing bugs."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Convert fixed bug scenarios into permanent regression tests."
+            }
+          ],
+          "keyTakeaways": [
+            "Add bug scenarios into automated regression suites."
+          ]
+        },
+        {
+          "id": "les-8-8",
+          "position": 8,
+          "title": "Test Coverage",
+          "slug": "test-coverage",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Use AI to fill uncovered branch and line code paths."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Pass uncovered code branches to AI and ask for targeted tests."
+            }
+          ],
+          "keyTakeaways": [
+            "Target uncovered branches to raise code coverage."
+          ]
+        },
+        {
+          "id": "les-8-9",
+          "position": 9,
+          "title": "Property-Based Testing Concepts",
+          "slug": "property-based-testing-concepts",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Apply property-based testing principles with fast-check."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Verify invariants across thousands of auto-generated inputs."
+            }
+          ],
+          "keyTakeaways": [
+            "Property-based tests verify universal invariants."
+          ]
+        },
+        {
+          "id": "les-8-10",
+          "position": 10,
+          "title": "Reviewing AI-Generated Tests",
+          "slug": "reviewing-ai-generated-tests",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Detect false-positive tests and invalid assertions."
+          ],
+          "content": [
+            {
+              "type": "warning",
+              "title": "Tautological Tests",
+              "text": "Ensure generated tests actually assert expected behavior rather than testing mock implementation details."
+            }
+          ],
+          "keyTakeaways": [
+            "Verify that generated tests fail when code is intentionally broken."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-9-web-dev",
+      "position": 9,
+      "title": "Section 9 — AI for Web Development",
+      "slug": "ai-for-web-development",
+      "description": "Leverage AI for HTML/CSS, React, Next.js, API integration, authentication, state management, form validation, and web performance.",
+      "level": "intermediate",
+      "lessons": [
+        {
+          "id": "les-9-1",
+          "position": 1,
+          "title": "AI for HTML/CSS",
+          "slug": "ai-for-html-css",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Generate semantic HTML5 markup and responsive Tailwind CSS."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Generate accessible semantic elements (<header>, <main>, <article>, <button>) with flex/grid classes."
+            }
+          ],
+          "keyTakeaways": [
+            "Use semantic HTML tags for accessibility and SEO."
+          ]
+        },
+        {
+          "id": "les-9-2",
+          "position": 2,
+          "title": "AI for JavaScript",
+          "slug": "ai-for-javascript",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Master ES6+, async/await, DOM manipulation, and promises."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Generate modern async/await code with try/catch block handling."
+            }
+          ],
+          "keyTakeaways": [
+            "Prefer async/await over raw promise chains."
+          ]
+        },
+        {
+          "id": "les-9-3",
+          "position": 3,
+          "title": "AI for React",
+          "slug": "ai-for-react",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Generate functional React components, custom hooks, and context."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Generate custom React hooks encapsulating async data fetching."
+            }
+          ],
+          "keyTakeaways": [
+            "Encapsulate reusable stateful logic into custom hooks."
+          ]
+        },
+        {
+          "id": "les-9-4",
+          "position": 4,
+          "title": "AI for Next.js",
+          "slug": "ai-for-nextjs",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Build Next.js App Router Server Components & Server Actions."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Separate Client Components ('use client') from Server Components."
+            }
+          ],
+          "keyTakeaways": [
+            "Default to Server Components; use Client Components for interactive UI."
+          ]
+        },
+        {
+          "id": "les-9-5",
+          "position": 5,
+          "title": "AI for API Development",
+          "slug": "ai-for-api-development-web",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Connect React frontend components to REST & GraphQL APIs."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Type fetch response payloads with TypeScript interfaces."
+            }
+          ],
+          "keyTakeaways": [
+            "Type all HTTP API response payloads explicitly."
+          ]
+        },
+        {
+          "id": "les-9-6",
+          "position": 6,
+          "title": "AI for Authentication",
+          "slug": "ai-for-authentication-web",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Implement auth flows with Clerk, NextAuth, or JWT tokens."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Protect client routes and server endpoints with session middleware."
+            }
+          ],
+          "keyTakeaways": [
+            "Enforce server-side authentication on every protected API route."
+          ]
+        },
+        {
+          "id": "les-9-7",
+          "position": 7,
+          "title": "AI for Database Integration",
+          "slug": "ai-for-database-integration-web",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Connect web apps to PostgreSQL/MongoDB via Drizzle/Prisma/Mongoose."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Manage database connection pooling in serverless environments."
+            }
+          ],
+          "keyTakeaways": [
+            "Reuse global connection instances in serverless environments."
+          ]
+        },
+        {
+          "id": "les-9-8",
+          "position": 8,
+          "title": "AI for State Management",
+          "slug": "ai-for-state-management",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Manage state using React Context, Zustand, or TanStack Query."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Use TanStack Query for server state caching and optimistic updates."
+            }
+          ],
+          "keyTakeaways": [
+            "Separate local component state from remote server cache."
+          ]
+        },
+        {
+          "id": "les-9-9",
+          "position": 9,
+          "title": "AI for Form Validation",
+          "slug": "ai-for-form-validation",
+          "level": "intermediate",
+          "durationMinutes": 10,
+          "objectives": [
+            "Build React Hook Form + Zod schema validation forms."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Validate user input on both client form submit and server endpoint."
+            }
+          ],
+          "keyTakeaways": [
+            "Duplicate validation on both client UI and server API."
+          ]
+        },
+        {
+          "id": "les-9-10",
+          "position": 10,
+          "title": "AI for Performance Optimization",
+          "slug": "ai-for-performance-optimization-web",
+          "level": "intermediate",
+          "durationMinutes": 12,
+          "objectives": [
+            "Optimize Core Web Vitals, code splitting, dynamic imports, and images."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Use Next.js Image component and dynamic lazy imports for heavy UI."
+            }
+          ],
+          "keyTakeaways": [
+            "Lazy load heavy third-party UI libraries."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-10-backend",
+      "position": 10,
+      "title": "Section 10 — AI for Backend Development",
+      "slug": "ai-for-backend-development",
+      "description": "Design robust backend microservices: REST APIs, Auth, ORM queries, Caching, Rate Limiting, Logging, Background Jobs, and Security.",
+      "level": "advanced",
+      "lessons": [
+        {
+          "id": "les-10-1",
+          "position": 1,
+          "title": "API Design",
+          "slug": "api-design-backend",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Design RESTful resource paths, HTTP verbs, and OpenAPI specs."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Follow standard REST conventions: GET /api/users, POST /api/users, DELETE /api/users/:id."
+            }
+          ],
+          "keyTakeaways": [
+            "Design REST resources using plural noun endpoints."
+          ]
+        },
+        {
+          "id": "les-10-2",
+          "position": 2,
+          "title": "REST APIs",
+          "slug": "rest-apis-backend",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Build Express/Fastify REST endpoints with middleware."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Chain request parsing, authentication, rate limiting, and error handling middleware."
+            }
+          ],
+          "keyTakeaways": [
+            "Use modular Express/Fastify middleware pipelines."
+          ]
+        },
+        {
+          "id": "les-10-3",
+          "position": 3,
+          "title": "Authentication",
+          "slug": "authentication-backend",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Implement secure JWT token issue and bcrypt password verification."
+          ],
+          "content": [
+            {
+              "type": "warning",
+              "title": "Bcrypt Work Factor",
+              "text": "Use bcrypt salt rounds >= 10 to protect against brute-force password cracking."
+            }
+          ],
+          "keyTakeaways": [
+            "Use bcrypt salt rounds >= 10 for password storage."
+          ]
+        },
+        {
+          "id": "les-10-4",
+          "position": 4,
+          "title": "Authorization",
+          "slug": "authorization-backend",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Implement Role-Based Access Control (RBAC) middleware."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Verify user roles (e.g. req.user.role === 'admin') on protected endpoints."
+            }
+          ],
+          "keyTakeaways": [
+            "Enforce RBAC authorization on administrative endpoints."
+          ]
+        },
+        {
+          "id": "les-10-5",
+          "position": 5,
+          "title": "Database Queries",
+          "slug": "database-queries-backend",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Execute efficient SQL and ORM queries with transactions."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Wrap multi-table updates in atomic database transactions."
+            }
+          ],
+          "keyTakeaways": [
+            "Use database transactions for multi-entity writes."
+          ]
+        },
+        {
+          "id": "les-10-6",
+          "position": 6,
+          "title": "ORM Usage",
+          "slug": "orm-usage-backend",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Master Prisma, Drizzle ORM, and Mongoose model schemas."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Define strongly typed relational schemas with foreign key constraints."
+            }
+          ],
+          "keyTakeaways": [
+            "Use ORMs for type safety and migration tracking."
+          ]
+        },
+        {
+          "id": "les-10-7",
+          "position": 7,
+          "title": "Validation",
+          "slug": "validation-backend",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Validate request payloads, path parameters, and query strings."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Validate incoming headers, params, and body with Zod schemas."
+            }
+          ],
+          "keyTakeaways": [
+            "Sanitize and validate all incoming request parameters."
+          ]
+        },
+        {
+          "id": "les-10-8",
+          "position": 8,
+          "title": "Error Handling",
+          "slug": "error-handling-backend",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Implement global error handling middleware."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Catch unhandled exceptions and format uniform JSON error responses."
+            }
+          ],
+          "keyTakeaways": [
+            "Centralize error handling in top-level framework middleware."
+          ]
+        },
+        {
+          "id": "les-10-9",
+          "position": 9,
+          "title": "Caching",
+          "slug": "caching-backend",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Implement Redis caching for hot database queries."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Set TTL expiry headers and handle cache invalidation on updates."
+            }
+          ],
+          "keyTakeaways": [
+            "Set explicit TTL expirations for Redis cache entries."
+          ]
+        },
+        {
+          "id": "les-10-10",
+          "position": 10,
+          "title": "Logging",
+          "slug": "logging-backend",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Implement structured JSON logging with Pino or Winston."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Include request ID, user ID, timestamp, and log level in JSON format."
+            }
+          ],
+          "keyTakeaways": [
+            "Use structured JSON logging for observability."
+          ]
+        },
+        {
+          "id": "les-10-11",
+          "position": 11,
+          "title": "Background Jobs",
+          "slug": "background-jobs-backend",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Process async background tasks using BullMQ or Redis queues."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Offload email sending and heavy image processing to queue workers."
+            }
+          ],
+          "keyTakeaways": [
+            "Offload long-running tasks to background job queues."
+          ]
+        },
+        {
+          "id": "les-10-12",
+          "position": 12,
+          "title": "Rate Limiting",
+          "slug": "rate-limiting-backend",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Protect APIs against DDoS and brute-force with sliding window rate limits."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Limit sensitive endpoints (e.g. /login) to 5 attempts per minute per IP."
+            }
+          ],
+          "keyTakeaways": [
+            "Apply strict rate limits to authentication endpoints."
+          ]
+        },
+        {
+          "id": "les-10-13",
+          "position": 13,
+          "title": "Security",
+          "slug": "security-backend",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Apply Helmet headers, CORS policies, and sanitize input."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Configure CORS origin whitelists and security response headers."
+            }
+          ],
+          "keyTakeaways": [
+            "Restrict CORS origins to trusted frontend domains."
+          ]
+        },
+        {
+          "id": "les-10-14",
+          "position": 14,
+          "title": "Performance",
+          "slug": "performance-backend",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Benchmark response latency, throughput, and connection pools."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Monitor database connection pool limits and event loop lag."
+            }
+          ],
+          "keyTakeaways": [
+            "Monitor connection pool exhaustion under high concurrency."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-11-databases",
+      "position": 11,
+      "title": "Section 11 — AI for Databases",
+      "slug": "ai-for-databases",
+      "description": "Generate, explain, and optimize SQL queries, schema design, relationships, indexes, transactions, normalization, and migrations.",
+      "level": "advanced",
+      "lessons": [
+        {
+          "id": "les-11-1",
+          "position": 1,
+          "title": "Generate SQL",
+          "slug": "generate-sql",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Generate ANSI SQL queries with joins, aggregations, and CTEs."
+          ],
+          "content": [
+            {
+              "type": "code",
+              "language": "sql",
+              "title": "SQL Aggregation Query",
+              "code": "SELECT u.id, u.email, COUNT(o.id) AS total_orders, SUM(o.total_cents) AS lifetime_value\nFROM users u\nJOIN orders o ON u.id = o.user_id\nWHERE o.status = 'completed'\nGROUP BY u.id, u.email\nHAVING SUM(o.total_cents) > 10000\nORDER BY lifetime_value DESC;"
+            }
+          ],
+          "keyTakeaways": [
+            "Use CTEs (Common Table Expressions) to simplify complex SQL queries."
+          ]
+        },
+        {
+          "id": "les-11-2",
+          "position": 2,
+          "title": "Explain SQL",
+          "slug": "explain-sql",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Analyze EXPLAIN ANALYZE execution plans with AI assistance."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Identify Sequential Scans vs Index Scans in EXPLAIN output."
+            }
+          ],
+          "keyTakeaways": [
+            "Use EXPLAIN ANALYZE to verify index utilization."
+          ]
+        },
+        {
+          "id": "les-11-3",
+          "position": 3,
+          "title": "Optimize Queries",
+          "slug": "optimize-queries",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Refactor slow SQL queries and eliminate N+1 subqueries."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Replace correlated subqueries with JOINs and indexed filters."
+            }
+          ],
+          "keyTakeaways": [
+            "Replace correlated subqueries with JOINs."
+          ]
+        },
+        {
+          "id": "les-11-4",
+          "position": 4,
+          "title": "Database Schema Design",
+          "slug": "database-schema-design",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Design relational database schemas with primary/foreign keys."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Define exact data types, NULL constraints, and default values."
+            }
+          ],
+          "keyTakeaways": [
+            "Specify explicit foreign key constraints and cascade rules."
+          ]
+        },
+        {
+          "id": "les-11-5",
+          "position": 5,
+          "title": "Relationships",
+          "slug": "relationships-database",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Design 1:1, 1:N, and N:M relationships with junction tables."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Create junction tables with composite primary keys for N:M relations."
+            }
+          ],
+          "keyTakeaways": [
+            "Use junction tables for many-to-many relationships."
+          ]
+        },
+        {
+          "id": "les-11-6",
+          "position": 6,
+          "title": "Indexes",
+          "slug": "indexes-database",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Add B-Tree, Hash, and Composite indexes for fast lookups."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Index foreign key columns and frequently queried WHERE conditions."
+            }
+          ],
+          "keyTakeaways": [
+            "Index foreign key columns used in JOIN conditions."
+          ]
+        },
+        {
+          "id": "les-11-7",
+          "position": 7,
+          "title": "Transactions",
+          "slug": "transactions-database",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Implement ACID database transactions with isolation levels."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Use BEGIN / COMMIT / ROLLBACK blocks for multi-table updates."
+            }
+          ],
+          "keyTakeaways": [
+            "Wrap multi-table mutations in atomic transactions."
+          ]
+        },
+        {
+          "id": "les-11-8",
+          "position": 8,
+          "title": "Normalization",
+          "slug": "normalization-database",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Normalize schemas to 3NF and selectively denormalize for read speed."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Eliminate duplicate data columns to maintain data integrity."
+            }
+          ],
+          "keyTakeaways": [
+            "Normalize to 3NF for write integrity; denormalize for read speed."
+          ]
+        },
+        {
+          "id": "les-11-9",
+          "position": 9,
+          "title": "Query Debugging",
+          "slug": "query-debugging",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Troubleshoot deadlock errors and query lock timeouts."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Order table updates consistently to prevent deadlocks."
+            }
+          ],
+          "keyTakeaways": [
+            "Update tables in consistent lock order across transactions."
+          ]
+        },
+        {
+          "id": "les-11-10",
+          "position": 10,
+          "title": "Migration Generation",
+          "slug": "migration-generation",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Generate reversible SQL migration scripts (UP / DOWN)."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Write non-destructive migrations that preserve production data."
+            }
+          ],
+          "keyTakeaways": [
+            "Provide rollback DOWN scripts for every migration."
+          ]
+        },
+        {
+          "id": "les-11-11",
+          "position": 11,
+          "title": "Database Security",
+          "slug": "database-security",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Apply Row-Level Security (RLS) policies and least-privilege roles."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Restrict database connection roles to required table permissions."
+            }
+          ],
+          "keyTakeaways": [
+            "Enforce Row-Level Security policies on multi-tenant databases."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-12-hallucinations",
+      "position": 12,
+      "title": "Section 12 — AI Hallucination & Verification",
+      "slug": "ai-hallucination-and-verification",
+      "description": "Detect hallucinated APIs, nonexistent packages, incorrect algorithm assumptions, and master the GENERATE -> INSPECT -> TEST -> VERIFY -> INTEGRATE pipeline.",
+      "level": "advanced",
+      "lessons": [
+        {
+          "id": "les-12-1",
+          "position": 1,
+          "title": "What is AI Hallucination?",
+          "slug": "what-is-ai-hallucination",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Understand why LLMs generate plausibly-formatted incorrect code."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Hallucinations occur when an LLM predicts tokens that look statistically valid but do not correspond to real runtime modules."
+            }
+          ],
+          "keyTakeaways": [
+            "Plausible-looking code can still be entirely hallucinated."
+          ]
+        },
+        {
+          "id": "les-12-2",
+          "position": 2,
+          "title": "Why AI Generates Incorrect Code",
+          "slug": "why-ai-generates-incorrect-code",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Recognize training data noise, knowledge cutoff, and context limits."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "LLMs lack compiler execution feedback during token generation."
+            }
+          ],
+          "keyTakeaways": [
+            "Token prediction does not validate runtime module exports."
+          ]
+        },
+        {
+          "id": "les-12-3",
+          "position": 3,
+          "title": "Detecting Incorrect APIs",
+          "slug": "detecting-incorrect-apis",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Spot invented function names and parameters in generated code."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Verify method signatures against official framework documentation."
+            }
+          ],
+          "keyTakeaways": [
+            "Check API method names against official documentation."
+          ]
+        },
+        {
+          "id": "les-12-4",
+          "position": 4,
+          "title": "Detecting Nonexistent Libraries",
+          "slug": "detecting-nonexistent-libraries",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Prevent Slopsquatting security hazards from hallucinated packages."
+          ],
+          "content": [
+            {
+              "type": "warning",
+              "title": "Slopsquatting Security Risk",
+              "text": "Attackers register package names hallucinated by AI to distribute malware. Always check npm/PyPI before running npm install."
+            }
+          ],
+          "keyTakeaways": [
+            "Never install unknown packages without checking registry existence."
+          ]
+        },
+        {
+          "id": "les-12-5",
+          "position": 5,
+          "title": "Detecting Incorrect Documentation Claims",
+          "slug": "detecting-incorrect-documentation-claims",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Cross-check AI text claims against code execution."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Verify that AI explanation text matches actual code behavior."
+            }
+          ],
+          "keyTakeaways": [
+            "Verify that explanation text matches code execution."
+          ]
+        },
+        {
+          "id": "les-12-6",
+          "position": 6,
+          "title": "Detecting Incorrect Algorithms",
+          "slug": "detecting-incorrect-algorithms",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Catch subtle logic bugs in AI-generated algorithms."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Run edge-case test inputs through a debugger or trace log."
+            }
+          ],
+          "keyTakeaways": [
+            "Execute unit tests to detect algorithmic flaws."
+          ]
+        },
+        {
+          "id": "les-12-7",
+          "position": 7,
+          "title": "Verifying Dependencies",
+          "slug": "verifying-dependencies",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Audit package dependencies for version compatibility."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Verify package version support in package.json."
+            }
+          ],
+          "keyTakeaways": [
+            "Confirm dependency versions match installed packages."
+          ]
+        },
+        {
+          "id": "les-12-8",
+          "position": 8,
+          "title": "Verifying Security Claims",
+          "slug": "verifying-security-claims",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Conduct independent security verification on AI code."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Run static analysis security tools (SAST) on AI code."
+            }
+          ],
+          "keyTakeaways": [
+            "Run SAST security scanners on generated code."
+          ]
+        },
+        {
+          "id": "les-12-9",
+          "position": 9,
+          "title": "Verifying Performance Claims",
+          "slug": "verifying-performance-claims",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Benchmark AI performance claims with actual timers."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Measure actual execution runtime using performance.now()."
+            }
+          ],
+          "keyTakeaways": [
+            "Benchmark AI performance claims with actual timers."
+          ]
+        },
+        {
+          "id": "les-12-10",
+          "position": 10,
+          "title": "Never Trust Generated Code Blindly",
+          "slug": "never-trust-generated-code-blindly",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Master the 5-step verification rule: GENERATE -> INSPECT -> TEST -> VERIFY -> INTEGRATE."
+          ],
+          "content": [
+            {
+              "type": "workflow",
+              "title": "Verification Pipeline",
+              "steps": [
+                {
+                  "number": 1,
+                  "title": "GENERATE",
+                  "description": "Prompt AI for initial implementation draft.",
+                  "badge": "STEP 1"
+                },
+                {
+                  "number": 2,
+                  "title": "INSPECT",
+                  "description": "Read line-by-line and check types.",
+                  "badge": "STEP 2"
+                },
+                {
+                  "number": 3,
+                  "title": "TEST",
+                  "description": "Run compiler, linter, and unit tests.",
+                  "badge": "STEP 3"
+                },
+                {
+                  "number": 4,
+                  "title": "VERIFY",
+                  "description": "Verify security and performance bounds.",
+                  "badge": "STEP 4"
+                },
+                {
+                  "number": 5,
+                  "title": "INTEGRATE",
+                  "description": "Commit change to git version control.",
+                  "badge": "STEP 5"
+                }
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Adhere strictly to GENERATE -> INSPECT -> TEST -> VERIFY -> INTEGRATE."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-13-security",
+      "position": 13,
+      "title": "Section 13 — AI Security",
+      "slug": "ai-security",
+      "description": "Audit AI-generated code for SQL injection, XSS, authentication mistakes, secret exposure, unsafe dependencies, and input validation vulnerabilities.",
+      "level": "advanced",
+      "lessons": [
+        {
+          "id": "les-13-1",
+          "position": 1,
+          "title": "Security Risks of AI-Generated Code",
+          "slug": "security-risks-of-ai-generated-code",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Identify top security flaws in AI generated code."
+          ],
+          "content": [
+            {
+              "type": "warning",
+              "title": "Insecure Defaults",
+              "text": "AI models frequently output insecure defaults (e.g. CORS *, plain text HTTP, disabled SSL)."
+            }
+          ],
+          "keyTakeaways": [
+            "AI models favor simple code over secure code by default."
+          ]
+        },
+        {
+          "id": "les-13-2",
+          "position": 2,
+          "title": "SQL Injection",
+          "slug": "sql-injection-ai-security",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Detect and fix string concatenation SQL injection in AI code."
+          ],
+          "content": [
+            {
+              "type": "codeComparison",
+              "title": "Insecure String SQL vs Secure Parameterized SQL",
+              "leftTitle": "Insecure SQL",
+              "rightTitle": "Secure Parameterized SQL",
+              "leftLanguage": "typescript",
+              "rightLanguage": "typescript",
+              "leftCode": "// VULNERABLE TO INJECTION\nconst sql = \"SELECT * FROM users WHERE email = '\" + req.body.email + \"'\";\nawait db.query(sql);",
+              "rightCode": "// SECURE PARAMETERIZED QUERY\nconst sql = \"SELECT * FROM users WHERE email = $1\";\nawait db.query(sql, [req.body.email]);"
+            }
+          ],
+          "keyTakeaways": [
+            "Enforce parameter bindings on all database query strings."
+          ]
+        },
+        {
+          "id": "les-13-3",
+          "position": 3,
+          "title": "XSS",
+          "slug": "xss-ai-security",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Prevent Cross-Site Scripting (XSS) in generated UI components."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Avoid innerHTML or dangerouslySetInnerHTML without DOMPurify sanitization."
+            }
+          ],
+          "keyTakeaways": [
+            "Sanitize user input before rendering dynamic HTML."
+          ]
+        },
+        {
+          "id": "les-13-4",
+          "position": 4,
+          "title": "Authentication Mistakes",
+          "slug": "authentication-mistakes-ai-security",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Spot insecure JWT secret storage and weak password hashing."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Store JWT secrets in environment variables, never in source code."
+            }
+          ],
+          "keyTakeaways": [
+            "Never hardcode JWT signing secrets in source files."
+          ]
+        },
+        {
+          "id": "les-13-5",
+          "position": 5,
+          "title": "Authorization Mistakes",
+          "slug": "authorization-mistakes-ai-security",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Fix Insecure Direct Object References (IDOR)."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Verify user ownership (e.g. record.userId === req.user.id) on resource lookup."
+            }
+          ],
+          "keyTakeaways": [
+            "Verify user ownership on every database record lookup."
+          ]
+        },
+        {
+          "id": "les-13-6",
+          "position": 6,
+          "title": "Secret Exposure",
+          "slug": "secret-exposure-ai-security",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Prevent API keys and private keys from leaking into prompts or code."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Use .env file variables and git secret scanners."
+            }
+          ],
+          "keyTakeaways": [
+            "Never paste production API secrets into AI prompts."
+          ]
+        },
+        {
+          "id": "les-13-7",
+          "position": 7,
+          "title": "Unsafe Dependencies",
+          "slug": "unsafe-dependencies-ai-security",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Audit third-party package vulnerabilities with npm audit."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Run npm audit to scan generated dependencies for CVE vulnerabilities."
+            }
+          ],
+          "keyTakeaways": [
+            "Run npm audit after adding new AI-suggested packages."
+          ]
+        },
+        {
+          "id": "les-13-8",
+          "position": 8,
+          "title": "Input Validation",
+          "slug": "input-validation-ai-security",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Enforce strict Zod schema validation on all API endpoints."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Reject unexpected payload properties using Zod .strict()."
+            }
+          ],
+          "keyTakeaways": [
+            "Use Zod schemas to sanitize all incoming HTTP request data."
+          ]
+        },
+        {
+          "id": "les-13-9",
+          "position": 9,
+          "title": "Secure API Design",
+          "slug": "secure-api-design-ai-security",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Configure Helmet security headers and CORS origin restrictions."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Apply Helmet security response headers to Express servers."
+            }
+          ],
+          "keyTakeaways": [
+            "Apply security response headers on every API backend."
+          ]
+        },
+        {
+          "id": "les-13-10",
+          "position": 10,
+          "title": "Security Review of AI Code",
+          "slug": "security-review-of-ai-code",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Conduct dedicated security code review prompts before merging."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Prompt AI: \"Perform an OWASP Top 10 security review on this backend file.\""
+            }
+          ],
+          "keyTakeaways": [
+            "Run explicit OWASP security review prompts on new code."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-14-performance",
+      "position": 14,
+      "title": "Section 14 — AI for Performance",
+      "slug": "ai-for-performance",
+      "description": "Optimize algorithms, database queries, API response times, caching strategies, and benchmark AI suggestions.",
+      "level": "advanced",
+      "lessons": [
+        {
+          "id": "les-14-1",
+          "position": 1,
+          "title": "Complexity Analysis",
+          "slug": "complexity-analysis-performance",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Analyze worst-case asymptotic bounds."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Derive time and space complexity for data processing pipelines."
+            }
+          ],
+          "keyTakeaways": [
+            "Derive worst-case Big-O time and space bounds."
+          ]
+        },
+        {
+          "id": "les-14-2",
+          "position": 2,
+          "title": "Finding Bottlenecks",
+          "slug": "finding-bottlenecks",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Identify CPU and I/O bottlenecks using profiling logs."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Locate hot code paths consuming high CPU cycles."
+            }
+          ],
+          "keyTakeaways": [
+            "Profile execution before optimizing code."
+          ]
+        },
+        {
+          "id": "les-14-3",
+          "position": 3,
+          "title": "Algorithm Optimization",
+          "slug": "algorithm-optimization-performance",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Transform O(n²) loops into O(n) hash lookups."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Replace nested array iterations with Map indexing."
+            }
+          ],
+          "keyTakeaways": [
+            "Replace nested loops with indexed map lookups."
+          ]
+        },
+        {
+          "id": "les-14-4",
+          "position": 4,
+          "title": "Database Optimization",
+          "slug": "database-optimization-performance",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Eliminate N+1 query patterns and add database indexes."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Use SQL JOINs or ORM eager-loading includes."
+            }
+          ],
+          "keyTakeaways": [
+            "Eliminate N+1 database queries using JOINs."
+          ]
+        },
+        {
+          "id": "les-14-5",
+          "position": 5,
+          "title": "API Optimization",
+          "slug": "api-optimization-performance",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Apply payload compression and HTTP caching headers."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Compress JSON payloads with gzip/brotli middleware."
+            }
+          ],
+          "keyTakeaways": [
+            "Enable gzip compression on large API responses."
+          ]
+        },
+        {
+          "id": "les-14-6",
+          "position": 6,
+          "title": "Caching",
+          "slug": "caching-performance",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Implement multi-layer caching with Redis and memory."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Cache expensive DB queries in Redis with explicit TTL exps."
+            }
+          ],
+          "keyTakeaways": [
+            "Set explicit TTL expirations on cached entries."
+          ]
+        },
+        {
+          "id": "les-14-7",
+          "position": 7,
+          "title": "Memory Optimization",
+          "slug": "memory-optimization-performance",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Reduce garbage collection pressure and memory allocations."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Reuse object buffers in high-throughput data streams."
+            }
+          ],
+          "keyTakeaways": [
+            "Minimize object allocations inside hot loops."
+          ]
+        },
+        {
+          "id": "les-14-8",
+          "position": 8,
+          "title": "Frontend Performance",
+          "slug": "frontend-performance",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Optimize Core Web Vitals, dynamic imports, and memoization."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Use React.memo and dynamic imports for heavy components."
+            }
+          ],
+          "keyTakeaways": [
+            "Lazy load heavy third-party UI libraries."
+          ]
+        },
+        {
+          "id": "les-14-9",
+          "position": 9,
+          "title": "Profiling",
+          "slug": "profiling-performance",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Analyze Node.js CPU profiles and Chrome DevTools traces."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Use node --prof to inspect event loop performance."
+            }
+          ],
+          "keyTakeaways": [
+            "Analyze CPU flamegraphs to locate slow functions."
+          ]
+        },
+        {
+          "id": "les-14-10",
+          "position": 10,
+          "title": "Benchmarking AI Suggestions",
+          "slug": "benchmarking-ai-suggestions",
+          "level": "advanced",
+          "durationMinutes": 12,
+          "objectives": [
+            "Benchmark AI performance suggestions using actual timers."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Always benchmark AI suggestions using Benchmark.js or console.time()."
+            }
+          ],
+          "keyTakeaways": [
+            "Benchmark AI performance claims with real timer measurements."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-15-docs",
+      "position": 15,
+      "title": "Section 15 — AI for Documentation",
+      "slug": "ai-for-documentation",
+      "description": "Generate README files, API specs, JSDoc/TSDoc comments, architecture documentation, setup guides, and changelogs.",
+      "level": "advanced",
+      "lessons": [
+        {
+          "id": "les-15-1",
+          "position": 1,
+          "title": "Generate README",
+          "slug": "generate-readme",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Generate structured README.md documentation with setup instructions."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Include badges, overview, prerequisites, installation, environment variables, and API endpoints."
+            }
+          ],
+          "keyTakeaways": [
+            "Generate clean, comprehensive README files for open-source repositories."
+          ]
+        },
+        {
+          "id": "les-15-2",
+          "position": 2,
+          "title": "Generate API Documentation",
+          "slug": "generate-api-documentation",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Generate OpenAPI/Swagger YAML specs from TypeScript types."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Convert Zod schemas or TypeScript DTOs into OpenAPI 3.0 YAML definitions."
+            }
+          ],
+          "keyTakeaways": [
+            "Convert TypeScript types into OpenAPI specifications."
+          ]
+        },
+        {
+          "id": "les-15-3",
+          "position": 3,
+          "title": "Generate Code Comments",
+          "slug": "generate-code-comments",
+          "level": "advanced",
+          "durationMinutes": 8,
+          "objectives": [
+            "Generate meaningful comments explaining why, not just what."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Comment complex business logic trade-offs rather than obvious statements."
+            }
+          ],
+          "keyTakeaways": [
+            "Document architectural reasoning, not self-explanatory syntax."
+          ]
+        },
+        {
+          "id": "les-15-4",
+          "position": 4,
+          "title": "Generate JSDoc",
+          "slug": "generate-jsdoc",
+          "level": "advanced",
+          "durationMinutes": 8,
+          "objectives": [
+            "Generate standardized JSDoc/TSDoc annotations for exported APIs."
+          ],
+          "content": [
+            {
+              "type": "code",
+              "language": "typescript",
+              "title": "Generated JSDoc",
+              "code": "/**\n * Calculates the compounding interest for an account balance.\n * @param principal Starting balance in USD\n * @param rate Annual interest rate (e.g. 0.05 for 5%)\n * @param years Number of compounding years\n * @returns Compounded final balance rounded to 2 decimal places\n */"
+            }
+          ],
+          "keyTakeaways": [
+            "Provide JSDoc annotations for exported module functions."
+          ]
+        },
+        {
+          "id": "les-15-5",
+          "position": 5,
+          "title": "Generate Architecture Documentation",
+          "slug": "generate-architecture-documentation",
+          "level": "advanced",
+          "durationMinutes": 10,
+          "objectives": [
+            "Generate Mermaid diagrams and system architecture notes."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Generate Mermaid flowchart diagrams representing service data flow."
+            }
+          ],
+          "keyTakeaways": [
+            "Use Mermaid syntax to render visual architectural diagrams."
+          ]
+        },
+        {
+          "id": "les-15-6",
+          "position": 6,
+          "title": "Generate Setup Instructions",
+          "slug": "generate-setup-instructions",
+          "level": "advanced",
+          "durationMinutes": 8,
+          "objectives": [
+            "Generate clear local development and environment setup guides."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "List step-by-step CLI commands for local database seeding and server launch."
+            }
+          ],
+          "keyTakeaways": [
+            "Provide exact copy-paste CLI commands for project setup."
+          ]
+        },
+        {
+          "id": "les-15-7",
+          "position": 7,
+          "title": "Generate Changelogs",
+          "slug": "generate-changelogs",
+          "level": "advanced",
+          "durationMinutes": 8,
+          "objectives": [
+            "Summarize git commit histories into semantic CHANGELOG.md files."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Categorize commits into Added, Fixed, Changed, and Security."
+            }
+          ],
+          "keyTakeaways": [
+            "Group release notes into semantic changelog categories."
+          ]
+        },
+        {
+          "id": "les-15-8",
+          "position": 8,
+          "title": "Improve Existing Documentation",
+          "slug": "improve-existing-documentation",
+          "level": "advanced",
+          "durationMinutes": 8,
+          "objectives": [
+            "Refine existing docs for clarity, accuracy, and formatting."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Review existing docs to fix outdated setup steps and dead links."
+            }
+          ],
+          "keyTakeaways": [
+            "Keep technical documentation synchronized with codebase changes."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-16-workflow",
+      "position": 16,
+      "title": "Section 16 — AI Coding Workflow",
+      "slug": "ai-coding-workflow-advanced",
+      "description": "Master the end-to-end 12-step professional AI development pipeline from requirement to final production verification.",
+      "level": "expert",
+      "lessons": [
+        {
+          "id": "les-16-1",
+          "position": 1,
+          "title": "Understanding Requirements",
+          "slug": "understanding-requirements-workflow",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Analyze product requirements before prompting."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Clarify ambiguous edge cases before generating any code."
+            }
+          ],
+          "keyTakeaways": [
+            "Clarify requirements before writing prompts."
+          ]
+        },
+        {
+          "id": "les-16-2",
+          "position": 2,
+          "title": "Breaking Into Tasks",
+          "slug": "breaking-into-tasks-workflow",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Decompose features into small, testable task items."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Decompose monolithic features into modular task checklists."
+            }
+          ],
+          "keyTakeaways": [
+            "Decompose features into small, incremental tasks."
+          ]
+        },
+        {
+          "id": "les-16-3",
+          "position": 3,
+          "title": "Designing Solution",
+          "slug": "designing-solution-workflow",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Design types and interfaces before writing implementation."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Define TypeScript interfaces first as contracts."
+            }
+          ],
+          "keyTakeaways": [
+            "Write type definitions before generating implementations."
+          ]
+        },
+        {
+          "id": "les-16-4",
+          "position": 4,
+          "title": "Asking AI for Assistance",
+          "slug": "asking-ai-for-assistance-workflow",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Prompt AI with exact context and constraints."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Pass type contracts and constraints to the AI model."
+            }
+          ],
+          "keyTakeaways": [
+            "Pass explicit type contracts in your prompt."
+          ]
+        },
+        {
+          "id": "les-16-5",
+          "position": 5,
+          "title": "Reviewing Generated Code",
+          "slug": "reviewing-generated-code-workflow",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Conduct thorough line-by-line inspection."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Inspect generated code for logic, typing, and safety."
+            }
+          ],
+          "keyTakeaways": [
+            "Never merge unread AI code."
+          ]
+        },
+        {
+          "id": "les-16-6",
+          "position": 6,
+          "title": "Implementing Incrementally",
+          "slug": "implementing-incrementally-workflow",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Commit code in small, logical git commits."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Commit small working changes frequently."
+            }
+          ],
+          "keyTakeaways": [
+            "Keep git commits small and focused."
+          ]
+        },
+        {
+          "id": "les-16-7",
+          "position": 7,
+          "title": "Running Tests",
+          "slug": "running-tests-workflow",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Execute automated test suites after every change."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Run npm test to verify regression freedom."
+            }
+          ],
+          "keyTakeaways": [
+            "Execute test suites after every incremental edit."
+          ]
+        },
+        {
+          "id": "les-16-8",
+          "position": 8,
+          "title": "Debugging",
+          "slug": "debugging-workflow",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Fix test failures using minimal error prompts."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Feed compiler/test failures directly back into AI."
+            }
+          ],
+          "keyTakeaways": [
+            "Use error outputs to drive AI debugging turns."
+          ]
+        },
+        {
+          "id": "les-16-9",
+          "position": 9,
+          "title": "Reviewing Security",
+          "slug": "reviewing-security-workflow",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Perform dedicated OWASP security audits."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Scan for injection, XSS, and authorization leaks."
+            }
+          ],
+          "keyTakeaways": [
+            "Audit for security risks prior to PR submission."
+          ]
+        },
+        {
+          "id": "les-16-10",
+          "position": 10,
+          "title": "Optimizing",
+          "slug": "optimizing-workflow",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Benchmark and optimize hot execution paths."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Profile runtime execution and optimize queries."
+            }
+          ],
+          "keyTakeaways": [
+            "Optimize hot paths based on actual profiling."
+          ]
+        },
+        {
+          "id": "les-16-11",
+          "position": 11,
+          "title": "Documenting",
+          "slug": "documenting-workflow",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Generate JSDoc annotations and update README files."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Generate updated documentation for new exports."
+            }
+          ],
+          "keyTakeaways": [
+            "Update documentation along with code changes."
+          ]
+        },
+        {
+          "id": "les-16-12",
+          "position": 12,
+          "title": "Final Verification",
+          "slug": "final-verification-workflow",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Run full CI/CD suite and conduct manual smoke test."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Verify build passes in production environment."
+            }
+          ],
+          "keyTakeaways": [
+            "Verify production build passes before deployment."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-17-advanced",
+      "position": 17,
+      "title": "Section 17 — Advanced AI Coding",
+      "slug": "advanced-ai-coding",
+      "description": "Repository-level AI indexing, multi-file edits, architecture-aware prompting, AI system design, and legacy modernization.",
+      "level": "expert",
+      "lessons": [
+        {
+          "id": "les-17-1",
+          "position": 1,
+          "title": "Repository-Level AI Assistance",
+          "slug": "repository-level-ai-assistance",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Index full repositories for cross-file context indexing."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Use repo-aware AI tools that build AST indexes of your entire codebase."
+            }
+          ],
+          "keyTakeaways": [
+            "Repo-level indexing enables accurate cross-file updates."
+          ]
+        },
+        {
+          "id": "les-17-2",
+          "position": 2,
+          "title": "Large Codebase Context",
+          "slug": "large-codebase-context",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Manage context limits in 100,000+ line codebases."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Selectively supply relevant module exports and types rather than entire repositories."
+            }
+          ],
+          "keyTakeaways": [
+            "Selectively trim context to avoid window truncation."
+          ]
+        },
+        {
+          "id": "les-17-3",
+          "position": 3,
+          "title": "Multi-File Changes",
+          "slug": "multi-file-changes",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Orchestrate coordinated edits across models, routes, and UI components."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Apply multi-file edits in dependency order: Schema -> Service -> API -> Client."
+            }
+          ],
+          "keyTakeaways": [
+            "Execute multi-file edits in dependency layer order."
+          ]
+        },
+        {
+          "id": "les-17-4",
+          "position": 4,
+          "title": "Architecture-Aware Prompting",
+          "slug": "architecture-aware-prompting",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Enforce project architectural patterns (Hexagonal, Event-Driven, DDD)."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Instruct AI to adhere strictly to existing repository folder structures and design patterns."
+            }
+          ],
+          "keyTakeaways": [
+            "Enforce repository design patterns in system prompts."
+          ]
+        },
+        {
+          "id": "les-17-5",
+          "position": 5,
+          "title": "Incremental Implementation",
+          "slug": "incremental-implementation-advanced",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Apply Strangler Fig pattern for safe large-scale migrations."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Migrate legacy modules incrementally behind feature flags."
+            }
+          ],
+          "keyTakeaways": [
+            "Use Strangler Fig pattern for legacy code migration."
+          ]
+        },
+        {
+          "id": "les-17-6",
+          "position": 6,
+          "title": "AI-Assisted System Design",
+          "slug": "ai-assisted-system-design",
+          "level": "expert",
+          "durationMinutes": 15,
+          "objectives": [
+            "Use AI to design scalable microservice architectures."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Prompt AI to evaluate load balancer, message queue, and database sharding options."
+            }
+          ],
+          "keyTakeaways": [
+            "Evaluate system design options and failure modes with AI."
+          ]
+        },
+        {
+          "id": "les-17-7",
+          "position": 7,
+          "title": "AI-Assisted Database Design",
+          "slug": "ai-assisted-database-design",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Design multi-tenant database schemas with row-level tenant isolation."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Design schemas supporting high-concurrency multi-tenant SaaS requirements."
+            }
+          ],
+          "keyTakeaways": [
+            "Include tenant isolation columns in multi-tenant schemas."
+          ]
+        },
+        {
+          "id": "les-17-8",
+          "position": 8,
+          "title": "AI-Assisted API Design",
+          "slug": "ai-assisted-api-design",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Design gRPC, GraphQL, and REST API contracts."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Define protobuf schemas, GraphQL resolvers, and REST specifications."
+            }
+          ],
+          "keyTakeaways": [
+            "Define clear API contracts prior to client/server implementation."
+          ]
+        },
+        {
+          "id": "les-17-9",
+          "position": 9,
+          "title": "AI-Assisted Code Migration",
+          "slug": "ai-assisted-code-migration",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Migrate libraries (e.g. Express to Fastify, Vue to React)."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Translate framework syntax while preserving route logic and test assertions."
+            }
+          ],
+          "keyTakeaways": [
+            "Preserve test assertion suites during framework migrations."
+          ]
+        },
+        {
+          "id": "les-17-10",
+          "position": 10,
+          "title": "AI-Assisted Legacy Modernization",
+          "slug": "ai-assisted-legacy-modernization",
+          "level": "expert",
+          "durationMinutes": 15,
+          "objectives": [
+            "Modernize untyped legacy monoliths into typed microservices."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Refactor monolith modules into independent, containerized services."
+            }
+          ],
+          "keyTakeaways": [
+            "Extract monolithic modules into typed microservices safely."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-18-agentic",
+      "position": 18,
+      "title": "Section 18 — Agentic Coding",
+      "slug": "agentic-coding",
+      "description": "Master AI coding agents, tool calling, file system operations, terminal agents, human-in-the-loop controls, and safe execution.",
+      "level": "expert",
+      "lessons": [
+        {
+          "id": "les-18-1",
+          "position": 1,
+          "title": "What is Agentic Coding?",
+          "slug": "what-is-agentic-coding",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Differentiate AI Chat vs AI Copilot vs Autonomous Coding Agent."
+          ],
+          "content": [
+            {
+              "type": "comparison",
+              "title": "AI Modality Comparison",
+              "columns": [
+                "Feature",
+                "AI Chat",
+                "AI Copilot",
+                "Coding Agent"
+              ],
+              "rows": [
+                [
+                  "File Access",
+                  "Manual Copy-Paste",
+                  "Current Open File",
+                  "Full Workspace Directory"
+                ],
+                [
+                  "Execution",
+                  "None",
+                  "Inline Suggestions",
+                  "Terminal Command Tool Calls"
+                ],
+                [
+                  "Autonomy",
+                  "Passive Answer",
+                  "Contextual Completion",
+                  "Autonomous Goal Planning & Execution"
+                ]
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Coding agents execute tool calls and file edits autonomously."
+          ]
+        },
+        {
+          "id": "les-18-2",
+          "position": 2,
+          "title": "Coding Agents",
+          "slug": "coding-agents-overview",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Understand agent loops: Observe -> Plan -> Act -> Verify."
+          ],
+          "content": [
+            {
+              "type": "workflow",
+              "title": "Agentic Execution Loop",
+              "steps": [
+                {
+                  "number": 1,
+                  "title": "OBSERVE",
+                  "description": "Read files, terminal logs, and git status.",
+                  "badge": "OBSERVE"
+                },
+                {
+                  "number": 2,
+                  "title": "PLAN",
+                  "description": "Decompose task into tool invocation steps.",
+                  "badge": "PLAN"
+                },
+                {
+                  "number": 3,
+                  "title": "ACT",
+                  "description": "Execute file edits and shell commands.",
+                  "badge": "ACT"
+                },
+                {
+                  "number": 4,
+                  "title": "VERIFY",
+                  "description": "Run test suite and verify output.",
+                  "badge": "VERIFY"
+                }
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Agents operate in iterative Observe -> Plan -> Act -> Verify loops."
+          ]
+        },
+        {
+          "id": "les-18-3",
+          "position": 3,
+          "title": "Tool Calling",
+          "slug": "tool-calling-agentic",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Understand how LLMs invoke JSON tool schemas."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Agents emit structured JSON tool calls (e.g. read_file, write_file, execute_command)."
+            }
+          ],
+          "keyTakeaways": [
+            "Tool calling allows LLMs to interact with the OS and IDE."
+          ]
+        },
+        {
+          "id": "les-18-4",
+          "position": 4,
+          "title": "File System Operations",
+          "slug": "file-system-operations-agentic",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Safely inspect, write, and patch codebase files."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Use atomic file writing and git status tracking."
+            }
+          ],
+          "keyTakeaways": [
+            "Verify git status after agent file modifications."
+          ]
+        },
+        {
+          "id": "les-18-5",
+          "position": 5,
+          "title": "Terminal-Based Agents",
+          "slug": "terminal-based-agents",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Run CLI agents for automated testing and linter fixing."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "CLI agents run test runners and fix lint errors automatically."
+            }
+          ],
+          "keyTakeaways": [
+            "Use terminal agents for automated build and test fixes."
+          ]
+        },
+        {
+          "id": "les-18-6",
+          "position": 6,
+          "title": "Planning Before Coding",
+          "slug": "planning-before-coding-agentic",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Enforce mandatory planning phases prior to agent execution."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Require agents to write an implementation plan document before modifying code."
+            }
+          ],
+          "keyTakeaways": [
+            "Require a written plan before allowing agents to edit code."
+          ]
+        },
+        {
+          "id": "les-18-7",
+          "position": 7,
+          "title": "Agent Task Decomposition",
+          "slug": "agent-task-decomposition",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Break complex agent goals into sub-tasks."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Decompose feature requests into sequential sub-task checklists."
+            }
+          ],
+          "keyTakeaways": [
+            "Track agent execution with sub-task checklists."
+          ]
+        },
+        {
+          "id": "les-18-8",
+          "position": 8,
+          "title": "Human-in-the-Loop",
+          "slug": "human-in-the-loop-agentic",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Maintain human approval gates for file writes and command executions."
+          ],
+          "content": [
+            {
+              "type": "warning",
+              "title": "Human Control",
+              "text": "Never allow agents to execute destructive commands (e.g. rm -rf or db drop) without explicit human confirmation."
+            }
+          ],
+          "keyTakeaways": [
+            "Enforce human approval gates for destructive commands."
+          ]
+        },
+        {
+          "id": "les-18-9",
+          "position": 9,
+          "title": "Reviewing Agent Changes",
+          "slug": "reviewing-agent-changes",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Inspect agent git diffs before committing."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Review git diffs carefully to verify agent did not modify unrelated files."
+            }
+          ],
+          "keyTakeaways": [
+            "Review git diffs to catch unintended agent file changes."
+          ]
+        },
+        {
+          "id": "les-18-10",
+          "position": 10,
+          "title": "Safe Agentic Development",
+          "slug": "safe-agentic-development",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Sandbox agent execution in Docker or isolated VM environments."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Run agent shell commands in isolated container sandboxes."
+            }
+          ],
+          "keyTakeaways": [
+            "Run agent terminal commands inside sandboxed environments."
+          ]
+        },
+        {
+          "id": "les-18-11",
+          "position": 11,
+          "title": "Rollback and Recovery",
+          "slug": "rollback-and-recovery-agentic",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Use git reset and stash to recover from bad agent loops."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Use git reset --hard to revert undesirable agent changes instantly."
+            }
+          ],
+          "keyTakeaways": [
+            "Use git reset --hard to revert bad agent execution loops."
+          ]
+        },
+        {
+          "id": "les-18-12",
+          "position": 12,
+          "title": "Agent Testing",
+          "slug": "agent-testing",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Automate verification of agent-generated pull requests."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Run automated CI/CD test pipelines on all agent pull requests."
+            }
+          ],
+          "keyTakeaways": [
+            "Validate all agent changes using automated CI test suites."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-19-best-practices",
+      "position": 19,
+      "title": "Section 19 — AI Coding Best Practices",
+      "slug": "ai-coding-best-practices",
+      "description": "Essential rules for professional AI-assisted engineering: human ownership, incremental commits, testing, security, and verification.",
+      "level": "expert",
+      "lessons": [
+        {
+          "id": "les-19-1",
+          "position": 1,
+          "title": "Understand Before Generating",
+          "slug": "understand-before-generating",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Never prompt for code until requirements are clear."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Understand the domain problem before asking AI for solution code."
+            }
+          ],
+          "keyTakeaways": [
+            "Clear requirements must precede AI code generation."
+          ]
+        },
+        {
+          "id": "les-19-2",
+          "position": 2,
+          "title": "Give Enough Context",
+          "slug": "give-enough-context",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Supply interface contracts, schemas, and dependencies."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Provide necessary types and environment details in prompt context."
+            }
+          ],
+          "keyTakeaways": [
+            "Provide necessary context to prevent AI hallucinations."
+          ]
+        },
+        {
+          "id": "les-19-3",
+          "position": 3,
+          "title": "Start Small",
+          "slug": "start-small",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Build features function by function."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Generate small functions rather than huge multi-module systems."
+            }
+          ],
+          "keyTakeaways": [
+            "Keep code generation increments small and verifiable."
+          ]
+        },
+        {
+          "id": "les-19-4",
+          "position": 4,
+          "title": "Review Every Change",
+          "slug": "review-every-change",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Inspect every line added by AI before committing."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Read every generated line carefully."
+            }
+          ],
+          "keyTakeaways": [
+            "Inspect every generated line before committing."
+          ]
+        },
+        {
+          "id": "les-19-5",
+          "position": 5,
+          "title": "Test Generated Code",
+          "slug": "test-generated-code",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Execute unit tests on all AI generated code."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Verify code passes compiler and unit test suites."
+            }
+          ],
+          "keyTakeaways": [
+            "Run test suites on all AI output."
+          ]
+        },
+        {
+          "id": "les-19-6",
+          "position": 6,
+          "title": "Verify APIs",
+          "slug": "verify-apis",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Cross-reference API method signatures with official docs."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Confirm library function exports actually exist."
+            }
+          ],
+          "keyTakeaways": [
+            "Verify API method names against official documentation."
+          ]
+        },
+        {
+          "id": "les-19-7",
+          "position": 7,
+          "title": "Verify Dependencies",
+          "slug": "verify-dependencies-best-practices",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Audit npm/PyPI package existence before installing."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Check package registry existence to prevent slopsquatting."
+            }
+          ],
+          "keyTakeaways": [
+            "Audit package dependencies on public registries."
+          ]
+        },
+        {
+          "id": "les-19-8",
+          "position": 8,
+          "title": "Check Security",
+          "slug": "check-security-best-practices",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Audit AI code for injection, XSS, and authorization leaks."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Audit AI code for OWASP security vulnerabilities."
+            }
+          ],
+          "keyTakeaways": [
+            "Conduct explicit security audits on generated code."
+          ]
+        },
+        {
+          "id": "les-19-9",
+          "position": 9,
+          "title": "Check Complexity",
+          "slug": "check-complexity-best-practices",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Verify asymptotic time and space Big-O bounds."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Verify time and space complexities match requirement bounds."
+            }
+          ],
+          "keyTakeaways": [
+            "Verify Big-O complexity bounds."
+          ]
+        },
+        {
+          "id": "les-19-10",
+          "position": 10,
+          "title": "Never Blindly Copy Code",
+          "slug": "never-blindly-copy-code",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Understand every line pasted into your workspace."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Understand the mechanism of every pasted snippet."
+            }
+          ],
+          "keyTakeaways": [
+            "Never paste code you cannot explain line-by-line."
+          ]
+        },
+        {
+          "id": "les-19-11",
+          "position": 11,
+          "title": "Maintain Human Ownership",
+          "slug": "maintain-human-ownership",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Retain full technical accountability for production systems."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Human developers remain 100% accountable for system safety and correctness."
+            }
+          ],
+          "keyTakeaways": [
+            "Human developers retain full accountability for production systems."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-20-interview-prep",
+      "position": 20,
+      "title": "Section 20 — AI Coding Interview Preparation",
+      "slug": "ai-coding-interview-preparation",
+      "description": "Use AI for interview prep: DSA practice, mock interviews, code explanations, system design, revision plans, and responsible assessment usage.",
+      "level": "expert",
+      "lessons": [
+        {
+          "id": "les-20-1",
+          "position": 1,
+          "title": "Using AI to Prepare DSA",
+          "slug": "using-ai-to-prepare-dsa",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Use AI as a DSA pattern tutor."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Ask AI to explain patterns across LeetCode topic categories."
+            }
+          ],
+          "keyTakeaways": [
+            "Use AI to master core DSA patterns."
+          ]
+        },
+        {
+          "id": "les-20-2",
+          "position": 2,
+          "title": "Using AI for Mock Interviews",
+          "slug": "using-ai-for-mock-interviews",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Simulate live technical interviews with AI."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Prompt AI to act as a strict tech interviewer asking follow-up questions."
+            }
+          ],
+          "keyTakeaways": [
+            "Simulate mock interviews with AI interviewers."
+          ]
+        },
+        {
+          "id": "les-20-3",
+          "position": 3,
+          "title": "Explaining Code With AI",
+          "slug": "explaining-code-with-ai",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Practice articulating your code out loud."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Practice explaining variable state changes out loud."
+            }
+          ],
+          "keyTakeaways": [
+            "Articulate code logic out loud clearly."
+          ]
+        },
+        {
+          "id": "les-20-4",
+          "position": 4,
+          "title": "Generating Follow-Up Questions",
+          "slug": "generating-follow-up-questions",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Prepare for interviewer follow-ups (e.g. \"What if data exceeds memory?\")."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Prompt AI for edge-case scale follow-up questions."
+            }
+          ],
+          "keyTakeaways": [
+            "Anticipate interviewer scale follow-up questions."
+          ]
+        },
+        {
+          "id": "les-20-5",
+          "position": 5,
+          "title": "Practicing System Design",
+          "slug": "practicing-system-design",
+          "level": "expert",
+          "durationMinutes": 15,
+          "objectives": [
+            "Practice system design mock interviews with AI."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Design distributed architectures with caching and messaging queues."
+            }
+          ],
+          "keyTakeaways": [
+            "Practice system design trade-off discussions."
+          ]
+        },
+        {
+          "id": "les-20-6",
+          "position": 6,
+          "title": "Reviewing Interview Solutions",
+          "slug": "reviewing-interview-solutions",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Critique interview code for readability and edge cases."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Review mock interview code for clarity and complexity."
+            }
+          ],
+          "keyTakeaways": [
+            "Review mock interview code for trade-offs."
+          ]
+        },
+        {
+          "id": "les-20-7",
+          "position": 7,
+          "title": "Identifying Knowledge Gaps",
+          "slug": "identifying-knowledge-gaps",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Use AI quizzes to pinpoint weak topic areas."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Identify weak areas in graph algorithms or DP."
+            }
+          ],
+          "keyTakeaways": [
+            "Pinpoint topic weaknesses using diagnostic quizzes."
+          ]
+        },
+        {
+          "id": "les-20-8",
+          "position": 8,
+          "title": "Building Interview Revision Plans",
+          "slug": "building-interview-revision-plans",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Generate structured 14-day technical interview study plans."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Create customized daily study schedules covering weak topics."
+            }
+          ],
+          "keyTakeaways": [
+            "Build structured study plans targeting topic gaps."
+          ]
+        },
+        {
+          "id": "les-20-9",
+          "position": 9,
+          "title": "AI Usage During Assessments",
+          "slug": "ai-usage-during-assessments",
+          "level": "expert",
+          "durationMinutes": 10,
+          "objectives": [
+            "Understand allowed vs prohibited AI usage during proctored exams."
+          ],
+          "content": [
+            {
+              "type": "warning",
+              "title": "Assessment Compliance",
+              "text": "Distinguish study prep from proctored assessment rules. Never violate assessment terms or use unapproved tools during exams."
+            }
+          ],
+          "keyTakeaways": [
+            "Adhere strictly to assessment terms and proctoring rules."
+          ]
+        },
+        {
+          "id": "les-20-10",
+          "position": 10,
+          "title": "Responsible AI Usage",
+          "slug": "responsible-ai-usage",
+          "level": "expert",
+          "durationMinutes": 12,
+          "objectives": [
+            "Maintain personal engineering mastery and ethical AI usage."
+          ],
+          "content": [
+            {
+              "type": "paragraph",
+              "text": "Use AI to deepen personal understanding without becoming dependent on it."
+            }
+          ],
+          "keyTakeaways": [
+            "Maintain personal problem-solving independence."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-21-cheat-sheets",
+      "position": 21,
+      "title": "Section 21 — Developer Cheat Sheets & Prompt Templates",
+      "slug": "developer-cheat-sheets-and-prompt-templates",
+      "description": "Instant-reference prompt templates for code generation, debugging, review, refactoring, testing, security, performance, DSA, APIs, and verification checklists.",
+      "level": "expert",
+      "lessons": [
+        {
+          "id": "les-21-1",
+          "position": 1,
+          "title": "Coding Prompt Template",
+          "slug": "template-coding-prompt",
+          "level": "expert",
+          "durationMinutes": 5,
+          "objectives": [
+            "Reference template for code generation."
+          ],
+          "content": [
+            {
+              "type": "code",
+              "language": "markdown",
+              "title": "Code Generation Template",
+              "code": "[ROLE] Senior {{STACK}} Engineer\n[GOAL] Write function '{{NAME}}' that {{PURPOSE}}.\n[TYPES] {{PASTE_TYPES}}\n[CONSTRAINTS] O({{TIME}}) time, O({{SPACE}}) space, no external deps.\n[FORMAT] Pure code + JSDoc + 3 Jest tests."
+            }
+          ],
+          "keyTakeaways": [
+            "Use for daily feature generation."
+          ]
+        },
+        {
+          "id": "les-21-2",
+          "position": 2,
+          "title": "Debugging Prompt Template",
+          "slug": "template-debugging-prompt",
+          "level": "expert",
+          "durationMinutes": 5,
+          "objectives": [
+            "Reference template for error debugging."
+          ],
+          "content": [
+            {
+              "type": "code",
+              "language": "markdown",
+              "title": "Debugging Template",
+              "code": "[ERROR] {{EXACT_ERROR_TEXT}}\n[CODE] {{FAILING_SNIPPET}}\n[EXPECTED] {{EXPECTED_BEHAVIOR}}\n[REQUEST] Identify root cause, provide fixed code, and explain why it failed."
+            }
+          ],
+          "keyTakeaways": [
+            "Use for instant bug diagnosis."
+          ]
+        },
+        {
+          "id": "les-21-3",
+          "position": 3,
+          "title": "Code Review Prompt Template",
+          "slug": "template-code-review-prompt",
+          "level": "expert",
+          "durationMinutes": 5,
+          "objectives": [
+            "Reference template for code review."
+          ],
+          "content": [
+            {
+              "type": "code",
+              "language": "markdown",
+              "title": "Code Review Template",
+              "code": "Audit this {{LANGUAGE}} code for:\n1. Unhandled promise rejections & null pointer risks\n2. OWASP Top 10 security risks (SQLi, XSS, Auth)\n3. N+1 database queries\n4. Code smells & naming clarity"
+            }
+          ],
+          "keyTakeaways": [
+            "Use for automated PR reviews."
+          ]
+        },
+        {
+          "id": "les-21-4",
+          "position": 4,
+          "title": "Refactoring Prompt Template",
+          "slug": "template-refactoring-prompt",
+          "level": "expert",
+          "durationMinutes": 5,
+          "objectives": [
+            "Reference template for code refactoring."
+          ],
+          "content": [
+            {
+              "type": "code",
+              "language": "markdown",
+              "title": "Refactoring Template",
+              "code": "Refactor the following {{LANGUAGE}} code:\n- Extract nested conditionals into guard clauses\n- Break monolithic methods into single-purpose functions\n- Preserve existing external interface & behavior\n- Maintain strict TypeScript type safety"
+            }
+          ],
+          "keyTakeaways": [
+            "Use for clean code refactoring."
+          ]
+        },
+        {
+          "id": "les-21-5",
+          "position": 5,
+          "title": "Testing Prompt Template",
+          "slug": "template-testing-prompt",
+          "level": "expert",
+          "durationMinutes": 5,
+          "objectives": [
+            "Reference template for test generation."
+          ],
+          "content": [
+            {
+              "type": "code",
+              "language": "markdown",
+              "title": "Testing Template",
+              "code": "Generate a Jest/Vitest unit test suite for this code:\n- Test happy paths\n- Test boundary inputs (0, empty, max)\n- Test thrown exceptions & rejection paths\n- Mock external API/DB calls"
+            }
+          ],
+          "keyTakeaways": [
+            "Use for rapid unit test suite creation."
+          ]
+        },
+        {
+          "id": "les-21-6",
+          "position": 6,
+          "title": "Security Review Prompt",
+          "slug": "template-security-review-prompt",
+          "level": "expert",
+          "durationMinutes": 5,
+          "objectives": [
+            "Reference template for security audits."
+          ],
+          "content": [
+            {
+              "type": "code",
+              "language": "markdown",
+              "title": "Security Audit Template",
+              "code": "Perform an OWASP security audit on this endpoint:\n1. Check for parameterized SQL binding\n2. Check for XSS sanitization\n3. Check for IDOR authorization verification\n4. List any hardcoded credentials"
+            }
+          ],
+          "keyTakeaways": [
+            "Use for pre-merge security checks."
+          ]
+        },
+        {
+          "id": "les-21-7",
+          "position": 7,
+          "title": "Performance Review Prompt",
+          "slug": "template-performance-review-prompt",
+          "level": "expert",
+          "durationMinutes": 5,
+          "objectives": [
+            "Reference template for performance analysis."
+          ],
+          "content": [
+            {
+              "type": "code",
+              "language": "markdown",
+              "title": "Performance Review Template",
+              "code": "Analyze performance of this code:\n1. Derive asymptotic Big-O time and space complexity\n2. Spot hidden O(n) array/string operations in loops\n3. Suggest optimizations with trade-offs"
+            }
+          ],
+          "keyTakeaways": [
+            "Use for Big-O analysis."
+          ]
+        },
+        {
+          "id": "les-21-8",
+          "position": 8,
+          "title": "DSA Prompt Template",
+          "slug": "template-dsa-prompt",
+          "level": "expert",
+          "durationMinutes": 5,
+          "objectives": [
+            "Reference template for DSA practice."
+          ],
+          "content": [
+            {
+              "type": "code",
+              "language": "markdown",
+              "title": "DSA Practice Template",
+              "code": "Explain LeetCode problem '{{NAME}}' conceptually.\n1. Identify core pattern (e.g. Two Pointers, DP)\n2. Explain brute-force vs optimal O(n) approach\n3. Give Socratic hint level 1 without showing code"
+            }
+          ],
+          "keyTakeaways": [
+            "Use for interview prep."
+          ]
+        },
+        {
+          "id": "les-21-9",
+          "position": 9,
+          "title": "API Development Prompt",
+          "slug": "template-api-development-prompt",
+          "level": "expert",
+          "durationMinutes": 5,
+          "objectives": [
+            "Reference template for REST API creation."
+          ],
+          "content": [
+            {
+              "type": "code",
+              "language": "markdown",
+              "title": "API Endpoint Template",
+              "code": "Write Express + TypeScript route {{METHOD}} {{PATH}}:\n- Validate req.body with Zod schema\n- Handle business logic in service module\n- Return 200/201 JSON on success, 400/401/500 JSON on error\n- Wrap in try/catch block"
+            }
+          ],
+          "keyTakeaways": [
+            "Use for REST API route generation."
+          ]
+        },
+        {
+          "id": "les-21-10",
+          "position": 10,
+          "title": "Database Prompt",
+          "slug": "template-database-prompt",
+          "level": "expert",
+          "durationMinutes": 5,
+          "objectives": [
+            "Reference template for database queries."
+          ],
+          "content": [
+            {
+              "type": "code",
+              "language": "markdown",
+              "title": "Database Query Template",
+              "code": "Write PostgreSQL query/Drizzle migration for:\n- Tables: {{TABLES}}\n- Task: {{TASK}}\n- Use parameterized bindings ($1, $2)\n- Include necessary indexes for JOIN columns"
+            }
+          ],
+          "keyTakeaways": [
+            "Use for SQL and ORM query generation."
+          ]
+        },
+        {
+          "id": "les-21-11",
+          "position": 11,
+          "title": "AI Verification Checklist",
+          "slug": "template-ai-verification-checklist",
+          "level": "expert",
+          "durationMinutes": 5,
+          "objectives": [
+            "Reference checklist for verifying AI code."
+          ],
+          "content": [
+            {
+              "type": "checklist",
+              "title": "Verification Checklist",
+              "items": [
+                {
+                  "text": "Code compiles without TypeScript errors",
+                  "checked": false
+                },
+                {
+                  "text": "All unit tests pass",
+                  "checked": false
+                },
+                {
+                  "text": "Dependencies exist on npm/PyPI",
+                  "checked": false
+                },
+                {
+                  "text": "No plain-text SQL string concat",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Use before committing AI changes."
+          ]
+        },
+        {
+          "id": "les-21-12",
+          "position": 12,
+          "title": "AI Coding Checklist",
+          "slug": "template-ai-coding-checklist",
+          "level": "expert",
+          "durationMinutes": 5,
+          "objectives": [
+            "Reference daily workflow checklist."
+          ],
+          "content": [
+            {
+              "type": "checklist",
+              "title": "Daily AI Workflow Checklist",
+              "items": [
+                {
+                  "text": "Specify clear constraints before prompting",
+                  "checked": false
+                },
+                {
+                  "text": "Read generated code line-by-line",
+                  "checked": false
+                },
+                {
+                  "text": "Run linter and unit tests",
+                  "checked": false
+                },
+                {
+                  "text": "Commit small git diffs",
+                  "checked": false
+                }
+              ]
+            }
+          ],
+          "keyTakeaways": [
+            "Daily operational checklist."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-22-capstone",
+      "position": 22,
+      "title": "Section 22 — Capstone Project: End-to-End AI-Assisted Feature Workflow",
+      "slug": "capstone-project-end-to-end-ai-assisted-feature-workflow",
+      "description": "Walkthrough a realistic full-stack feature build (User Authentication & Order Checkout) using the complete AI development workflow.",
+      "level": "expert",
+      "lessons": [
+        {
+          "id": "les-22-1",
+          "position": 1,
+          "title": "Capstone: Requirement & Architecture Planning",
+          "slug": "capstone-requirement-and-architecture-planning",
+          "level": "expert",
+          "durationMinutes": 20,
+          "objectives": [
+            "Decompose full-stack feature requirements into atomic technical tasks.",
+            "Define data models, API contracts, and security boundaries prior to prompting."
+          ],
+          "content": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "Capstone Scenario: E-Commerce Checkout System"
+            },
+            {
+              "type": "paragraph",
+              "text": "In this capstone, you will build a production-grade REST API endpoint for Order Checkout with JWT authentication, inventory check, database transaction, input validation, unit tests, and OpenAPI documentation."
+            },
+            {
+              "type": "workflow",
+              "title": "Complete 10-Step Capstone Workflow",
+              "steps": [
+                {
+                  "number": 1,
+                  "title": "Requirement",
+                  "description": "Define user checkout spec & error codes.",
+                  "badge": "SPEC"
+                },
+                {
+                  "number": 2,
+                  "title": "Type Schema",
+                  "description": "Write Zod validation & DTO types.",
+                  "badge": "TYPES"
+                },
+                {
+                  "number": 3,
+                  "title": "DB Schema",
+                  "description": "Define Drizzle ORM order tables.",
+                  "badge": "DB"
+                },
+                {
+                  "number": 4,
+                  "title": "Service Logic",
+                  "description": "Generate checkout service with transaction.",
+                  "badge": "SERVICE"
+                },
+                {
+                  "number": 5,
+                  "title": "API Handler",
+                  "description": "Build Express POST /api/checkout route.",
+                  "badge": "API"
+                },
+                {
+                  "number": 6,
+                  "title": "Unit Tests",
+                  "description": "Generate Jest unit & integration tests.",
+                  "badge": "TESTS"
+                },
+                {
+                  "number": 7,
+                  "title": "Security Audit",
+                  "description": "Perform OWASP Top 10 security prompt review.",
+                  "badge": "SECURITY"
+                },
+                {
+                  "number": 8,
+                  "title": "Optimization",
+                  "description": "Benchmark query timing & add Redis lock.",
+                  "badge": "PERF"
+                },
+                {
+                  "number": 9,
+                  "title": "Documentation",
+                  "description": "Generate JSDoc and OpenAPI 3.0 YAML.",
+                  "badge": "DOCS"
+                },
+                {
+                  "number": 10,
+                  "title": "Verification",
+                  "description": "Run full CI test suite & verify build.",
+                  "badge": "VERIFIED"
+                }
+              ]
+            },
+            {
+              "type": "code",
+              "language": "typescript",
+              "title": "Step 1: Generated Checkout Service Layer",
+              "code": "import { db } from '../db';\nimport { orders, orderItems, products } from '../db/schema';\nimport { eq } from 'drizzle-orm';\n\nexport interface CheckoutInput {\n  userId: string;\n  items: Array<{ productId: string; quantity: number }>;\n}\n\nexport async function processCheckout(input: CheckoutInput) {\n  return await db.transaction(async (tx) => {\n    let totalCents = 0;\n    for (const item of input.items) {\n      const [product] = await tx.select().from(products).where(eq(products.id, item.productId));\n      if (!product || product.stock < item.quantity) {\n        throw new Error(`Insufficient stock for product ${item.productId}`);\n      }\n      totalCents += product.priceCents * item.quantity;\n      await tx.update(products).set({ stock: product.stock - item.quantity }).where(eq(products.id, item.productId));\n    }\n    const [order] = await tx.insert(orders).values({ userId: input.userId, totalCents, status: 'paid' }).returning();\n    return order;\n  });\n}"
+            }
+          ],
+          "keyTakeaways": [
+            "The complete AI workflow combines specification, incremental generation, unit testing, security review, and performance benchmarking.",
+            "Always use database transactions when modifying inventory or multi-table state.",
+            "Human developers lead the architecture while AI accelerates the implementation."
+          ]
+        }
+      ]
+    }
+  ]
+}

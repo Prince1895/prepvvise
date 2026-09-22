@@ -1,0 +1,1850 @@
+{
+  "academy": {
+    "name": "AI Literacy Academy",
+    "version": "2.0",
+    "purpose": "A structured learning system for understanding Artificial Intelligence from fundamentals to advanced AI engineering.",
+    "learningLevels": [
+      "easy",
+      "medium",
+      "hard",
+      "advanced",
+      "expert"
+    ],
+    "learningMethod": [
+      "Learn the concept",
+      "Understand the intuition",
+      "Study a real-world example",
+      "Review important points",
+      "Practice questions",
+      "Solve scenario-based problems",
+      "Review mistakes",
+      "Take stage tests",
+      "Take cumulative mock tests"
+    ]
+  },
+
+  "stages": [
+
+    {
+      "id": 1,
+      "title": "AI Fundamentals",
+      "difficulty": "easy-to-medium",
+      "description": "Understand the basic concepts, terminology, history, capabilities and limitations of Artificial Intelligence.",
+
+      "learningObjectives": [
+        "Understand what Artificial Intelligence means",
+        "Differentiate AI, Machine Learning and Deep Learning",
+        "Understand Generative AI",
+        "Understand Narrow AI",
+        "Understand AGI",
+        "Understand how AI systems solve problems",
+        "Understand the difference between traditional programming and machine learning"
+      ],
+
+      "topics": [
+
+        {
+          "id": "ai",
+          "title": "Artificial Intelligence",
+
+          "definition": "Artificial Intelligence is the field of computing concerned with building systems that can perform tasks that normally require aspects of human intelligence, such as perception, reasoning, language understanding, learning and decision making.",
+
+          "simpleExplanation": "AI is about building machines that can perform intelligent tasks.",
+
+          "detailedExplanation": "AI systems can process information, identify patterns, make predictions, understand language, recognize objects, generate content and make decisions. AI is a broad field that includes rule-based systems, machine learning, deep learning, generative models and agentic systems.",
+
+          "howItWorks": [
+            "Receive input",
+            "Process information",
+            "Apply rules or learned patterns",
+            "Produce an output or decision"
+          ],
+
+          "realWorldExamples": [
+            "Voice assistants",
+            "Recommendation systems",
+            "Fraud detection",
+            "Face recognition",
+            "Chatbots",
+            "Autonomous vehicles"
+          ],
+
+          "importantPoints": [
+            "AI is a broad field",
+            "Not every AI system uses machine learning",
+            "AI can be rule-based or data-driven",
+            "Modern AI heavily uses machine learning"
+          ],
+
+          "commonMistakes": [
+            "Assuming AI always means ChatGPT",
+            "Assuming every AI system learns automatically",
+            "Thinking AI is necessarily conscious"
+          ],
+
+          "relatedConcepts": [
+            "Machine Learning",
+            "Deep Learning",
+            "Generative AI",
+            "AI Agents"
+          ],
+
+          "interviewQuestions": [
+            "What is Artificial Intelligence?",
+            "Give three real-world examples of AI.",
+            "Is every AI system based on machine learning?"
+          ],
+
+          "examTip": "AI is the broader field; ML is one approach used to build AI systems."
+        },
+
+        {
+          "id": "machine-learning",
+          "title": "Machine Learning",
+
+          "definition": "Machine Learning is a branch of AI in which algorithms learn patterns from data and use those patterns to make predictions or decisions.",
+
+          "simpleExplanation": "Instead of manually programming every rule, we give a model data from which it learns patterns.",
+
+          "detailedExplanation": "Traditional software commonly follows explicitly written rules. In machine learning, developers define an algorithm and provide data. The learning process adjusts model parameters so that the model performs a desired task.",
+
+          "basicWorkflow": [
+            "Collect data",
+            "Clean and prepare data",
+            "Select features or representations",
+            "Choose a model",
+            "Train the model",
+            "Validate the model",
+            "Test the model",
+            "Deploy the model",
+            "Monitor performance"
+          ],
+
+          "example": "A spam classifier learns patterns from previously labeled spam and legitimate emails and predicts whether a new email is spam.",
+
+          "importantPoints": [
+            "ML requires data",
+            "The model learns patterns",
+            "Training and evaluation are different",
+            "Generalization to unseen data is important"
+          ],
+
+          "relatedConcepts": [
+            "Supervised Learning",
+            "Unsupervised Learning",
+            "Reinforcement Learning",
+            "Deep Learning"
+          ]
+        },
+
+        {
+          "id": "deep-learning",
+          "title": "Deep Learning",
+
+          "definition": "Deep Learning is a subset of machine learning that uses neural networks with multiple layers to learn complex representations from data.",
+
+          "simpleExplanation": "Deep learning uses multi-layer neural networks to automatically learn increasingly complex patterns.",
+
+          "detailedExplanation": "Deep neural networks transform input data through multiple layers. Earlier layers can learn relatively simple patterns while deeper layers can combine those patterns into more complex representations.",
+
+          "commonArchitectures": [
+            "CNN",
+            "RNN",
+            "LSTM",
+            "Transformer"
+          ],
+
+          "applications": [
+            "Computer vision",
+            "Speech recognition",
+            "Natural language processing",
+            "Generative AI",
+            "Medical image analysis"
+          ],
+
+          "importantPoints": [
+            "Deep learning is a subset of ML",
+            "Neural networks contain layers and parameters",
+            "Deep learning often benefits from large datasets and significant computation"
+          ],
+
+          "relatedConcepts": [
+            "Neural Networks",
+            "Transformers",
+            "Backpropagation",
+            "Gradient Descent"
+          ]
+        },
+
+        {
+          "id": "generative-ai",
+          "title": "Generative AI",
+
+          "definition": "Generative AI refers to AI systems capable of generating new content such as text, images, audio, video or code based on learned patterns.",
+
+          "simpleExplanation": "Generative AI creates new content instead of only classifying or predicting existing information.",
+
+          "examples": [
+            "Text generation",
+            "Image generation",
+            "Code generation",
+            "Audio generation",
+            "Video generation"
+          ],
+
+          "importantPoints": [
+            "LLMs are a type of generative AI system",
+            "Generative systems model patterns in training data",
+            "Generated content can contain errors or hallucinations"
+          ],
+
+          "relatedConcepts": [
+            "LLM",
+            "Diffusion Models",
+            "Transformers",
+            "Multimodal AI"
+          ]
+        },
+
+        {
+          "id": "narrow-ai",
+          "title": "Narrow AI",
+
+          "definition": "Narrow AI is an AI system designed to perform a specific task or limited set of tasks.",
+
+          "examples": [
+            "Spam detection",
+            "Recommendation engines",
+            "Chess engines",
+            "Face recognition systems"
+          ],
+
+          "importantPoints": [
+            "Narrow AI is task-specific",
+            "It does not imply general human-level intelligence",
+            "Most deployed AI systems are narrow or specialized systems"
+          ]
+        },
+
+        {
+          "id": "agi",
+          "title": "Artificial General Intelligence",
+
+          "definition": "AGI is a hypothetical or theoretical form of AI capable of performing a broad range of intellectual tasks with general-purpose competence rather than being limited to one narrow task.",
+
+          "importantPoints": [
+            "AGI is different from narrow AI",
+            "There is no universally accepted operational definition of AGI",
+            "Claims about achieving AGI depend heavily on the definition being used"
+          ],
+
+          "commonMistakes": [
+            "Treating AGI as simply a more powerful chatbot",
+            "Assuming AGI has a universally agreed technical threshold"
+          ]
+        },
+
+        {
+          "id": "ai-ml-dl",
+          "title": "AI vs ML vs DL",
+
+          "definition": "AI is the broad field, machine learning is a major approach within AI, and deep learning is a subset of machine learning based on multi-layer neural networks.",
+
+          "relationship": [
+            "Artificial Intelligence",
+            "  └── Machine Learning",
+            "       └── Deep Learning"
+          ],
+
+          "examTip": "Remember the hierarchy: AI > ML > Deep Learning."
+        }
+      ]
+    },
+
+    {
+      "id": 2,
+      "title": "Machine Learning Basics",
+      "difficulty": "medium",
+      "description": "Learn how machine learning systems learn from data, how models are trained and evaluated, and why models fail to generalize.",
+
+      "learningObjectives": [
+        "Understand supervised learning",
+        "Understand unsupervised learning",
+        "Understand reinforcement learning",
+        "Understand training, validation and test datasets",
+        "Understand overfitting and underfitting",
+        "Understand bias and variance",
+        "Understand feature engineering"
+      ],
+
+      "topics": [
+
+        {
+          "id": "supervised-learning",
+          "title": "Supervised Learning",
+
+          "definition": "Supervised learning trains a model using examples where the desired output or label is known.",
+
+          "simpleExplanation": "The model learns from questions where the correct answers are already provided.",
+
+          "examples": [
+            "House price prediction",
+            "Spam classification",
+            "Disease classification",
+            "Credit risk prediction"
+          ],
+
+          "workflow": [
+            "Collect labeled data",
+            "Split data",
+            "Train model",
+            "Evaluate model",
+            "Deploy model"
+          ],
+
+          "commonTasks": [
+            "Classification",
+            "Regression"
+          ],
+
+          "examTip": "Known labels are the key characteristic of supervised learning."
+        },
+
+        {
+          "id": "unsupervised-learning",
+          "title": "Unsupervised Learning",
+
+          "definition": "Unsupervised learning attempts to discover patterns or structures in data without predefined target labels.",
+
+          "examples": [
+            "Customer segmentation",
+            "Clustering",
+            "Anomaly detection",
+            "Dimensionality reduction"
+          ],
+
+          "commonAlgorithms": [
+            "K-Means",
+            "DBSCAN",
+            "PCA"
+          ],
+
+          "importantPoints": [
+            "No target label is required",
+            "The algorithm searches for structure in the data"
+          ]
+        },
+
+        {
+          "id": "reinforcement-learning",
+          "title": "Reinforcement Learning",
+
+          "definition": "Reinforcement learning is a learning framework where an agent interacts with an environment and learns actions through rewards and penalties.",
+
+          "coreComponents": [
+            "Agent",
+            "Environment",
+            "State",
+            "Action",
+            "Reward",
+            "Policy"
+          ],
+
+          "simpleExplanation": "The agent learns which actions produce better long-term rewards.",
+
+          "examples": [
+            "Game-playing agents",
+            "Robotics",
+            "Resource optimization",
+            "Control systems"
+          ]
+        },
+
+        {
+          "id": "training-validation-test",
+          "title": "Training, Validation and Test Data",
+
+          "definition": "Datasets are commonly separated into training, validation and test portions so that model learning, model selection and final evaluation can be separated.",
+
+          "training": "Used to learn model parameters.",
+
+          "validation": "Used to compare configurations and tune hyperparameters.",
+
+          "test": "Used for final evaluation on data not used for model fitting or tuning.",
+
+          "importantPoint": "The test set should remain isolated until final evaluation whenever possible.",
+
+          "commonMistakes": [
+            "Using test data repeatedly to tune the model",
+            "Confusing validation data with training data"
+          ]
+        },
+
+        {
+          "id": "overfitting",
+          "title": "Overfitting",
+
+          "definition": "Overfitting occurs when a model learns the training data too specifically and performs poorly on unseen data.",
+
+          "simpleExplanation": "The model memorizes instead of learning general patterns.",
+
+          "symptoms": [
+            "Very high training performance",
+            "Significantly lower validation or test performance"
+          ],
+
+          "causes": [
+            "Model too complex",
+            "Too little training data",
+            "Noise",
+            "Excessive training"
+          ],
+
+          "solutions": [
+            "More data",
+            "Regularization",
+            "Dropout",
+            "Early stopping",
+            "Data augmentation",
+            "Simpler model",
+            "Cross-validation"
+          ],
+
+          "relatedConcepts": [
+            "Variance",
+            "Generalization"
+          ]
+        },
+
+        {
+          "id": "underfitting",
+          "title": "Underfitting",
+
+          "definition": "Underfitting occurs when a model is too simple or insufficiently trained to capture important patterns in the data.",
+
+          "symptoms": [
+            "Poor training performance",
+            "Poor validation performance"
+          ],
+
+          "solutions": [
+            "Increase model capacity",
+            "Improve features",
+            "Train longer when appropriate",
+            "Reduce excessive regularization"
+          ]
+        },
+
+        {
+          "id": "bias",
+          "title": "Bias",
+
+          "definition": "Bias represents systematic error caused by assumptions that prevent a model from adequately capturing the underlying relationship.",
+
+          "simpleExplanation": "A high-bias model is often too simple.",
+
+          "relationship": [
+            "High bias can contribute to underfitting",
+            "High variance can contribute to overfitting"
+          ]
+        },
+
+        {
+          "id": "variance",
+          "title": "Variance",
+
+          "definition": "Variance describes how sensitive a model's learned behavior is to the particular training dataset.",
+
+          "simpleExplanation": "A high-variance model can change significantly when the training data changes.",
+
+          "relationship": [
+            "High variance is associated with overfitting",
+            "High bias is associated with underfitting"
+          ]
+        },
+
+        {
+          "id": "feature-engineering",
+          "title": "Feature Engineering",
+
+          "definition": "Feature engineering is the process of transforming raw data into useful representations that help a machine learning model learn effectively.",
+
+          "examples": [
+            "Extracting day of week from a date",
+            "Creating total purchase value",
+            "Encoding categorical variables",
+            "Scaling numerical variables"
+          ],
+
+          "importantPoints": [
+            "Good features can improve model performance",
+            "Feature engineering depends heavily on the problem domain"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": 3,
+      "title": "Prompt Engineering",
+      "difficulty": "medium-to-hard",
+      "description": "Learn how to communicate effectively with generative AI systems and design prompts that produce reliable outputs.",
+
+      "topics": [
+
+        {
+          "id": "zero-shot",
+          "title": "Zero-Shot Prompting",
+
+          "definition": "Zero-shot prompting asks a model to perform a task without providing task-specific examples.",
+
+          "example": "Classify the following review as positive or negative: 'The product arrived quickly.'",
+
+          "bestFor": [
+            "Simple tasks",
+            "Common tasks",
+            "Straightforward instructions"
+          ]
+        },
+
+        {
+          "id": "few-shot",
+          "title": "Few-Shot Prompting",
+
+          "definition": "Few-shot prompting provides examples of the desired input-output behavior before asking the model to solve a new instance.",
+
+          "benefits": [
+            "Clarifies expected output",
+            "Demonstrates formatting",
+            "Can improve consistency"
+          ]
+        },
+
+        {
+          "id": "role-prompting",
+          "title": "Role Prompting",
+
+          "definition": "Role prompting gives the model contextual instructions about the perspective or function it should adopt.",
+
+          "example": "Act as a senior backend engineer reviewing this API design.",
+
+          "importantPoint": "A role does not grant the model real-world authority or expertise; it primarily provides behavioral context."
+        },
+
+        {
+          "id": "structured-prompting",
+          "title": "Structured Prompting",
+
+          "definition": "Structured prompting organizes instructions, context, constraints and expected output format into clearly separated components.",
+
+          "recommendedStructure": [
+            "Task",
+            "Context",
+            "Constraints",
+            "Input",
+            "Expected output",
+            "Examples when useful"
+          ]
+        },
+
+        {
+          "id": "output-constraints",
+          "title": "Output Constraints",
+
+          "definition": "Output constraints specify exactly how the model should format or restrict its response.",
+
+          "examples": [
+            "Return valid JSON",
+            "Use exactly five bullet points",
+            "Return a table",
+            "Use less than 100 words"
+          ]
+        },
+
+        {
+          "id": "prompt-decomposition",
+          "title": "Prompt Decomposition",
+
+          "definition": "Prompt decomposition breaks a complex task into smaller, explicit subtasks.",
+
+          "benefits": [
+            "Reduces ambiguity",
+            "Makes evaluation easier",
+            "Improves complex workflows"
+          ]
+        },
+
+        {
+          "id": "prompt-evaluation",
+          "title": "Prompt Evaluation",
+
+          "definition": "Prompt evaluation measures whether a prompt consistently produces useful outputs across representative inputs.",
+
+          "evaluationCriteria": [
+            "Accuracy",
+            "Consistency",
+            "Relevance",
+            "Format compliance",
+            "Safety",
+            "Latency",
+            "Cost"
+          ]
+        },
+
+        {
+          "id": "chain-of-thought",
+          "title": "Reasoning Prompts",
+
+          "definition": "Reasoning-oriented prompting asks a model to carefully solve a multi-step problem. In production systems, developers generally focus on the correctness of the final output and use appropriate evaluation rather than depending on exposing private internal reasoning.",
+
+          "importantPoint": "The goal is reliable reasoning behavior, not necessarily displaying hidden internal reasoning."
+        }
+      ]
+    },
+
+    {
+      "id": 4,
+      "title": "Generative AI",
+      "difficulty": "hard",
+      "description": "Understand how modern generative AI systems such as large language models process information and generate content.",
+
+      "topics": [
+
+        {
+          "id": "llm",
+          "title": "Large Language Models",
+
+          "definition": "An LLM is a machine learning model trained on large amounts of text or multimodal data to model language and generate or transform content.",
+
+          "coreCapabilities": [
+            "Text generation",
+            "Summarization",
+            "Question answering",
+            "Translation",
+            "Code generation",
+            "Classification"
+          ],
+
+          "limitations": [
+            "Can hallucinate",
+            "Can misunderstand context",
+            "Can produce outdated information",
+            "Can reflect biases in data"
+          ]
+        },
+
+        {
+          "id": "tokens",
+          "title": "Tokens",
+
+          "definition": "Tokens are units used by language models to represent text for processing.",
+
+          "importantPoints": [
+            "A token may represent a word, part of a word, punctuation or another text fragment",
+            "Tokenization varies between models",
+            "Context limits are generally measured in tokens"
+          ]
+        },
+
+        {
+          "id": "embeddings",
+          "title": "Embeddings",
+
+          "definition": "Embeddings are numerical vector representations of data that capture useful semantic or structural relationships.",
+
+          "applications": [
+            "Semantic search",
+            "Recommendation systems",
+            "RAG",
+            "Clustering",
+            "Similarity search"
+          ]
+        },
+
+        {
+          "id": "transformers",
+          "title": "Transformers",
+
+          "definition": "Transformers are neural network architectures built around attention mechanisms and are widely used in modern language and multimodal models.",
+
+          "majorComponents": [
+            "Attention",
+            "Feed-forward layers",
+            "Normalization",
+            "Residual connections",
+            "Positional information"
+          ],
+
+          "importance": "Transformers enabled highly scalable sequence modeling and became a foundation for many modern generative AI systems."
+        },
+
+        {
+          "id": "attention",
+          "title": "Attention",
+
+          "definition": "Attention allows a model to dynamically weigh relationships between elements in a sequence when producing representations.",
+
+          "simpleExplanation": "Attention helps the model determine which pieces of context are more relevant to one another."
+        },
+
+        {
+          "id": "temperature",
+          "title": "Temperature",
+
+          "definition": "Temperature is a generation parameter that affects the distribution from which a model selects possible outputs.",
+
+          "importantPoint": "Higher temperature generally allows more variation, while lower temperature generally produces more concentrated and predictable sampling. Exact behavior depends on the implementation."
+        },
+
+        {
+          "id": "context-window",
+          "title": "Context Window",
+
+          "definition": "The context window is the amount of input and generated context that a model can process within a request or conversation according to its model-specific limits.",
+
+          "importantPoints": [
+            "Larger context does not automatically guarantee better answers",
+            "Long context can increase cost or latency",
+            "Relevant information should still be selected carefully"
+          ]
+        },
+
+        {
+          "id": "hallucination",
+          "title": "AI Hallucination",
+
+          "definition": "A hallucination occurs when a generative AI system produces information that is unsupported, fabricated or incorrect while presenting it as an answer.",
+
+          "causes": [
+            "Insufficient information",
+            "Ambiguous prompts",
+            "Model limitations",
+            "Weak retrieval",
+            "Generation uncertainty"
+          ],
+
+          "mitigation": [
+            "RAG",
+            "Grounding",
+            "Tool use",
+            "Verification",
+            "Structured outputs",
+            "Human review for high-impact decisions"
+          ]
+        },
+
+        {
+          "id": "multimodal-ai",
+          "title": "Multimodal AI",
+
+          "definition": "Multimodal AI systems can process or generate information across multiple modalities such as text, images, audio and video.",
+
+          "examples": [
+            "Image question answering",
+            "Speech-to-text",
+            "Text-to-image",
+            "Video understanding"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": 5,
+      "title": "Responsible AI",
+      "difficulty": "hard",
+      "description": "Understand how to build and use AI systems responsibly, safely and transparently.",
+
+      "topics": [
+
+        {
+          "id": "ai-bias",
+          "title": "AI Bias",
+
+          "definition": "AI bias occurs when systematic patterns in data, modeling choices or deployment contexts lead to unfair or undesirable differences in outcomes.",
+
+          "possibleSources": [
+            "Historical data",
+            "Sampling problems",
+            "Labeling decisions",
+            "Model design",
+            "Deployment context"
+          ],
+
+          "mitigation": [
+            "Representative data",
+            "Bias evaluation",
+            "Subgroup testing",
+            "Human review",
+            "Continuous monitoring"
+          ]
+        },
+
+        {
+          "id": "fairness",
+          "title": "Fairness",
+
+          "definition": "Fairness in AI concerns whether system outcomes and processes meet appropriate fairness criteria for the people affected.",
+
+          "importantPoint": "There is no single fairness definition that applies identically to every application; the appropriate criterion depends on the context."
+        },
+
+        {
+          "id": "privacy",
+          "title": "AI Privacy",
+
+          "definition": "AI privacy concerns protecting personal or sensitive information throughout data collection, training, inference, storage and use.",
+
+          "principles": [
+            "Data minimization",
+            "Purpose limitation",
+            "Access control",
+            "Encryption",
+            "Retention controls",
+            "Privacy-aware system design"
+          ]
+        },
+
+        {
+          "id": "transparency",
+          "title": "Transparency",
+
+          "definition": "Transparency means providing appropriate information about how an AI system is developed, used, governed and limited.",
+
+          "examples": [
+            "Documenting system purpose",
+            "Disclosing important limitations",
+            "Explaining data sources when appropriate",
+            "Providing system documentation"
+          ]
+        },
+
+        {
+          "id": "explainability",
+          "title": "Explainability",
+
+          "definition": "Explainability concerns the ability to provide meaningful information about why a model produced a particular result.",
+
+          "importantPoint": "Different models and use cases require different forms of explanation."
+        },
+
+        {
+          "id": "ai-safety",
+          "title": "AI Safety",
+
+          "definition": "AI safety focuses on reducing harmful, unintended or uncontrolled behavior and improving the reliability of AI systems.",
+
+          "methods": [
+            "Testing",
+            "Guardrails",
+            "Monitoring",
+            "Access control",
+            "Human oversight",
+            "Incident response"
+          ]
+        },
+
+        {
+          "id": "human-in-loop",
+          "title": "Human-in-the-Loop",
+
+          "definition": "Human-in-the-loop systems incorporate human review or approval into AI workflows, especially where automated mistakes could have significant consequences.",
+
+          "examples": [
+            "Medical decision support",
+            "Financial approvals",
+            "Content moderation escalation",
+            "High-risk autonomous actions"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": 6,
+      "title": "RAG & Knowledge Systems",
+      "difficulty": "advanced",
+      "description": "Learn how AI systems retrieve external knowledge and use it to produce grounded responses.",
+
+      "topics": [
+
+        {
+          "id": "rag",
+          "title": "Retrieval-Augmented Generation",
+
+          "definition": "RAG combines information retrieval with generative AI by retrieving relevant external information and providing it as context to a generation model.",
+
+          "workflow": [
+            "User asks a question",
+            "Question is converted into a retrieval representation",
+            "Relevant documents or chunks are retrieved",
+            "Retrieved information is optionally reranked",
+            "Relevant context is sent to the generation model",
+            "Model generates an answer using the retrieved context"
+          ],
+
+          "benefits": [
+            "Can use current information",
+            "Can ground responses in organizational documents",
+            "Can reduce unsupported generation"
+          ],
+
+          "limitations": [
+            "Poor retrieval leads to poor answers",
+            "Documents can contain conflicting information",
+            "Retrieved content can be malicious",
+            "RAG does not guarantee factual correctness"
+          ]
+        },
+
+        {
+          "id": "vector-database",
+          "title": "Vector Databases",
+
+          "definition": "A vector database stores and retrieves vector representations efficiently, often supporting similarity search.",
+
+          "uses": [
+            "Semantic search",
+            "RAG",
+            "Recommendation systems",
+            "Similarity matching"
+          ]
+        },
+
+        {
+          "id": "chunking",
+          "title": "Document Chunking",
+
+          "definition": "Chunking divides documents into smaller pieces so that relevant sections can be retrieved efficiently.",
+
+          "strategies": [
+            "Fixed-size chunks",
+            "Sentence-based chunks",
+            "Paragraph-based chunks",
+            "Semantic chunks",
+            "Hierarchical chunks"
+          ],
+
+          "importantPoint": "Chunk size involves a trade-off between preserving context and keeping retrieved information focused."
+        },
+
+        {
+          "id": "retrieval",
+          "title": "Retrieval",
+
+          "definition": "Retrieval selects potentially relevant information from a knowledge source based on a user's query.",
+
+          "approaches": [
+            "Keyword search",
+            "Semantic search",
+            "Hybrid search"
+          ]
+        },
+
+        {
+          "id": "reranking",
+          "title": "Reranking",
+
+          "definition": "Reranking is a second-stage process that reorders retrieved candidates according to their relevance to the query.",
+
+          "benefit": "It can improve the quality of the context passed to the generation model."
+        },
+
+        {
+          "id": "semantic-search",
+          "title": "Semantic Search",
+
+          "definition": "Semantic search attempts to retrieve information based on meaning rather than relying only on exact keyword matches.",
+
+          "example": "A search for 'ways to reduce cloud spending' can retrieve a document titled 'AWS cost optimization techniques' even when the exact words differ."
+        },
+
+        {
+          "id": "grounded-generation",
+          "title": "Grounded Generation",
+
+          "definition": "Grounded generation constrains or guides an AI response using trusted external evidence, retrieved information or tool results.",
+
+          "importantPoints": [
+            "Grounding improves traceability",
+            "Grounding does not automatically guarantee correctness",
+            "Sources should be evaluated for quality"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": 7,
+      "title": "AI Security",
+      "difficulty": "advanced",
+      "description": "Understand security threats specific to AI applications and methods for reducing their impact.",
+
+      "topics": [
+
+        {
+          "id": "prompt-injection",
+          "title": "Prompt Injection",
+
+          "definition": "Prompt injection occurs when an attacker attempts to manipulate an AI system through crafted instructions that alter how the system processes a task.",
+
+          "example": "An attacker provides text that instructs an AI assistant to ignore its intended task and reveal confidential information.",
+
+          "mitigation": [
+            "Separate trusted instructions from untrusted content",
+            "Limit tool permissions",
+            "Validate tool arguments",
+            "Apply authorization checks outside the model",
+            "Monitor suspicious behavior"
+          ]
+        },
+
+        {
+          "id": "jailbreaking",
+          "title": "Jailbreaking",
+
+          "definition": "Jailbreaking refers to attempts to bypass model or application safety restrictions through specially crafted interactions.",
+
+          "importantPoint": "Application-level authorization and security controls should not depend solely on a model refusing a request."
+        },
+
+        {
+          "id": "data-leakage",
+          "title": "Data Leakage",
+
+          "definition": "Data leakage occurs when confidential or sensitive information is exposed to unauthorized users, systems or model outputs.",
+
+          "prevention": [
+            "Least privilege",
+            "Data filtering",
+            "Access control",
+            "Secret management",
+            "Output monitoring"
+          ]
+        },
+
+        {
+          "id": "indirect-prompt-injection",
+          "title": "Indirect Prompt Injection",
+
+          "definition": "Indirect prompt injection occurs when malicious instructions are embedded in external content that an AI system retrieves or processes.",
+
+          "example": "A webpage retrieved by an AI agent contains hidden instructions attempting to manipulate the agent's behavior.",
+
+          "risk": "This is particularly important for RAG systems and autonomous agents."
+        },
+
+        {
+          "id": "adversarial-attacks",
+          "title": "Adversarial Attacks",
+
+          "definition": "Adversarial attacks intentionally manipulate inputs or system behavior to cause incorrect model outputs.",
+
+          "examples": [
+            "Adversarial images",
+            "Evasion attacks",
+            "Input manipulation"
+          ]
+        },
+
+        {
+          "id": "model-poisoning",
+          "title": "Model/Data Poisoning",
+
+          "definition": "Data poisoning occurs when malicious or corrupted data is introduced into a training or adaptation pipeline to influence model behavior.",
+
+          "prevention": [
+            "Data provenance",
+            "Dataset validation",
+            "Access controls",
+            "Anomaly detection",
+            "Reproducible pipelines"
+          ]
+        },
+
+        {
+          "id": "ai-access-control",
+          "title": "AI Access Control",
+
+          "definition": "AI access control ensures users and agents can only access data and perform actions they are authorized to perform.",
+
+          "principles": [
+            "Authentication",
+            "Authorization",
+            "Least privilege",
+            "Role-based access",
+            "Tool-level permissions",
+            "Audit logging"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": 8,
+      "title": "Advanced ML",
+      "difficulty": "advanced-to-expert",
+      "description": "Study important neural network architectures, transfer learning, fine-tuning and model behavior in changing environments.",
+
+      "topics": [
+
+        {
+          "id": "neural-networks",
+          "title": "Neural Networks",
+
+          "definition": "Neural networks are parameterized computational models composed of interconnected layers that transform input representations into outputs.",
+
+          "components": [
+            "Input layer",
+            "Hidden layers",
+            "Output layer",
+            "Weights",
+            "Biases",
+            "Activation functions"
+          ],
+
+          "trainingConcepts": [
+            "Forward propagation",
+            "Loss calculation",
+            "Backpropagation",
+            "Gradient descent",
+            "Parameter updates"
+          ]
+        },
+
+        {
+          "id": "cnn",
+          "title": "Convolutional Neural Networks",
+
+          "definition": "CNNs use convolution operations to efficiently process spatially structured data such as images.",
+
+          "applications": [
+            "Image classification",
+            "Object detection",
+            "Image segmentation"
+          ]
+        },
+
+        {
+          "id": "rnn",
+          "title": "Recurrent Neural Networks",
+
+          "definition": "RNNs process sequential information using recurrent connections that allow information from previous steps to influence later processing.",
+
+          "limitations": [
+            "Difficulty with long-range dependencies",
+            "Sequential computation can limit parallelization"
+          ]
+        },
+
+        {
+          "id": "lstm",
+          "title": "Long Short-Term Memory",
+
+          "definition": "LSTM is a recurrent neural network architecture designed to better preserve useful information across longer sequences using gated memory mechanisms.",
+
+          "mainComponents": [
+            "Forget gate",
+            "Input gate",
+            "Output gate",
+            "Cell state"
+          ]
+        },
+
+        {
+          "id": "transfer-learning",
+          "title": "Transfer Learning",
+
+          "definition": "Transfer learning reuses knowledge learned from one task or dataset as a starting point for another related task.",
+
+          "benefits": [
+            "Requires less task-specific data",
+            "Can reduce training cost",
+            "Can improve performance"
+          ]
+        },
+
+        {
+          "id": "fine-tuning",
+          "title": "Fine-Tuning",
+
+          "definition": "Fine-tuning continues training a pretrained model on task-specific data to adapt its behavior or capabilities.",
+
+          "useCases": [
+            "Domain adaptation",
+            "Task specialization",
+            "Style adaptation",
+            "Instruction following"
+          ],
+
+          "importantPoint": "Fine-tuning changes model parameters, unlike ordinary RAG, which typically provides external context at inference time without changing the base model parameters."
+        },
+
+        {
+          "id": "concept-drift",
+          "title": "Concept Drift",
+
+          "definition": "Concept drift occurs when the relationship between input data and the target behavior changes over time.",
+
+          "example": "Fraud patterns change over several years, causing a previously accurate fraud detection model to become less effective.",
+
+          "solutions": [
+            "Continuous monitoring",
+            "Fresh training data",
+            "Retraining",
+            "Drift detection",
+            "Human review"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": 9,
+      "title": "AI Agents",
+      "difficulty": "advanced-to-expert",
+      "description": "Understand systems where AI models reason over tasks, use tools, maintain state and perform multi-step workflows.",
+
+      "topics": [
+
+        {
+          "id": "ai-agents",
+          "title": "AI Agents",
+
+          "definition": "An AI agent is a system that uses an AI model together with instructions, state, tools and control logic to pursue a goal through one or more steps.",
+
+          "basicArchitecture": [
+            "User request",
+            "Agent controller",
+            "AI model",
+            "Planning/reasoning",
+            "Tool selection",
+            "Tool execution",
+            "Observation",
+            "Next action",
+            "Final response"
+          ],
+
+          "importantPoint": "An agent is more than a model response; it includes surrounding system logic and capabilities."
+        },
+
+        {
+          "id": "tool-calling",
+          "title": "Tool Calling",
+
+          "definition": "Tool calling allows a model to request execution of predefined external functions or tools.",
+
+          "examples": [
+            "Search database",
+            "Get weather",
+            "Create calendar event",
+            "Query API",
+            "Run calculations"
+          ],
+
+          "securityRule": "The application must validate authorization and tool arguments independently rather than trusting the model."
+        },
+
+        {
+          "id": "function-calling",
+          "title": "Function Calling",
+
+          "definition": "Function calling is a structured interface where a model generates arguments for a predefined function that the application can execute.",
+
+          "example": {
+            "function": "getOrderStatus",
+            "arguments": {
+              "orderId": "12345"
+            }
+          }
+        },
+
+        {
+          "id": "planning",
+          "title": "Agent Planning",
+
+          "definition": "Planning is the process of decomposing a goal into actions or subgoals that an agent can execute.",
+
+          "example": [
+            "Understand user request",
+            "Search database",
+            "Compare results",
+            "Calculate outcome",
+            "Generate response"
+          ]
+        },
+
+        {
+          "id": "memory",
+          "title": "Agent Memory",
+
+          "definition": "Agent memory refers to mechanisms that allow an agent system to retain relevant information across steps or interactions.",
+
+          "types": [
+            "Short-term context",
+            "Conversation history",
+            "Long-term stored information",
+            "External knowledge"
+          ]
+        },
+
+        {
+          "id": "agent-loop",
+          "title": "Agent Loop",
+
+          "definition": "An agent loop repeatedly evaluates the current state, chooses an action, executes it and observes the result until a stopping condition is reached.",
+
+          "workflow": [
+            "Observe",
+            "Reason/plan",
+            "Choose action",
+            "Execute tool",
+            "Observe result",
+            "Continue or stop"
+          ],
+
+          "risks": [
+            "Infinite loops",
+            "Unexpected tool use",
+            "Excessive cost",
+            "Unauthorized actions"
+          ],
+
+          "controls": [
+            "Maximum steps",
+            "Timeouts",
+            "Tool permissions",
+            "Budget limits",
+            "Human approval"
+          ]
+        },
+
+        {
+          "id": "multi-agent",
+          "title": "Multi-Agent Systems",
+
+          "definition": "A multi-agent system uses multiple specialized AI agents or agent roles that cooperate or coordinate to accomplish a task.",
+
+          "example": [
+            "Research agent",
+            "Planning agent",
+            "Coding agent",
+            "Testing agent",
+            "Review agent"
+          ],
+
+          "tradeoffs": [
+            "Can decompose complex work",
+            "Can increase complexity",
+            "Can increase latency",
+            "Can increase cost"
+          ]
+        },
+
+        {
+          "id": "human-approval",
+          "title": "Human Approval",
+
+          "definition": "Human approval introduces a checkpoint before an AI agent performs actions that are sensitive, irreversible or high impact.",
+
+          "examples": [
+            "Sending an email",
+            "Making a financial transaction",
+            "Deleting data",
+            "Deploying production code"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": 10,
+      "title": "AI Engineering Scenarios",
+      "difficulty": "expert",
+      "description": "Apply AI concepts to realistic engineering problems involving architecture, reliability, security, evaluation, cost and production deployment.",
+
+      "topics": [
+
+        {
+          "id": "ai-architecture",
+          "title": "AI Architecture",
+
+          "definition": "AI architecture describes the components and interactions required to build, operate and monitor an AI-powered application.",
+
+          "typicalComponents": [
+            "Frontend",
+            "Backend",
+            "Authentication",
+            "AI model",
+            "Prompt layer",
+            "Retrieval system",
+            "Vector database",
+            "Application database",
+            "Tool layer",
+            "Monitoring",
+            "Logging"
+          ]
+        },
+
+        {
+          "id": "rag-architecture",
+          "title": "RAG Architecture",
+
+          "definition": "RAG architecture connects a knowledge ingestion pipeline and retrieval system to a generative model.",
+
+          "architecture": [
+            "Documents",
+            "Document processing",
+            "Chunking",
+            "Embedding generation",
+            "Vector storage",
+            "User query",
+            "Query embedding",
+            "Retrieval",
+            "Reranking",
+            "LLM",
+            "Grounded response"
+          ],
+
+          "commonFailurePoints": [
+            "Bad chunking",
+            "Poor embeddings",
+            "Incorrect retrieval",
+            "Outdated documents",
+            "Insufficient context",
+            "Conflicting sources"
+          ]
+        },
+
+        {
+          "id": "agent-architecture",
+          "title": "Agent Architecture",
+
+          "definition": "Agent architecture defines how a model, tools, memory, state and control mechanisms cooperate to accomplish multi-step tasks.",
+
+          "importantComponents": [
+            "Model",
+            "System instructions",
+            "State",
+            "Memory",
+            "Tools",
+            "Tool permissions",
+            "Planner/controller",
+            "Guardrails",
+            "Human approval",
+            "Observability"
+          ]
+        },
+
+        {
+          "id": "ai-evaluation",
+          "title": "AI Evaluation",
+
+          "definition": "AI evaluation measures whether a system performs its intended task accurately, reliably, safely and efficiently.",
+
+          "metrics": [
+            "Accuracy",
+            "Precision",
+            "Recall",
+            "F1 score",
+            "Latency",
+            "Cost",
+            "Groundedness",
+            "Relevance",
+            "Safety",
+            "Task success rate"
+          ],
+
+          "importantPoint": "There is no single universal metric for every AI application."
+        },
+
+        {
+          "id": "monitoring",
+          "title": "AI Monitoring",
+
+          "definition": "AI monitoring observes system behavior after deployment to detect quality problems, failures, drift, security incidents and operational issues.",
+
+          "monitoringAreas": [
+            "Latency",
+            "Errors",
+            "Token usage",
+            "Cost",
+            "Model quality",
+            "User feedback",
+            "Retrieval quality",
+            "Safety events",
+            "Data drift"
+          ]
+        },
+
+        {
+          "id": "cost-optimization",
+          "title": "AI Cost Optimization",
+
+          "definition": "AI cost optimization reduces unnecessary computational and infrastructure spending while preserving required quality.",
+
+          "strategies": [
+            "Use smaller models when sufficient",
+            "Cache repeated results",
+            "Reduce unnecessary context",
+            "Optimize prompts",
+            "Batch requests where appropriate",
+            "Use retrieval efficiently",
+            "Set token limits",
+            "Monitor usage"
+          ]
+        },
+
+        {
+          "id": "latency",
+          "title": "AI Latency",
+
+          "definition": "Latency is the time required for an AI system to process a request and return a response.",
+
+          "sources": [
+            "Network delay",
+            "Model inference",
+            "Retrieval",
+            "Tool execution",
+            "Database queries",
+            "Long prompts"
+          ],
+
+          "optimization": [
+            "Parallelize independent operations",
+            "Use caching",
+            "Reduce unnecessary context",
+            "Use faster models where appropriate",
+            "Optimize database queries"
+          ]
+        },
+
+        {
+          "id": "reliability",
+          "title": "AI Reliability",
+
+          "definition": "AI reliability concerns how consistently an AI system performs its intended function under expected operating conditions.",
+
+          "methods": [
+            "Retries",
+            "Fallback models",
+            "Input validation",
+            "Output validation",
+            "Monitoring",
+            "Evaluation",
+            "Human escalation"
+          ]
+        },
+
+        {
+          "id": "production-ai",
+          "title": "Production AI",
+
+          "definition": "Production AI is the engineering discipline of deploying and operating AI systems reliably, securely and cost-effectively in real-world environments.",
+
+          "productionChecklist": [
+            "Authentication",
+            "Authorization",
+            "Input validation",
+            "Prompt management",
+            "Model selection",
+            "Evaluation",
+            "Monitoring",
+            "Logging",
+            "Rate limiting",
+            "Cost controls",
+            "Security",
+            "Fallbacks",
+            "Human escalation",
+            "Incident response"
+          ]
+        }
+      ]
+    }
+  ],
+
+  "questionSystem": {
+
+    "difficultyLevels": {
+
+      "easy": {
+        "purpose": "Check basic understanding.",
+        "questionTypes": [
+          "Definitions",
+          "Basic identification",
+          "Simple comparisons"
+        ]
+      },
+
+      "medium": {
+        "purpose": "Check conceptual understanding.",
+        "questionTypes": [
+          "Concept application",
+          "Simple scenarios",
+          "Difference between concepts"
+        ]
+      },
+
+      "hard": {
+        "purpose": "Check deeper understanding.",
+        "questionTypes": [
+          "Multi-concept questions",
+          "Failure analysis",
+          "Architecture decisions"
+        ]
+      },
+
+      "advanced": {
+        "purpose": "Test engineering reasoning.",
+        "questionTypes": [
+          "System design",
+          "Security scenarios",
+          "RAG scenarios",
+          "Agent scenarios"
+        ]
+      },
+
+      "expert": {
+        "purpose": "Test production-level reasoning.",
+        "questionTypes": [
+          "Complex scenarios",
+          "Trade-off analysis",
+          "Architecture debugging",
+          "Security analysis",
+          "Cost and reliability decisions"
+        ]
+      }
+    },
+
+    "questionFormat": {
+      "id": "unique-question-id",
+      "stage": 1,
+      "topic": "AI Fundamentals",
+      "concept": "ai",
+      "difficulty": "easy",
+      "type": "mcq",
+
+      "question": "What is Artificial Intelligence?",
+
+      "options": [
+        "A field focused on building systems capable of intelligent tasks",
+        "Only robots",
+        "Only neural networks",
+        "Only chatbots"
+      ],
+
+      "answer": 0,
+
+      "explanation": "AI is the broad field concerned with building systems capable of tasks associated with aspects of intelligence.",
+
+      "relatedConcepts": [
+        "Machine Learning",
+        "Deep Learning"
+      ]
+    }
+  },
+
+  "scenarioSystem": {
+
+    "purpose": "Train practical AI engineering decision-making.",
+
+    "scenarioFormat": {
+      "id": "scenario-001",
+      "stage": 6,
+      "difficulty": "advanced",
+      "type": "scenario",
+
+      "context": "A company wants to build an AI assistant that answers questions using internal company documents.",
+
+      "problem": "The documents change frequently and the company does not want to retrain the model every time a document changes.",
+
+      "question": "Which architecture is appropriate?",
+
+      "options": [
+        "Train the model from scratch after every document update",
+        "Use RAG with an updateable knowledge index",
+        "Increase temperature",
+        "Remove the documents"
+      ],
+
+      "answer": 1,
+
+      "explanation": "RAG allows the application to retrieve updated external information at inference time without requiring the base model to be retrained for every document change.",
+
+      "conceptsTested": [
+        "RAG",
+        "Retrieval",
+        "Embeddings",
+        "Knowledge systems"
+      ]
+    }
+  },
+
+  "learningRules": {
+
+    "stageCompletion": {
+      "requiredConceptCompletion": 0.8,
+      "requiredQuizAccuracy": 0.7
+    },
+
+    "difficultyUnlocking": {
+      "easy": "Available initially",
+      "medium": "Unlock after basic concepts",
+      "hard": "Unlock after medium performance",
+      "advanced": "Unlock after hard performance",
+      "expert": "Unlock after advanced performance"
+    },
+
+    "recommendedLearningCycle": [
+      "Read concept",
+      "Understand example",
+      "Review important points",
+      "Solve easy questions",
+      "Solve medium questions",
+      "Solve hard questions",
+      "Solve scenario questions",
+      "Review mistakes",
+      "Retake weak topics"
+    ]
+  },
+
+  "progressSystem": {
+
+    "userProgress": {
+      "completedConcepts": [],
+      "attemptedQuestions": [],
+      "incorrectQuestions": [],
+      "bookmarkedQuestions": [],
+      "completedStages": [],
+      "stageScores": {},
+      "topicAccuracy": {},
+      "difficultyAccuracy": {},
+      "totalQuestionsAttempted": 0,
+      "totalCorrect": 0,
+      "overallAccuracy": 0,
+      "currentStage": 1,
+      "currentDifficulty": "easy"
+    },
+
+    "analytics": {
+      "weakTopics": [],
+      "strongTopics": [],
+      "recommendedRevision": [],
+      "averageScore": 0,
+      "bestScore": 0,
+      "testsCompleted": 0
+    }
+  },
+
+  "mockTests": {
+
+    "beginnerTest": {
+      "questions": 20,
+      "timeMinutes": 20,
+      "difficulty": [
+        "easy",
+        "medium"
+      ]
+    },
+
+    "intermediateTest": {
+      "questions": 30,
+      "timeMinutes": 30,
+      "difficulty": [
+        "medium",
+        "hard"
+      ]
+    },
+
+    "advancedTest": {
+      "questions": 40,
+      "timeMinutes": 45,
+      "difficulty": [
+        "hard",
+        "advanced"
+      ]
+    },
+
+    "expertTest": {
+      "questions": 50,
+      "timeMinutes": 60,
+      "difficulty": [
+        "advanced",
+        "expert"
+      ]
+    },
+
+    "fullAcademyTest": {
+      "questions": 100,
+      "timeMinutes": 120,
+      "difficulty": [
+        "easy",
+        "medium",
+        "hard",
+        "advanced",
+        "expert"
+      ]
+    }
+  },
+
+  "revisionSystem": {
+
+    "incorrectQuestionRevision": {
+      "trigger": "Question answered incorrectly",
+      "actions": [
+        "Save question",
+        "Show explanation",
+        "Link to concept",
+        "Add to revision queue"
+      ]
+    },
+
+    "weakTopicDetection": {
+      "threshold": 0.7,
+      "description": "Topics with accuracy below 70 percent are considered candidates for revision."
+    },
+
+    "spacedRevision": {
+      "enabled": true,
+      "intervals": [
+        "1 day",
+        "3 days",
+        "7 days",
+        "14 days",
+        "30 days"
+      ]
+    }
+  },
+
+  "finalLearningGoal": {
+
+    "beginner": [
+      "Understand AI terminology",
+      "Understand basic ML concepts",
+      "Understand generative AI"
+    ],
+
+    "intermediate": [
+      "Understand model training",
+      "Understand prompt engineering",
+      "Understand RAG",
+      "Understand responsible AI"
+    ],
+
+    "advanced": [
+      "Design RAG systems",
+      "Understand AI security",
+      "Understand AI agents",
+      "Evaluate AI systems"
+    ],
+
+    "expert": [
+      "Design production AI architectures",
+      "Analyze AI security risks",
+      "Optimize cost and latency",
+      "Design reliable AI systems",
+      "Evaluate complex AI workflows",
+      "Solve scenario-based engineering problems"
+    ]
+  }
+}

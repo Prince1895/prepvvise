@@ -1,0 +1,90 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1789759184556,
+      "tag": "0000_keen_firebrand",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789760082927,
+      "tag": "0001_famous_sunset_bain",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789760444562,
+      "tag": "0002_minor_johnny_blaze",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1789762647982,
+      "tag": "0003_lonely_moon_knight",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1789763516562,
+      "tag": "0004_quiet_bruce_banner",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1789801707937,
+      "tag": "0005_cultured_sinister_six",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1789802040785,
+      "tag": "0006_exotic_moonstone",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1789805750991,
+      "tag": "0007_neat_alex_power",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1789812055681,
+      "tag": "0008_dapper_sugar_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1789814585755,
+      "tag": "0009_daffy_nightshade",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1789817454668,
+      "tag": "0010_bouncy_mongoose",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1789820000000,
+      "tag": "0011_debugging_fields",
+      "breakpoints": true
+    }
+  ]
+}

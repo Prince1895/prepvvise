@@ -1,0 +1,685 @@
+'use client'
+
+import Script from 'next/script'
+import { authClient } from '@/lib/auth-client'
+import { useEffect, useMemo, useState } from 'react'
+import {
+  ArrowUpRight,
+  AudioLines,
+  Brain,
+  Check,
+  ChevronRight,
+  CircleHelp,
+  Code2,
+  Flame,
+  Gauge,
+  Home,
+  Languages,
+  LibraryBig,
+  LineChart,
+  MessageCircle,
+  MoreHorizontal,
+  Play,
+  Search,
+  Settings2,
+  Sparkles,
+  Target,
+  Timer,
+  Trophy,
+  UserRound,
+  Zap,
+  AlertTriangle,
+  CheckCircle2,
+  Clock3,
+  FileCode2,
+  LockKeyhole,
+  RotateCcw,
+  Terminal,
+} from 'lucide-react'
+import Link from 'next/link'
+
+// Static display configuration for the five assessment stages.
+// Readiness percentages are resolved dynamically from the backend via
+// /api/progress and /api/attempts — never hardcoded here.
+const stages = [
+  { id: 'english', number: '01', name: 'English', label: 'Communication', icon: Languages, progress: 0, meta: 'Grammar · Speaking', color: 'mint' },
+  { id: 'technical', number: '02', name: 'Technical', label: 'Assessment', icon: Brain, progress: 0, meta: 'AI Literacy · Logic', color: 'peach' },
+  { id: 'debugging', number: '03', name: 'Debugging', label: 'Code Lab', icon: Code2, progress: 0, meta: 'Loops · Runtime errors', color: 'lavender' },
+  { id: 'coding', number: '04', name: 'AI Coding', label: 'Practice', icon: Sparkles, progress: 0, meta: 'Arrays · Algorithms', color: 'yellow' },
+  { id: 'cognitive', number: '05', name: 'Cognitive', label: 'Assessment', icon: Target, progress: 0, meta: 'Patterns · Reasoning', color: 'blue' },
+]
+
+type BackendPracticeSet = {
+  id: string
+  setNumber: number
+  name: string
+  access: 'free' | 'premium'
+  type: 'focused' | 'mixed'
+  locked: boolean
+}
+
+type BackendLearnSection = {
+  id: string
+  position: number
+  title: string
+  summary: string
+  content: string
+  durationMinutes: number
+  access: 'free' | 'premium'
+}
+
+type BackendModule = {
+  id: string
+  slug: string
+  name: string
+  description: string | null
+  learningSections: BackendLearnSection[]
+  practiceSets: BackendPracticeSet[]
+}
+
+type BackendProgress = {
+  moduleId: string
+  moduleSlug: string
+  moduleName: string
+  attemptsCount: number | null
+  bestScore: number | null
+  completedSets: number | null
+}
+
+type BackendAttempt = {
+  id: string
+  status: 'in_progress' | 'submitted' | 'expired'
+  score: number | null
+  startedAt: string | null
+  expiresAt: string | null
+  submittedAt: string | null
+  practiceSetId: string
+  practiceSetName: string
+  setNumber: number
+  moduleSlug: string
+  moduleName: string
+}
+
+type BackendPlan = {
+  slug: 'free' | 'premium'
+  displayName: string
+  pricePaise: number
+  current: boolean
+  practiceSetAccessLimit: number | null
+  unlimitedAttempts: boolean
+  aiAnalysis: boolean
+  aiCoachDailyLimit: number | null
+}
+
+const practiceNames = [
+  'AI Fundamentals', 'Generative AI', 'LLM Concepts', 'Prompt Engineering', 'Responsible AI',
+  'AI Applications', 'Workplace Situations', 'Technical Decision Making', 'Problem Analysis',
+  'Situational Judgment', 'Case-Based Questions', 'Advanced Situational Assessment',
+  'Logical Problem Solving', 'Analytical Reasoning', 'Technical Problem Solving', 'Complex Scenarios',
+  'Advanced Problem Solving', 'Mixed Technical', 'Technical Mock', 'Advanced Technical Mock',
+]
+
+function LearnSectionView({ sections, isPremium, onPremium }: { sections: BackendLearnSection[]; isPremium: boolean; onPremium: () => void }) {
+  const [openId, setOpenId] = useState<string | null>(null)
+  if (!sections.length) {
+    return <section className="module-content"><p className="eyebrow text-muted-foreground">Learning path</p><h2 className="section-title">No learning content yet</h2><p className="module-description">Learning sub-modules for this module are managed from the admin panel. Please check back soon.</p></section>
+  }
+  const open = sections.find((section) => section.id === openId)
+  if (open) {
+    const locked = open.access === 'premium' && !isPremium
+    return (
+      <section className="module-content">
+        <button className="back-link" onClick={() => setOpenId(null)}><ChevronRight className="rotate-180" /> Learning path</button>
+        <p className="eyebrow text-muted-foreground">Sub-module {String(open.position).padStart(2, '0')} · {open.durationMinutes} min read · {open.access === 'premium' ? 'Premium' : 'Free'}</p>
+        <h2 className="section-title">{open.title}</h2>
+        <p className="module-description">{open.summary}</p>
+        {locked ? (
+          <div className="mock-card stage-peach"><div><p className="eyebrow">Premium learning content</p><h3>Unlock this sub-module to read the full content.</h3></div><button className="primary-button" onClick={onPremium}>Unlock Premium <ArrowUpRight /></button></div>
+        ) : (
+          <article className="topic-card"><p style={{ whiteSpace: 'pre-wrap' }}>{open.content}</p></article>
+        )}
+      </section>
+    )
+  }
+  return (
+    <section className="module-content">
+      <p className="eyebrow text-muted-foreground">Learning path</p>
+      <h2 className="section-title">Learn {sections.length > 0 ? '' : ''}step by step</h2>
+      <p className="module-description">Build the concepts before you practice them. Content is managed from the admin panel.</p>
+      <div className="topic-grid">
+        {sections.map((section) => {
+          const locked = section.access === 'premium' && !isPremium
+          return (
+            <article className="topic-card" key={section.id}>
+              <span className="stage-number">{String(section.position).padStart(2, '0')}</span>
+              <h3>{section.title}</h3>
+              <p>{section.summary}</p>
+              <div>
+                <span>{locked ? 'Premium' : `${section.durationMinutes} min read`}</span>
+                <button onClick={() => locked ? onPremium() : setOpenId(section.id)}>{locked ? 'Unlock' : 'Learn'} <ArrowUpRight /></button>
+              </div>
+            </article>
+          )
+        })}
+      </div>
+    </section>
+  )
+}
+
+function ModuleView({ stage, backendModule, onBack, onTutor, onAssessment, onSet, isPremium, onPremium }: { stage: (typeof stages)[number]; backendModule?: BackendModule; onBack: () => void; onTutor: () => void; onAssessment: () => void; onSet: (set: number) => void; isPremium: boolean; onPremium: () => void }) {
+  const [tab, setTab] = useState<'Learn' | 'Practice' | 'Mock' | 'AI analysis'>('Practice')
+  const [filter, setFilter] = useState('All')
+  if (stage.id === 'debugging') return <DebuggingModule onBack={onBack} isPremium={isPremium} onPremium={onPremium} />
+  if (stage.id === 'coding') return <AICodingModule onBack={onBack} isPremium={isPremium} onPremium={onPremium} />
+  if (stage.id === 'cognitive') return <CognitiveModule onBack={onBack} isPremium={isPremium} onPremium={onPremium} />
+  const learnSections = backendModule?.learningSections ?? []
+  const availableSets = backendModule?.practiceSets.length
+    ? backendModule.practiceSets.map((set) => ({ name: set.name, number: set.setNumber, free: set.access === 'free', score: '—' }))
+    : practiceNames.map((name, index) => ({ name, number: index + 1, free: index < 2, score: index === 0 ? '86%' : index === 1 ? '78%' : '—' }))
+  const visibleSets = availableSets.filter((set) => filter === 'All' || filter === (set.free ? 'Free' : 'Premium'))
+  return (
+    <div className="module-page">
+      <button className="back-link" onClick={onBack}><ChevronRight className="rotate-180" /> Assessment journey</button>
+      <div className={`module-hero stage-${stage.color}`}>
+        <div className="module-hero-copy"><p className="eyebrow">{stage.name} module</p><h1 className="module-title">{stage.name} Assessment</h1><p className="module-subtitle">AI Literacy · Situational · Problem Solving</p><button className="primary-button" onClick={stage.id === 'english' ? onAssessment : onTutor}>{stage.id === 'english' ? 'Start assessment' : 'Ask AI coach'} <ArrowUpRight /></button></div>
+        <div className="module-progress"><div className="flex items-baseline justify-between"><span className="eyebrow">{isPremium ? 'Premium unlocked' : 'Free plan'}</span><strong>{stage.progress}% ready</strong></div><p className="mt-2 text-xs text-muted-foreground">{isPremium ? '20 / 20 practice sets available' : '2 / 20 practice sets available'}</p><div className="progress-track"><div style={{ width: `${stage.progress}%` }} /></div><div className="module-stats"><div><strong>86%</strong><span>best score</span></div><div><strong>42</strong><span>attempts</span></div><div><strong>240</strong><span>questions</span></div></div></div>
+      </div>
+      <div className="module-tabs">{(['Learn', 'Practice', 'Mock', 'AI analysis'] as const).map((item) => <button key={item} className={`module-tab ${tab === item ? 'active' : ''}`} onClick={() => setTab(item)}>{item}</button>)}</div>
+      {tab === 'Learn' && <LearnSectionView sections={learnSections} isPremium={isPremium} onPremium={onPremium} />}
+      {tab === 'Practice' && <section className="module-content"><div className="module-section-heading"><div><p className="eyebrow text-muted-foreground">Practice</p><h2 className="section-title">Practice sets</h2><p className="module-description">20 sets · Unlimited attempts</p></div><select className="filter-select" value={filter} onChange={(event) => setFilter(event.target.value)} aria-label="Filter practice sets"><option>All</option><option>Free</option><option>Premium</option></select></div><p className="practice-intro">Start with focused topic practice, then test yourself with mixed assessment sets.</p><h3 className="subsection-title">Focused practice <span>Sets 01–10</span></h3><div className="set-grid">{visibleSets.filter((set) => set.number <= 10).map((set) => <SetCard key={set.number} set={set} isPremium={isPremium} onPremium={onPremium} onStart={() => onSet(set.number)} />)}</div><h3 className="subsection-title">Mixed practice <span>Sets 11–20</span></h3><div className="set-grid">{visibleSets.filter((set) => set.number > 10).map((set) => <SetCard key={set.number} set={set} isPremium={isPremium} onPremium={onPremium} onStart={() => onSet(set.number)} />)}</div></section>}
+      {tab === 'Mock' && <section className="module-content"><p className="eyebrow text-muted-foreground">Full assessment</p><h2 className="section-title">Test your complete preparation.</h2><div className="mock-card stage-peach"><div><p className="eyebrow">{stage.name} Assessment Mock</p><h3>Exam simulation, without the shortcuts.</h3><p>40 questions · 45 minutes · Timed</p><span>No hints during assessment. Full analysis after submission.</span></div><button className="primary-button" onClick={!isPremium ? onPremium : undefined}>{isPremium ? 'Start mock' : 'Unlock mock'} <ArrowUpRight /></button></div></section>}
+      {tab === 'AI analysis' && <section className="module-content"><p className="eyebrow text-muted-foreground">Your AI analysis</p><h2 className="section-title">Your performance is improving.</h2><div className="analysis-grid"><div className="analysis-card"><span>Overall practice performance</span><strong>{stage.progress}%</strong><div className="progress-track"><div style={{ width: `${stage.progress}%` }} /></div></div><div className="analysis-card"><p className="eyebrow">Strong areas</p><p>✓ AI Fundamentals · 86%</p><p>✓ Responsible AI · 82%</p></div><div className="analysis-card"><p className="eyebrow">Focus areas</p><p>⚠ Prompt Engineering · 61%</p><p>⚠ LLM Concepts · 64%</p></div></div><div className="next-steps"><p className="eyebrow">Your next steps</p><div><strong>01</strong><span>Review Prompt Engineering · 8 min</span><button>Learn <ArrowUpRight /></button></div><div><strong>02</strong><span>Complete 5 targeted questions · 10 min</span><button>Practice <ArrowUpRight /></button></div><div><strong>03</strong><span>Reattempt Practice Set 04 · 20 min</span><button onClick={onTutor}>Ask coach <ArrowUpRight /></button></div></div></section>}
+    </div>
+  )
+}
+
+function DebuggingModule({ onBack, isPremium, onPremium }: { onBack: () => void; isPremium: boolean; onPremium: () => void }) {
+  const [tab, setTab] = useState<'Learn' | 'Practice' | 'Mock' | 'AI analysis'>('Practice')
+  const [view, setView] = useState<'sets' | 'intro' | 'lab' | 'result'>('sets')
+  const [language, setLanguage] = useState('C++')
+  const [code, setCode] = useState('int findMax(int arr[], int n) {\n    int max = 0;\n\n    for (int i = 0; i <= n; i++) {\n        if (arr[i] > max) max = arr[i];\n    }\n\n    return max;\n}')
+  const [seconds, setSeconds] = useState(20 * 60)
+  const [ran, setRan] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [attempts, setAttempts] = useState(0)
+  const timerLabel = `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`
+  useEffect(() => {
+    if (view !== 'lab' || submitted || seconds <= 0) return
+    const timer = window.setInterval(() => setSeconds((value) => value <= 1 ? 0 : value - 1), 1000)
+    return () => window.clearInterval(timer)
+  }, [view, submitted, seconds])
+  const start = () => { setView('intro'); setTab('Practice') }
+  const enterLab = () => { setView('lab'); setSeconds(20 * 60); setSubmitted(false); setRan(false) }
+  if (view === 'lab') return <section className="debug-lab-screen"><div className="debug-lab-top"><button className="back-link" onClick={() => setView('sets')}><ChevronRight className="rotate-180" /> Exit lab</button><div><p className="eyebrow">Debugging lab · Practice set 01</p><strong>Question 01 / 01</strong></div><div className={`debug-timer ${seconds < 300 ? 'warning' : ''}`}><Clock3 /> {timerLabel} remaining</div></div><div className="debug-lab-grid"><article className="debug-problem"><div className="debug-panel-heading"><span className="eyebrow">Problem</span><span className="topic-chip">Arrays · Boundary</span></div><h2>Find the maximum element</h2><p>Return the largest value in an integer array. The starter implementation contains one boundary bug.</p><div className="debug-section"><span className="eyebrow">Input</span><code>arr = [3, 8, 2, 15, 6]</code></div><div className="debug-section"><span className="eyebrow">Expected output</span><code>15</code></div><div className="debug-section"><span className="eyebrow">Constraints</span><p>1 ≤ n ≤ 10⁵ · O(n) expected · negative values may appear</p></div><div className="debug-section"><span className="eyebrow">Visible test cases</span><div className="visible-tests"><span>Test 1 <b className={ran ? 'pass' : ''}>{ran ? '✓ 15' : '—'}</b></span><span>Test 2 <b className={ran ? 'pass' : ''}>{ran ? '✓ 8' : '—'}</b></span><span>Test 3 <b className={ran ? 'fail' : ''}>{ran ? '✕ 0' : '—'}</b></span></div></div></article><article className="debug-editor-panel"><div className="debug-panel-heading"><span className="eyebrow"><FileCode2 /> Code editor</span><select value={language} onChange={(event) => setLanguage(event.target.value)} aria-label="Choose language"><option>C</option><option>C++</option><option>Java</option></select></div><div className="editor-shell"><div className="line-numbers">{code.split('\n').map((_, index) => <span key={index}>{String(index + 1).padStart(2, '0')}</span>)}</div><textarea value={code} onChange={(event) => setCode(event.target.value)} spellCheck={false} aria-label="Buggy code editor" /></div><div className="editor-note"><Terminal /> AI assistance is off during the assessment. Find the bug independently.</div><div className="test-results"><div className="debug-panel-heading"><span className="eyebrow">Test results</span><span>{ran ? '2 / 3 visible passed' : 'Not run yet'}</span></div>{ran && <div className="result-lines"><span className="pass"><CheckCircle2 /> Test 1 · Expected 15 · Output 15</span><span className="pass"><CheckCircle2 /> Test 2 · Expected 8 · Output 8</span><span className="fail"><AlertTriangle /> Test 3 · Expected -4 · Output 0</span></div>}</div><div className="debug-actions"><button className="secondary-button" onClick={() => { setCode('int findMax(int arr[], int n) {\n    int max = 0;\n\n    for (int i = 0; i <= n; i++) {\n        if (arr[i] > max) max = arr[i];\n    }\n\n    return max;\n}'); setRan(false) }}><RotateCcw /> Reset code</button><button className="secondary-button" onClick={() => { setRan(true); setAttempts((value) => value + 1) }}><Play /> Run code</button><button className="primary-button" onClick={() => { setSubmitted(true); setView('result') }}>Submit challenge <ArrowUpRight /></button></div></article></div></section>
+  if (view === 'result') return <section className="debug-result"><button className="back-link" onClick={() => setView('sets')}><ChevronRight className="rotate-180" /> Debugging</button><p className="eyebrow text-muted-foreground">Debugging complete · Practice set 01</p><h1 className="assessment-heading">You found the pattern.</h1><p className="assessment-lede">Your code was evaluated against visible and hidden edge cases.</p><div className="debug-score-card"><div><span className="eyebrow">Final result</span><strong>78%</strong><p>14 / 18 tests passed</p></div><div className="debug-result-stats"><span><b>✓</b> Compilation</span><span><b>2 / 3</b> Visible tests</span><span><b>12 / 15</b> Hidden tests</span><span><b>18m 42s</b> Time used</span></div></div><div className="debug-result-grid"><div className="analysis-card"><p className="eyebrow">Your changes</p><pre>{'- i <= n\n+ i < n'}</pre><p>Bug fixed: array boundary condition.</p></div><div className="analysis-card"><p className="eyebrow">AI debugging analysis</p><p>You identified the main logic issue, but checked the boundary case late. Next time, test the smallest and largest valid inputs first.</p><span className="ai-label">AI feedback · not official scoring</span></div><div className="analysis-card"><p className="eyebrow">Skill signals</p><p>Bug identification <b>88%</b></p><p>Edge cases <b>61%</b></p><p>Code validation <b>84%</b></p></div></div><div className="result-actions"><button className="primary-button" onClick={enterLab}>Try again <ArrowUpRight /></button><button className="secondary-button" onClick={() => setTab('AI analysis')}>AI analysis <Sparkles /></button></div></section>
+  if (view === 'intro') return <section className="debug-intro"><button className="back-link" onClick={() => setView('sets')}><ChevronRight className="rotate-180" /> Debugging</button><div className="debug-intro-grid"><div><p className="eyebrow text-muted-foreground">Debugging lab</p><h1 className="assessment-heading">Fix the code. Find the bug.<br />Make it pass.</h1><p className="assessment-lede">You will receive a working-looking DSA implementation with one or more errors. Inspect it, run tests, and make the smallest correct fix.</p><div className="debug-meta"><span>1 Question</span><span>20 Minutes</span><span>DSA Based</span></div></div><div className="assessment-summary"><p className="eyebrow">Choose language</p><div className="language-picker">{['C', 'C++', 'Java'].map((item) => <button className={language === item ? 'selected' : ''} key={item} onClick={() => setLanguage(item)}>{item}</button>)}</div><p className="selected-language">Selected language: <strong>{language}</strong></p><button className="primary-button" onClick={enterLab}>Start debugging <ArrowUpRight /></button></div></div><div className="debug-rules"><span><LockKeyhole /> AI assistance off</span><span><CheckCircle2 /> Visible + hidden tests</span><span><Clock3 /> Timer starts on launch</span></div></section>
+  return <section className="debug-module"><button className="back-link" onClick={onBack}><ChevronRight className="rotate-180" /> Assessment journey</button><div className="module-hero stage-lavender"><div className="module-hero-copy"><p className="eyebrow">Debugging module</p><h1 className="module-title">Debugging Lab</h1><p className="module-subtitle">DSA · Logic tracing · Runtime errors</p><button className="primary-button" onClick={start}>Start debugging <ArrowUpRight /></button></div><div className="module-progress"><div className="flex items-baseline justify-between"><span className="eyebrow">{isPremium ? 'Premium unlocked' : 'Free plan'}</span><strong>61% ready</strong></div><p className="mt-2 text-xs text-muted-foreground">{isPremium ? '20 / 20 practice sets available' : '2 / 20 practice sets available'}</p><div className="progress-track"><div style={{ width: '61%' }} /></div><div className="module-stats"><div><strong>72%</strong><span>best score</span></div><div><strong>12</strong><span>attempts</span></div><div><strong>8</strong><span>bugs fixed</span></div></div></div></div><div className="module-tabs">{(['Learn', 'Practice', 'Mock', 'AI analysis'] as const).map((item) => <button key={item} className={`module-tab ${tab === item ? 'active' : ''}`} onClick={() => setTab(item)}>{item}</button>)}</div>{tab === 'Practice' && <><div className="module-section-heading"><div><p className="eyebrow text-muted-foreground">Practice</p><h2 className="section-title">Debugging challenges</h2><p className="module-description">20 sets · Unlimited attempts · Visible tests in practice</p></div><span className="topic-chip">AI assistance off</span></div><p className="practice-intro">Start with focused DSA debugging, then move into mixed challenges with subtler bugs.</p><h3 className="subsection-title">Focused debugging <span>Sets 01–10</span></h3><div className="set-grid">{['Arrays', 'Strings', 'Searching & Sorting', 'Hashing', 'Linked Lists', 'Stack & Queue', 'Recursion', 'Trees', 'Graphs', 'Dynamic Programming'].map((name, index) => <button key={name} className={`set-card ${index > 1 && !isPremium ? 'set-locked' : ''}`} onClick={() => index > 1 && !isPremium ? onPremium() : start()}><div className="flex items-start justify-between"><span className="stage-number">{String(index + 1).padStart(2, '0')}</span>{index > 1 && !isPremium ? <span className="lock-badge"><LockKeyhole /> Premium · ₹59</span> : <span className="free-badge">{index > 1 ? 'UNLOCKED' : 'FREE'}</span>}</div><h3>{name}</h3><p className="set-meta">1 challenge · {index > 5 ? 'Medium' : 'Easy'} · 20 minutes</p><div className="set-footer"><span>Best score <strong>{index < 2 ? index ? '78%' : '—' : '—'}</strong></span><span className="set-action">{index > 1 && !isPremium ? 'Unlock' : 'Start'} <ArrowUpRight /></span></div></button>)}</div><h3 className="subsection-title">Mixed debugging <span>Sets 11–20</span></h3><div className="set-grid">{['Arrays + Strings', 'Hashing + Search', 'Lists + Stack', 'Trees + Recursion', 'Graphs + BFS/DFS', 'Greedy + Arrays'].map((name, index) => <button key={name} className={`set-card set-locked`} onClick={onPremium}><div className="flex items-start justify-between"><span className="stage-number">{String(index + 11).padStart(2, '0')}</span><span className="lock-badge"><LockKeyhole /> Premium · ₹59</span></div><h3>{name}</h3><p className="set-meta">1 challenge · Medium → Hard · 20 minutes</p><div className="set-footer"><span>Best score <strong>—</strong></span><span className="set-action">Unlock <ArrowUpRight /></span></div></button>)}</div></>}{tab === 'Learn' && <div className="debug-info-card"><p className="eyebrow">Learning path</p><h2 className="section-title">Learn to debug deliberately.</h2><p>Practice the workflow: read the constraints, inspect the loop, run the smallest edge case, then validate the fix.</p><div className="debug-skill-list"><span>Boundary conditions</span><span>Loop termination</span><span>Negative values</span><span>Pointer safety</span></div></div>}{tab === 'Mock' && <div className="mock-card stage-lavender"><div><p className="eyebrow">Debugging mock</p><h3>Find and fix the bug.</h3><p>1 DSA problem · 20 minutes · C / C++ / Java</p><span>No AI assistance during the assessment. Hidden tests included.</span></div><button className="primary-button" onClick={start}>Start mock <ArrowUpRight /></button></div>}{tab === 'AI analysis' && <div className="debug-info-card"><p className="eyebrow">AI feedback · not official scoring</p><h2 className="section-title">Your debugging patterns.</h2><p>You have made boundary-condition mistakes in 3 recent attempts. Try the smallest and largest valid inputs before submitting.</p><div className="debug-skill-bars"><span>Bug identification <b>88%</b></span><span>Logic tracing <b>76%</b></span><span>Edge cases <b>61%</b></span><span>Code validation <b>84%</b></span></div></div>}</section>
+}
+
+function AICodingModule({ onBack, isPremium, onPremium }: { onBack: () => void; isPremium: boolean; onPremium: () => void }) {
+  const [screen, setScreen] = useState<'overview' | 'sets' | 'details' | 'instructions' | 'workspace' | 'result'>('overview')
+  const [selectedSet, setSelectedSet] = useState(4)
+  const [filter, setFilter] = useState('All')
+  const [language, setLanguage] = useState('C++')
+  const [seconds, setSeconds] = useState(38 * 60 + 42)
+  const [tests, setTests] = useState(false)
+  const [showPrompt, setShowPrompt] = useState(false)
+  const [showSubmit, setShowSubmit] = useState(false)
+  const [chat, setChat] = useState('')
+  const sets = ['Arrays + Hashing', 'Two Sum Variant', 'Sliding Window', 'Longest Subarray', 'Binary Search', 'Strings + Pointers', 'Intervals', 'Stack Patterns', 'Linked Lists', 'Trees', 'Graphs + BFS', 'Dynamic Programming', 'Greedy Arrays', 'Recursion', 'Heaps', 'Backtracking', 'Advanced Graphs', 'Mixed Algorithms', 'Mock Challenge', 'Final Challenge']
+  const difficulties = ['Easy', 'Easy', 'Medium', 'Medium', 'Easy', 'Medium', 'Medium', 'Medium', 'Medium', 'Hard', 'Hard', 'Hard', 'Medium', 'Medium', 'Hard', 'Hard', 'Hard', 'Hard', 'Hard', 'Hard']
+  useEffect(() => { if (screen !== 'workspace') return; const timer = window.setInterval(() => setSeconds((value) => Math.max(0, value - 1)), 1000); return () => window.clearInterval(timer) }, [screen])
+  const startSet = (index: number) => { setSelectedSet(index + 1); setScreen('details') }
+  const time = `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`
+  if (screen === 'workspace') return <section className="ai-workspace"><header className="ai-workspace-top"><span className="brand-mark">PrepWise <i>/</i> AI Coding <i>/</i> Set {String(selectedSet).padStart(2, '0')}</span><span className="workspace-title">AI-ASSISTED CODING</span><div className={`workspace-timer ${seconds < 600 ? 'warning' : ''}`}><Timer /> {time}<button onClick={() => setShowSubmit(true)}>Submit</button></div></header><div className="workspace-grid"><aside className="problem-panel"><div className="workspace-panel-head"><span className="eyebrow">Problem</span><button>Collapse</button></div><h2>Longest Subarray With Target Sum</h2><span className="difficulty-badge">MEDIUM · Arrays · Prefix Sum</span><div className="workspace-tabs"><button className="active">Problem</button><button>Examples</button><button>Constraints</button></div><p>Given an integer array and an integer K, find the length of the longest subarray whose sum is equal to K.</p><h4>Example</h4><code>[10, 5, 2, 7, 1, 9], K = 15</code><strong className="example-output">Output: 4</strong><h4>Constraints</h4><p>1 ≤ N ≤ 10⁵<br />-10⁹ ≤ arr[i] ≤ 10⁹</p></aside><main className="code-panel"><div className="workspace-panel-head"><span className="eyebrow">Code <select value={language} onChange={(e) => setLanguage(e.target.value)}><option>C</option><option>C++</option><option>Java</option></select></span><button onClick={() => setTests(false)}>Reset</button></div><div className="code-editor"><div>{Array.from({ length: 12 }, (_, i) => <span key={i}>{String(i + 1).padStart(2, '0')}</span>)}</div><pre>{`#include <bits/stdc++.h&gt;\nusing namespace std;\n\nint longestSubarray(vector<int&gt;& arr, int k) {\n  unordered_map<long long, int&gt; first;\n  long long prefix = 0;\n  int best = 0;\n\n  for (int i = 0; i < arr.size(); i++) {\n    prefix += arr[i];\n    if (prefix == k) best = i + 1;\n  }\n  return best;\n}`}</pre></div><div className="code-actions"><button onClick={() => setTests(false)}>Reset</button><button className="secondary-button" onClick={() => setTests(true)}><Play /> Run Code</button><button className="primary-button" onClick={() => setTests(true)}>Run Tests <ArrowUpRight /></button></div>{tests && <div className="test-drawer"><div className="workspace-panel-head"><span className="eyebrow">Test results</span><b>18 / 20 tests passed</b></div><div className="test-grid"><span className="pass">✓ Test 01</span><span className="pass">✓ Test 02</span><span className="pass">✓ Test 03</span><span className="pass">✓ Test 04</span><span className="fail">✕ Test 05</span><span className="pass">✓ Test 06</span></div><small>Runtime 124 ms · Memory 14 MB</small><p><b>Test 05 failed</b><br />Expected: 6 · Your output: 4<br /><em>Hint: consider cases containing negative values.</em></p></div>}</main><aside className="ai-panel"><div className="ai-panel-head"><div><span className="eyebrow">AI Assistant</span><strong>Powered by Gemini</strong></div><Sparkles /></div><div className="ai-context"><b>AI Context</b><span>✓ Problem</span><span>✓ Current code</span><span>✓ Test results</span><span>✓ Conversation</span></div><div className="quick-actions">{['Explain Problem', 'Get Hint', 'Suggest Approach', 'Review My Code', 'Find Edge Cases', 'Analyze Complexity'].map((item) => <button key={item} onClick={() => setChat(item)}>{item}</button>)}</div><div className="chat-messages"><div className="ai-message"><b>Gemini</b><p>Hi! I&apos;m your AI coding assistant. I can help you understand the problem, explore approaches, review code, analyze errors, and think through edge cases.</p></div>{chat && <><div className="user-message"><b>You</b><p>{chat}</p></div><div className="ai-message"><b>Gemini</b><p>Think about whether the current approach can handle negative numbers efficiently. A prefix-sum based approach may be useful here.</p></div></>}</div><button className="structured-button" onClick={() => setShowPrompt(true)}><Sparkles /> Structured Prompt</button><div className="chat-input"><input value={chat} onChange={(e) => setChat(e.target.value)} placeholder="Ask Gemini about your solution..." /><button onClick={() => setChat(chat || 'Explain the optimal approach.')}>Send</button></div></aside></div>{showPrompt && <PromptModal onClose={() => setShowPrompt(false)} onUse={(value) => { setChat(value); setShowPrompt(false) }} />}{showSubmit && <div className="modal-backdrop"><div className="submit-modal"><span className="eyebrow">Submit solution</span><h2>Are you ready to submit?</h2><p>Tests passed <b>18 / 20</b></p><p>Time remaining <b>{time}</b></p><small>Your solution will be evaluated after submission.</small><div><button className="secondary-button" onClick={() => setShowSubmit(false)}>Continue coding</button><button className="primary-button" onClick={() => { setShowSubmit(false); setScreen('result') }}>Submit</button></div></div></div>}</section>
+  if (screen === 'result') return <section className="coding-result"><button className="back-link" onClick={onBack}><ChevronRight className="rotate-180" /> AI Coding</button><p className="eyebrow">AI Coding complete</p><h1 className="assessment-heading">Great work.</h1><p className="assessment-lede">Your solution passed 18 / 20 available tests.</p><div className="coding-result-score"><strong>18 / 20</strong><span>Time · 34:18</span><span>Language · {language}</span></div><div className="coding-result-cards"><div><span className="eyebrow">DSA performance</span><strong>Strong</strong></div><div><span className="eyebrow">AI collaboration</span><strong>Good</strong></div><div><span className="eyebrow">Prompt quality</span><strong>Strong</strong></div></div><div className="ai-analysis-preview"><span className="eyebrow">Your AI analysis</span><p>You used AI effectively to explore the prefix-sum approach and iterated after testing your first implementation.</p><b>Strengths</b><p>✓ Clear problem understanding<br />✓ Good debugging iteration<br />✓ Tested edge cases</p><b>Focus next</b><p>→ More precise constraint-based prompts<br />→ Complexity optimization</p></div></section>
+  if (screen === 'instructions') return <section className="coding-instructions"><button className="back-link" onClick={() => setScreen('details')}><ChevronRight className="rotate-180" /> Set details</button><div className="instruction-card"><p className="eyebrow">Before you begin</p><h1 className="assessment-heading">AI-Assisted Coding</h1><p className="assessment-lede">You have 40 minutes to solve one DSA problem using the AI assistant.</p><div className="remember-grid">{['Use structured prompts', 'Test your solution frequently', 'Review AI-generated suggestions', 'Check edge cases', 'Optimize your solution'].map((item) => <span key={item}><Check /> {item}</span>)}</div><p className="instruction-note">The timer starts when you begin.</p><button className="primary-button" onClick={() => setScreen('workspace')}>Begin Assessment <ArrowUpRight /></button></div></section>
+  if (screen === 'details') return <section className="coding-details"><button className="back-link" onClick={() => setScreen('sets')}><ChevronRight className="rotate-180" /> Practice sets</button><p className="eyebrow">AI Coding · Set {String(selectedSet).padStart(2, '0')}</p><h1 className="assessment-heading">{sets[selectedSet - 1]}</h1><p className="assessment-lede">Focused AI Coding Practice</p><div className="coding-detail-layout"><div className="coding-detail-main"><div className="coding-time-card"><span><Timer /> 40 minutes</span><span>1 DSA problem</span><span>AI assistant enabled</span><span>Coding IDE included</span></div><h3>Skills you&apos;ll practice</h3><div className="skill-pills">{['Sliding Window', 'Array Traversal', 'Complexity Analysis', 'Structured Prompting', 'AI-assisted Debugging'].map((item) => <span key={item}>{item}</span>)}</div></div><div className="assessment-summary"><p className="eyebrow">Assessment flow</p>{['Read the problem', 'Plan your approach', 'Prompt the AI', 'Write your solution', 'Test your code', 'Refine with AI', 'Submit'].map((item, i) => <p key={item}><b>{String(i + 1).padStart(2, '0')}</b>{item}</p>)}<button className="primary-button" onClick={() => setScreen('instructions')}>Start AI Coding <ArrowUpRight /></button></div></div></section>
+  if (screen === 'sets') { const filtered = sets.map((name, i) => ({ name, i })).filter(({ i }) => filter === 'All' || filter === (i > 9 ? 'Mixed' : 'Focused')); return <section className="coding-sets"><button className="back-link" onClick={onBack}><ChevronRight className="rotate-180" /> Assessment journey</button><div className="module-section-heading"><div><p className="eyebrow">AI Coding</p><h1 className="section-title">Practice Sets</h1><p className="module-description">Build your DSA + AI collaboration skills.</p></div><div className="coding-filters"><button className={filter === 'All' ? 'active' : ''} onClick={() => setFilter('All')}>All</button><button className={filter === 'Focused' ? 'active' : ''} onClick={() => setFilter('Focused')}>Focused</button><button className={filter === 'Mixed' ? 'active' : ''} onClick={() => setFilter('Mixed')}>Mixed</button></div></div><div className="set-grid coding-set-grid">{filtered.map(({ name, i }) => <button className={`set-card ${i > 1 && !isPremium ? 'set-locked' : ''}`} key={name} onClick={() => i > 1 && !isPremium ? onPremium() : startSet(i)}><span className="eyebrow">Set {String(i + 1).padStart(2, '0')}</span><h3>{name}</h3>{i > 1 && !isPremium ? <><span className="lock-badge">Premium</span><p className="set-meta">Unlock with PrepWise Premium</p><span className="set-action">Unlock ₹59 <ArrowUpRight /></span></> : <><p className="set-meta">{i > 9 ? 'Mixed' : 'Focused'} · {difficulties[i]}</p><p className="set-meta">1 problem · 40 min</p><span className="set-action">Start Set <ArrowUpRight /></span></>}</button>)}</div></section> }
+  return <section className="coding-overview"><button className="back-link" onClick={onBack}><ChevronRight className="rotate-180" /> Assessment journey</button><div className="coding-overview-hero stage-yellow"><div><p className="eyebrow">AI-Assisted Coding</p><h1 className="module-title">Solve. Prompt. Test. Improve.</h1><p className="module-subtitle">Practice real-world DSA problems while learning how to effectively use AI through structured prompting.</p><button className="primary-button" onClick={() => setScreen('sets')}>Start Practicing <ArrowUpRight /></button></div><div className="coding-stats"><strong>20</strong><span>Practice Sets</span><strong>40 min</strong><span>Assessment Time</span><strong>1</strong><span>DSA Problem</span><strong>AI</strong><span>Assistant</span></div></div><div className="coding-history"><span className="eyebrow">Recent attempts</span><h2 className="section-title">AI Coding History</h2><div className="history-row"><b>Longest Subarray</b><span>20/20</span><span>34m</span></div><div className="history-row"><b>Two Sum Variant</b><span>18/20</span><span>40m</span></div><div className="history-row"><b>Binary Search</b><span>20/20</span><span>28m</span></div></div></section>
+}
+
+function PromptModal({ onClose, onUse }: { onClose: () => void; onUse: (value: string) => void }) {
+  const [context, setContext] = useState('Longest subarray with target sum')
+  const [approach, setApproach] = useState('I am considering prefix sums but need to handle negative values.')
+  const [constraints, setConstraints] = useState('O(n) time, O(n) space, no complete code yet.')
+  const [request, setRequest] = useState('Help me validate the approach and identify edge cases.')
+  const generated = `Context: ${context}\nCurrent approach: ${approach}\nConstraints: ${constraints}\nRequest: ${request}`
+  return <div className="modal-backdrop"><div className="prompt-modal"><div className="workspace-panel-head"><div><span className="eyebrow">Structured prompt</span><h2>Build a clearer prompt.</h2></div><button onClick={onClose}>×</button></div>{[['Context', context, setContext], ['My approach', approach, setApproach], ['Constraints', constraints, setConstraints], ['What I need', request, setRequest]].map(([label, value, setter]) => <label key={label as string}>{label as string}<textarea value={value as string} onChange={(e) => (setter as (value: string) => void)(e.target.value)} /></label>)}<div className="generated-prompt"><span className="eyebrow">Your structured prompt</span><p>{generated}</p></div><div><button className="secondary-button" onClick={onClose}>Cancel</button><button className="primary-button" onClick={() => onUse(generated)}>Use Prompt</button></div></div></div>
+}
+
+function CognitiveModule({ onBack, isPremium, onPremium }: { onBack: () => void; isPremium: boolean; onPremium: () => void }) {
+  const [screen, setScreen] = useState<'overview' | 'sets' | 'start' | 'challenge' | 'result' | 'profile'>('overview')
+  const [section, setSection] = useState<'Motion' | 'Grid' | 'Logic' | 'Behavioral'>('Grid')
+  const [setNumber, setSetNumber] = useState(4)
+  const [filter, setFilter] = useState('All')
+  const [selected, setSelected] = useState<string[]>([])
+  const [answer, setAnswer] = useState('')
+  const [phase, setPhase] = useState<'remember' | 'answer'>('remember')
+  const [seconds, setSeconds] = useState(12 * 60 + 42)
+  const [showExit, setShowExit] = useState(false)
+  const sectionMeta = { Motion: ['Track movement, direction & speed.', 'Motion Tracking', '12 Challenges', '15 min'], Grid: ['Test visual memory, spatial awareness & attention.', 'Visual Memory', '12 Challenges', '15 min'], Logic: ['Solve patterns, sequences & logic.', 'Pattern Recognition', '15 Questions', '18 min'], Behavioral: ['Explore workplace decision scenarios.', 'Decision Making', '10 Scenarios', '12 min'] } as const
+  const sets = ['Motion Tracking', 'Direction & Speed', 'Grid Memory', 'Visual Patterns', 'Sequence Logic', 'Matrix Reasoning', 'Teamwork Scenarios', 'Conflict Resolution', 'Mixed Cognitive', 'Attention Sprint', 'Motion + Grid', 'Logic + Behavioral', 'Spatial Recall', 'Odd One Out', 'Decision Making', 'Complex Patterns', 'Rapid Reasoning', 'Workplace Ethics', 'Mock Cognitive', 'Final Cognitive']
+  const kinds = ['Motion', 'Motion', 'Grid', 'Grid', 'Logic', 'Logic', 'Behavioral', 'Behavioral', 'Mixed', 'Grid', 'Mixed', 'Mixed', 'Grid', 'Logic', 'Behavioral', 'Logic', 'Motion', 'Behavioral', 'Mixed', 'Mixed']
+  useEffect(() => { if (screen !== 'challenge') return; const timer = window.setInterval(() => setSeconds((value) => Math.max(0, value - 1)), 1000); return () => window.clearInterval(timer) }, [screen])
+  const start = (kind = section) => { setSection(kind as typeof section); setScreen('start'); setPhase('remember'); setAnswer(''); setSelected([]) }
+  const begin = () => { setSeconds(12 * 60 + 42); setScreen('challenge'); setPhase(section === 'Grid' ? 'remember' : 'answer') }
+  const time = `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`
+  const next = () => { if (section === 'Grid' && phase === 'remember') setPhase('answer'); else setScreen('result') }
+  if (screen === 'profile') return <section className="cognitive-profile"><button className="back-link" onClick={() => setScreen('overview')}><ChevronRight className="rotate-180" /> Cognitive</button><p className="eyebrow">Your cognitive profile</p><h1 className="assessment-heading">How you think, in signals.</h1><div className="profile-bars">{[['Attention','82%'],['Pattern Recognition','74%'],['Logical Reasoning','81%'],['Spatial Reasoning','68%'],['Decision Making','76%']].map(([label, value]) => <div key={label}><span>{label}<b>{value}</b></span><i><em style={{ width: value }} /></i></div>)}</div><div className="focus-grid"><div><p className="eyebrow">Focus area</p><h3>Spatial Memory</h3><p>You had difficulty maintaining accuracy as grid complexity increased.</p><button className="secondary-button" onClick={() => start('Grid')}>Practice Grid Challenge <ArrowUpRight /></button></div><div className="ai-analysis-card"><p className="eyebrow">AI analysis · practice summary</p><h3>Strong pattern recognition.</h3><p>Consistent logical reasoning and fast response time. Focus on spatial memory and accuracy under time pressure.</p><strong>Recommended next step</strong><button className="primary-button" onClick={() => start('Grid')}>Practice Set 08 <ArrowUpRight /></button></div></div></section>
+  if (screen === 'challenge') return <section className="cognitive-challenge"><header className="cognitive-challenge-top"><span className="brand-mark">PrepWise <i>/</i> COGNITIVE</span><strong>{section.toUpperCase()} CHALLENGE</strong><span className={`cognitive-timer ${seconds < 180 ? 'warning' : ''}`}><Timer /> {time}</span></header><div className="cognitive-progress-row"><span>CHALLENGE 05 / 15</span><span>{Math.round((5 / 15) * 100)}%</span></div><div className="cognitive-progress"><div style={{ width: '47%' }} /></div><main className={`challenge-card challenge-${section.toLowerCase()}`}><p className="eyebrow">{section === 'Behavioral' ? 'Situation 04' : 'Challenge 05'}</p>{section === 'Motion' && <><h1>Track the blue object.</h1><p className="challenge-instruction">Watch carefully, then choose where it finishes.</p><div className="motion-board"><span className="motion-dot blue" /><span className="motion-dot coral" /><span className="motion-path" /></div><div className="answer-options">{['A','B','C','D'].map((item) => <button className={answer === item ? 'selected' : ''} key={item} onClick={() => setAnswer(item)}>{item}</button>)}</div></>}{section === 'Grid' && <><h1>{phase === 'remember' ? 'Remember the highlighted cells.' : 'Which cells were highlighted?'}</h1><p className="challenge-instruction">{phase === 'remember' ? 'You will respond after the pattern disappears.' : 'Select the cells you remember, then submit the pattern.'}</p><div className="memory-grid">{Array.from({ length: 25 }, (_, i) => <button key={i} className={`${[1,8,15,17].includes(i) && phase === 'remember' ? 'target' : ''} ${selected.includes(String(i)) ? 'selected' : ''}`} onClick={() => phase === 'answer' && setSelected((items) => items.includes(String(i)) ? items.filter((item) => item !== String(i)) : [...items, String(i)])} />)}</div></>}{section === 'Logic' && <><h1>Which number comes next?</h1><div className="logic-sequence">3 <span>→</span> 9 <span>→</span> 27 <span>→</span> 81 <span>→</span> ?</div><div className="logic-options">{['162','243','324','729'].map((item) => <button className={answer === item ? 'selected' : ''} key={item} onClick={() => setAnswer(item)}>{item}</button>)}</div></>}{section === 'Behavioral' && <><h1>You are working on a team project. A teammate submits work containing several mistakes shortly before the deadline.</h1><p className="challenge-instruction">What would you most likely do?</p><div className="behavior-options">{['Fix everything yourself to save time.','Inform the teammate and work together to correct them.','Ignore the issue because it is their responsibility.','Escalate immediately to the manager.'].map((item) => <button className={answer === item ? 'selected' : ''} key={item} onClick={() => setAnswer(item)}><span>{answer === item ? '●' : '○'}</span>{item}</button>)}</div></>}<div className="challenge-actions"><button className="secondary-button" onClick={() => setShowExit(true)}>Exit Practice</button><button className="primary-button" onClick={next}>{section === 'Grid' && phase === 'remember' ? 'Continue' : 'Next'} <ChevronRight /></button></div></main>{showExit && <div className="modal-backdrop"><div className="submit-modal"><span className="eyebrow">Exit challenge?</span><h2>Your current progress may be lost.</h2><div><button className="secondary-button" onClick={() => setShowExit(false)}>Continue</button><button className="primary-button" onClick={() => { setShowExit(false); setScreen('sets') }}>Exit</button></div></div></div>}</section>
+  if (screen === 'result') return <section className="cognitive-result"><button className="back-link" onClick={() => setScreen('overview')}><ChevronRight className="rotate-180" /> Cognitive</button><p className="eyebrow">Cognitive challenge complete</p><h1 className="assessment-heading">Nice work.</h1><div className="cognitive-score"><strong>82%</strong><span>Accuracy</span><strong>11:42</strong><span>Time</span><strong>15 / 15</strong><span>Challenges</span></div><div className="result-section-grid">{[['MOTION','86% Accuracy'],['GRID','78% Accuracy'],['LOGICAL REASONING','84% Accuracy'],['BEHAVIORAL','Completed']].map(([label, value]) => <div key={label}><p className="eyebrow">{label}</p><strong>{value}</strong></div>)}</div><button className="primary-button" onClick={() => setScreen('profile')}>View Cognitive Profile <ArrowUpRight /></button></section>
+  if (screen === 'start') { const meta = sectionMeta[section]; return <section className="cognitive-start"><button className="back-link" onClick={() => setScreen('sets')}><ChevronRight className="rotate-180" /> Cognitive practice</button><p className="eyebrow">Cognitive challenge</p><h1 className="assessment-heading">{section.toUpperCase()} CHALLENGE</h1><p className="assessment-lede">{meta[0]}</p><div className="cognitive-start-card"><div className="start-stats"><span>Challenges <b>{meta[2]}</b></span><span>Time <b>{meta[3]}</b></span><span>Difficulty <b>{setNumber > 10 ? 'Hard' : 'Medium'}</b></span></div><p className="eyebrow">Focus</p><div className="focus-pills"><span>{meta[1]}</span><span>Spatial Reasoning</span><span>Attention</span></div></div><div className="how-card"><p className="eyebrow">How it works</p><p>You will see a sequence of visual patterns. Remember the required information and respond as quickly and accurately as possible.</p><button className="primary-button" onClick={begin}>Start Challenge <ArrowUpRight /></button></div></section> }
+  if (screen === 'sets') { const filtered = sets.map((name, i) => ({ name, i })).filter(({ i }) => filter === 'All' || (filter === 'Motion' && kinds[i] === 'Motion') || (filter === 'Grid' && kinds[i] === 'Grid') || (filter === 'Logic' && kinds[i] === 'Logic') || (filter === 'Behavioral' && kinds[i] === 'Behavioral')); return <section className="cognitive-sets"><button className="back-link" onClick={onBack}><ChevronRight className="rotate-180" /> Assessment journey</button><div className="module-section-heading"><div><p className="eyebrow">Cognitive practice</p><h1 className="section-title">Choose a challenge.</h1><p className="module-description">20 sets · Focused and mixed cognitive practice.</p></div><div className="cognitive-filters">{['All','Motion','Grid','Logic','Behavioral'].map((item) => <button className={filter === item ? 'active' : ''} key={item} onClick={() => setFilter(item)}>{item}</button>)}</div></div><div className="set-grid cognitive-set-grid">{filtered.map(({ name, i }) => { const locked = i > 1 && !isPremium; return <button className={`set-card ${locked ? 'set-locked' : ''}`} key={name} onClick={() => locked ? onPremium() : (setSetNumber(i + 1), start(kinds[i] === 'Mixed' ? 'Grid' : kinds[i] as typeof section))}><span className="eyebrow">Set {String(i + 1).padStart(2,'0')}</span><h3>{name}</h3>{locked ? <><span className="lock-badge">Premium</span><p className="set-meta">Unlock with PrepWise Premium</p></> : <><p className="set-meta">{kinds[i]} · {i > 9 ? 'Hard' : i > 3 ? 'Medium' : 'Easy'}</p><p className="set-meta">{i > 9 ? 'Mixed' : 'Focused'} · ~15 min</p></>}<span className="set-action">{locked ? 'Unlock Premium' : 'Start'} <ArrowUpRight /></span></button> })}</div></section> }
+  return <section className="cognitive-overview"><button className="back-link" onClick={onBack}><ChevronRight className="rotate-180" /> Assessment journey</button><div className="cognitive-hero"><p className="eyebrow">Cognitive Assessment</p><h1 className="module-title">Train the way you think.</h1><p className="module-subtitle">Challenge your memory, reasoning, attention, pattern recognition, and decision-making skills.</p><div className="cognitive-hero-actions"><button className="primary-button" onClick={() => setScreen('sets')}>View practice sets <ArrowUpRight /></button><button className="secondary-button" onClick={() => setScreen('profile')}>Your cognitive profile <ArrowUpRight /></button></div></div><div className="cognitive-section-cards">{(['Motion','Grid','Logic','Behavioral'] as const).map((item, i) => <button className={`cognitive-section-card cognitive-${item.toLowerCase()}`} key={item} onClick={() => { setSection(item); setScreen('sets'); setFilter(item) }}><span className="stage-number">0{i + 1}</span><h3>{item === 'Logic' ? 'Logical Reasoning' : `${item} Challenge`}</h3><p>{sectionMeta[item][0]}</p><span>Practice <ArrowUpRight /></span></button>)}</div></section>
+}
+
+function AuthControls() {
+  const { data: session } = authClient.useSession()
+  if (!session)
+    return (
+      <span className="flex items-center gap-2">
+        <a className="secondary-button" href="/admin">
+          Admin
+        </a>
+        <a className="secondary-button" href="/sign-in">
+          Sign in
+        </a>
+      </span>
+    )
+  return (
+    <span className="flex items-center gap-2">
+      <a className="secondary-button" href="/admin">
+        Admin
+      </a>
+      <button className="secondary-button" onClick={() => authClient.signOut({ fetchOptions: { onSuccess: () => window.location.reload() } })}>
+        Sign out
+      </button>
+    </span>
+  )
+}
+
+function SetCard({ set, isPremium, onPremium, onStart }: { set: { number: number; name: string; free: boolean; score: string }; isPremium: boolean; onPremium: () => void; onStart: () => void }) {
+  const locked = !set.free && !isPremium
+  return <button className={`set-card ${locked ? 'set-locked' : ''}`} onClick={() => locked ? onPremium() : onStart()}><div className="flex items-start justify-between"><span className="stage-number">{String(set.number).padStart(2, '0')}</span>{locked ? <span className="lock-badge">Premium · ₹59</span> : <span className="free-badge">{isPremium && !set.free ? 'UNLOCKED' : 'FREE'}</span>}</div><h3>{set.name}</h3><p className="set-meta">20 questions · {set.number > 15 ? 'Hard' : set.number > 5 ? 'Medium' : 'Easy'} · 20 minutes</p><div className="set-footer"><span>Best score <strong>{set.score}</strong></span><span className="set-action">{locked ? 'Unlock' : 'Start practice'} <ArrowUpRight /></span></div></button>
+} 
+
+const technicalQuestions = [
+  { question: 'Which approach is most effective when asking an AI model to return structured information?', options: ['Give a vague instruction', 'Specify the required output format', 'Avoid providing context', 'Ask unrelated questions'], answer: 1, topic: 'Prompt Engineering', explanation: 'A clear output format gives the model a reliable structure to follow.' },
+  { question: 'What is the best first step when evaluating an AI-generated answer?', options: ['Accept it immediately', 'Verify it against reliable context', 'Remove all details', 'Ask the same question repeatedly'], answer: 1, topic: 'AI Fundamentals', explanation: 'Human review and reliable sources are essential because generated answers can be inaccurate.' },
+  { question: 'Which prompt usually produces the most useful response?', options: ['“Tell me something.”', 'A prompt with role, context, and constraints', 'A prompt with no desired outcome', 'Several unrelated requests'], answer: 1, topic: 'Prompt Engineering', explanation: 'Role, context, and constraints make the desired task explicit.' },
+  { question: 'What does a language model primarily predict?', options: ['The next likely token', 'A database row', 'A guaranteed fact', 'A user password'], answer: 0, topic: 'LLM Concepts', explanation: 'Language models generate text by predicting likely next tokens from context.' },
+]
+
+function TechnicalAssessment({ setNumber, setName, onBack }: { setNumber: number; setName: string; onBack: () => void }) {
+  const [started, setStarted] = useState(false)
+  const [question, setQuestion] = useState(0)
+  const [answers, setAnswers] = useState<Record<number, number>>({})
+  const [marked, setMarked] = useState<number[]>([])
+  const [submitted, setSubmitted] = useState(false)
+  const [seconds, setSeconds] = useState(20 * 60)
+  const questions = Array.from({ length: 20 }, (_, index) => technicalQuestions[index % technicalQuestions.length])
+  const current = questions[question]
+  const answered = Object.keys(answers).length
+  const score = Math.round((Object.values(answers).filter((answer, index) => answer === questions[index]?.answer).length / 20) * 100)
+  useEffect(() => {
+    if (!started || submitted || seconds <= 0) return
+    const timer = window.setInterval(() => setSeconds((value) => {
+      if (value <= 1) { window.clearInterval(timer); setSubmitted(true); return 0 }
+      return value - 1
+    }), 1000)
+    return () => window.clearInterval(timer)
+  }, [started, submitted])
+  if (submitted) return <section className="technical-results"><button className="back-link" onClick={onBack}><ChevronRight className="rotate-180" /> Technical Assessment</button><p className="eyebrow text-muted-foreground">Technical Assessment · Practice Set {String(setNumber).padStart(2, '0')}</p><h1 className="assessment-heading">Assessment complete.</h1><div className="technical-score-card"><div><span className="eyebrow">Your score</span><strong>{score}%</strong><p>{Object.values(answers).filter((answer, index) => answer === questions[index]?.answer).length} / 20 correct</p></div><div className="result-stats"><span><b>{answered}</b>Answered</span><span><b>{20 - answered}</b>Unanswered</span><span><b>17m 24s</b>Time used</span></div></div><div className="analysis-grid"><div className="analysis-card"><p className="eyebrow">Strongest area</p><p>AI Fundamentals · 92%</p></div><div className="analysis-card"><p className="eyebrow">Improvement area</p><p>Prompt Engineering · 61%</p></div><div className="analysis-card"><p className="eyebrow">AI recommendation</p><p>Review output formatting, then try 5 targeted questions.</p></div></div><div className="result-actions"><button className="primary-button" onClick={() => { setSubmitted(false); setStarted(false); setQuestion(0); setAnswers({}); setSeconds(1200) }}>Try again <ArrowUpRight /></button><button className="secondary-button">AI analysis <Sparkles /></button></div></section>
+  if (!started) return <section className="technical-entry"><button className="back-link" onClick={onBack}><ChevronRight className="rotate-180" /> Technical Assessment</button><div className="technical-entry-grid"><div><p className="eyebrow text-muted-foreground">Practice Set {String(setNumber).padStart(2, '0')}</p><h1 className="assessment-heading">{setName}</h1><p className="assessment-lede">Focused MCQ practice for your Technical Assessment preparation.</p><div className="technical-meta"><span>20 Questions</span><span>20 Minutes</span><span>{setNumber > 15 ? 'Hard' : setNumber > 5 ? 'Medium' : 'Easy'}</span></div></div><div className="assessment-summary"><p className="eyebrow">Topics</p><ul><li><Check /> AI Literacy</li><li><Check /> Situational Assessment</li><li><Check /> Problem Solving</li><li><Check /> Unlimited attempts</li></ul><button className="primary-button" onClick={() => setStarted(true)}>Start Practice <ArrowUpRight /></button></div></div><div className="before-begin"><p className="eyebrow">Before you begin</p><p>20 MCQ questions · 20 minute time limit · answers reviewed after submission · AI analysis available after completion.</p><span>Previous attempts <strong>3</strong> · Best score <strong>82%</strong></span></div></section>
+  return <section className="technical-workspace"><div className="technical-top"><button className="back-link" onClick={onBack}><ChevronRight className="rotate-180" /> Exit assessment</button><div><p className="eyebrow">Technical Assessment · {setName}</p><strong>Question {String(question + 1).padStart(2, '0')} / 20</strong></div><div className={`technical-timer ${seconds < 60 ? 'warning' : ''}`}><Timer /> {Math.floor(seconds / 60)}:{String(seconds % 60).padStart(2, '0')} remaining</div></div><div className="technical-progress"><div style={{ width: `${((question + 1) / 20) * 100}%` }} /></div><div className="technical-layout"><article className="technical-question"><p className="eyebrow text-muted-foreground">Question {String(question + 1).padStart(2, '0')}</p><h2>{current.question}</h2><div className="mcq-options">{current.options.map((option, index) => <button key={option} className={answers[question] === index ? 'selected' : ''} onClick={() => setAnswers((previous) => ({ ...previous, [question]: index }))}><span className="mcq-letter">{String.fromCharCode(65 + index)}</span><span>{option}</span>{answers[question] === index && <Check />}</button>)}</div><div className="technical-controls"><button className="secondary-button" disabled={question === 0} onClick={() => setQuestion((value) => Math.max(0, value - 1))}>Previous</button><button className="review-button" onClick={() => setMarked((items) => items.includes(question) ? items.filter((item) => item !== question) : [...items, question])}>{marked.includes(question) ? 'Marked for review' : 'Mark for review'}</button>{question === 19 ? <button className="primary-button" onClick={() => setSubmitted(true)}>Submit Assessment <ArrowUpRight /></button> : <button className="primary-button" onClick={() => setQuestion((value) => Math.min(19, value + 1))}>Next <ChevronRight /></button>}</div><span className="save-status"><Check /> Saved</span></article><aside className="question-palette"><p className="eyebrow">Questions</p><div>{questions.map((_, index) => <button key={index} className={`${index === question ? 'current' : ''} ${answers[index] !== undefined ? 'answered' : ''} ${marked.includes(index) ? 'marked' : ''}`} onClick={() => setQuestion(index)}>{String(index + 1).padStart(2, '0')}</button>)}</div><p className="palette-legend">✓ answered · ? review</p></aside></div></section>
+} 
+
+function PremiumModal({ onClose, onUnlock }: { onClose: () => void; onUnlock: () => void | Promise<void> }) {
+  return <div className="premium-overlay" role="dialog" aria-modal="true" aria-labelledby="premium-title"><div className="premium-modal"><button className="premium-close" onClick={onClose} aria-label="Close premium dialog">×</button><div className="premium-mark"><Sparkles /></div><p className="eyebrow text-muted-foreground">PrepWise Premium</p><h2 id="premium-title" className="premium-title">Unlock the full PrepWise experience</h2><p className="premium-copy">Practice every assessment stage, learn from every mistake, and get personalized AI guidance.</p><div className="premium-features">{['100 practice sets', 'Unlimited attempts', 'Advanced learning content', 'AI Performance Analyzer', 'AI Tutor and recommendations', 'Full mock assessments'].map((feature) => <div key={feature}><Check />{feature}</div>)}</div><div className="premium-price"><strong>₹59</strong><span>Premium subscription</span></div><button className="primary-button premium-cta" onClick={onUnlock}>Unlock Premium — ₹59 <ArrowUpRight /></button><button className="premium-continue" onClick={onClose}>Continue with Free</button></div></div>
+}
+
+function ProgressRing({ value }: { value: number }) {
+  return (
+    <div className="relative grid size-28 place-items-center rounded-full" style={{ background: `conic-gradient(var(--ink) ${value * 3.6}deg, var(--line) 0deg)` }}>
+      <div className="grid size-22 place-items-center rounded-full bg-card">
+        <span className="font-display text-2xl font-semibold tracking-tight">{value}%</span>
+      </div>
+    </div>
+  )
+}
+
+function StageCard({ stage, active, onSelect }: { stage: (typeof stages)[number]; active: boolean; onSelect: () => void }) {
+  const Icon = stage.icon
+  return (
+    <button onClick={onSelect} className={`stage-card stage-${stage.color} ${active ? 'stage-active' : ''}`} aria-pressed={active}>
+      <div className="flex items-start justify-between">
+        <span className="stage-number">{stage.number}</span>
+        <div className="stage-icon"><Icon /></div>
+      </div>
+      <div className="mt-8 text-left">
+        <p className="font-display text-xl font-semibold leading-none">{stage.name}</p>
+        <p className="mt-1 text-sm text-muted-foreground">{stage.label}</p>
+      </div>
+      <div className="mt-5 flex items-center justify-between text-xs">
+        <span className="text-muted-foreground">{stage.progress}% ready</span>
+        <ChevronRight className="size-4" />
+      </div>
+      <div className="mt-2 h-1.5 rounded-full bg-black/10"><div className="h-full rounded-full bg-foreground" style={{ width: `${stage.progress}%` }} /></div>
+    </button>
+  )
+}
+
+export default function Page() {
+  const [activeStage, setActiveStage] = useState('technical')
+  const [moduleOpen, setModuleOpen] = useState(false)
+  const [tutorOpen, setTutorOpen] = useState(false)
+  const [premiumOpen, setPremiumOpen] = useState(false)
+  const [isPremium, setIsPremium] = useState(false)
+  const [userLoaded, setUserLoaded] = useState(false)
+  const [paymentLoading, setPaymentLoading] = useState(false)
+  const [englishAssessment, setEnglishAssessment] = useState(false)
+  const [technicalSet, setTechnicalSet] = useState<number | null>(null)
+  const [message, setMessage] = useState('')
+  const [sent, setSent] = useState(false)
+  const [assistantReply, setAssistantReply] = useState('')
+  const [assistantLoading, setAssistantLoading] = useState(false)
+  const [currentUser, setCurrentUser] = useState<{ name: string | null; plan: string } | null>(null)
+  const [catalogModules, setCatalogModules] = useState<BackendModule[]>([])
+  const [progressBySlug, setProgressBySlug] = useState<Record<string, BackendProgress>>({})
+  const [attemptHistory, setAttemptHistory] = useState<BackendAttempt[]>([])
+  const [plans, setPlans] = useState<BackendPlan[]>([])
+  const [dataError, setDataError] = useState(false)
+
+  // Stage config is static (icon, color, label, etc.). Readiness percentages
+  // come from the backend /api/progress endpoint, not from hardcoded values.
+  const resolvedStages = useMemo(() => stages.map((stage) => ({
+    ...stage,
+    progress: progressBySlug[stage.id]?.bestScore ?? 0,
+    })), [progressBySlug])
+
+  const selected = useMemo(() => resolvedStages.find((stage) => stage.id === activeStage) ?? resolvedStages[1], [resolvedStages, activeStage])
+
+  // --- Derived data from real API responses ---
+
+  const stageTones: Record<string, string> = {
+    english: 'mint',
+    technical: 'peach',
+    debugging: 'lavender',
+    coding: 'yellow',
+    cognitive: 'blue',
+  }
+
+  function formatTimeAgo(iso: string | null): string {
+    if (!iso) return 'Unknown'
+    const date = new Date(iso)
+    const now = new Date()
+    const diffMs = now.getTime() - date.getTime()
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
+    const diffDays = Math.floor(diffHours / 24)
+    if (diffDays === 0) {
+      return `Today, ${date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
+    }
+    if (diffDays === 1) return `Yesterday, ${date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`
+    return date.toLocaleDateString('en-US', { weekday: 'short', hour: 'numeric', minute: '2-digit' })
+  }
+
+  const activityItems = useMemo(() =>
+    attemptHistory
+      .filter((a) => a.status === 'submitted' && a.score !== null)
+      .slice(0, 5)
+      .map((attempt) => ({
+        stage: attempt.moduleName,
+        title: attempt.practiceSetName,
+        score: `${attempt.score}%`,
+        time: formatTimeAgo(attempt.startedAt),
+                tone: stageTones[attempt.moduleSlug] ?? 'blue',
+      })),
+  [attemptHistory])
+
+  const overallReadiness = useMemo(() => {
+    const scores = resolvedStages.filter((s) => s.progress > 0).map((s) => s.progress)
+    return scores.length > 0 ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 0
+  }, [resolvedStages])
+
+  const premiumPrice = useMemo(() => {
+    const premiumPlan = plans.find((p) => p.slug === 'premium')
+    return premiumPlan ? (premiumPlan.pricePaise / 100).toFixed(0) : '59'
+  }, [plans])
+
+  const premiumFeatures = useMemo(() => {
+    const premiumPlan = plans.find((p) => p.slug === 'premium')
+    if (!premiumPlan) return ['100 practice sets', 'Unlimited attempts', 'Advanced learning content', 'AI Performance Analyzer', 'AI Tutor and recommendations', 'Full mock assessments']
+    return [
+      premiumPlan.practiceSetAccessLimit === null ? 'Unlimited practice sets' : `${premiumPlan.practiceSetAccessLimit} practice sets`,
+      premiumPlan.unlimitedAttempts ? 'Unlimited attempts' : 'Limited attempts',
+      premiumPlan.aiAnalysis ? 'AI Performance Analyzer' : 'AI Analysis',
+      premiumPlan.aiCoachDailyLimit === null ? 'AI Tutor and recommendations' : 'AI Tutor (daily limit)',
+      'Full mock assessments',
+    ]
+  }, [plans])
+
+  const unlockedSetCount = useMemo(() =>
+    catalogModules.reduce((total, module) =>
+      total + module.practiceSets.filter((s) => !s.locked).length, 0),
+  [catalogModules])
+
+  const weeklyProgress = useMemo(() => {
+    return attemptHistory
+      .filter((a) => a.status === 'submitted' && a.score !== null)
+      .slice(0, 10)
+      .map((a) => a.score ?? 0)
+      .reverse()
+  }, [attemptHistory])
+
+  const weakestStage = useMemo(() => {
+    const nonZero = resolvedStages.filter((s) => s.progress > 0)
+    if (nonZero.length === 0) return null
+    return nonZero.reduce((min, s) => (s.progress < min.progress ? s : min))
+  }, [resolvedStages])
+
+  useEffect(() => {
+    let active = true
+
+    fetch('/api/me', { cache: 'no-store' })
+      .then(async (response) => {
+        if (response.status === 401) return null
+        if (!response.ok) throw new Error('Unable to load your account.')
+        return response.json() as Promise<{ name: string | null; plan: string }>
+      })
+            .then(async (user) => {
+        if (!active) return
+        if (!user) {
+          setUserLoaded(true)
+          return
+        }
+        setCurrentUser(user)
+        setIsPremium(user.plan === 'premium')
+
+        const modulesResponse = await fetch('/api/modules', { cache: 'no-store' })
+        if (!modulesResponse.ok) throw new Error('Unable to load assessment modules.')
+        const modules = await modulesResponse.json() as { modules: BackendModule[] }
+        if (active) setCatalogModules(modules.modules)
+
+        // Fetch per-module progress (best score, attempt counts)
+        try {
+          const progressResponse = await fetch('/api/progress', { cache: 'no-store' })
+          if (progressResponse.ok) {
+            const progressData = await progressResponse.json() as { progress: BackendProgress[] }
+            const map: Record<string, BackendProgress> = {}
+            progressData.progress.forEach((p) => { map[p.moduleSlug] = p })
+            if (active) setProgressBySlug(map)
+          }
+        } catch { /* non-fatal: progress loads opportunistically */ }
+
+        // Fetch attempt history for the activity feed
+        try {
+          const attemptsResponse = await fetch('/api/attempts', { cache: 'no-store' })
+          if (attemptsResponse.ok) {
+            const attemptsData = await attemptsResponse.json() as { attempts: BackendAttempt[] }
+            if (active) setAttemptHistory(attemptsData.attempts)
+          }
+        } catch { /* non-fatal */ }
+
+        // Fetch subscription plans for pricing (public endpoint)
+        try {
+          const plansResponse = await fetch('/api/plans', { cache: 'no-store' })
+          if (plansResponse.ok) {
+            const plansData = await plansResponse.json() as { plans: BackendPlan[] }
+            if (active) setPlans(plansData.plans)
+          }
+        } catch { /* non-fatal */ }
+
+        setUserLoaded(true)
+      })
+      .catch(() => {
+        // Non-fatal: the app should still render with defaults
+        if (active) setUserLoaded(true)
+      })
+
+    return () => {
+      active = false
+    }
+  }, [])
+
+  async function sendMessage() {
+    const prompt = message.trim()
+    if (!prompt || assistantLoading) return
+    setSent(true)
+    setMessage('')
+    setAssistantLoading(true)
+    try {
+      const response = await fetch('/api/ai/assist', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ problem: 'PrepWise assessment preparation and debugging practice', currentCode: '', testOutput: '', request: prompt }),
+      })
+      const result = await response.json() as { text?: string; error?: string }
+      setAssistantReply(result.text ?? result.error ?? 'I could not generate a response right now.')
+    } catch {
+      setAssistantReply('The AI coach is temporarily unavailable. Please try again.')
+    } finally {
+      setAssistantLoading(false)
+    }
+  }
+
+  async function beginPremiumCheckout() {
+    if (paymentLoading) return
+    setPaymentLoading(true)
+
+    try {
+      const response = await fetch('/api/payments/create-order', {
+        method: 'POST',
+        headers: { 'x-idempotency-key': crypto.randomUUID() },
+      })
+      const order = await response.json() as { orderId?: string; amount?: number; currency?: string; keyId?: string; error?: string }
+
+      if (!response.ok || !order.orderId || !order.keyId) {
+        throw new Error(order.error ?? 'Unable to start checkout.')
+      }
+
+      const RazorpayConstructor = (window as Window & {
+        Razorpay?: new (options: Record<string, unknown>) => { open: () => void }
+      }).Razorpay
+
+      if (!RazorpayConstructor) {
+        throw new Error('Payment checkout is not available yet.')
+      }
+
+      const checkout = new RazorpayConstructor({
+        key: order.keyId,
+        amount: order.amount,
+        currency: order.currency,
+        name: 'PrepWise',
+        description: 'PrepWise Premium',
+        order_id: order.orderId,
+        handler: async (payment: { razorpay_order_id: string; razorpay_payment_id: string; razorpay_signature: string }) => {
+          try {
+            const verification = await fetch('/api/payments/verify', {
+              method: 'POST',
+              headers: { 'content-type': 'application/json' },
+              body: JSON.stringify({
+                razorpayOrderId: payment.razorpay_order_id,
+                razorpayPaymentId: payment.razorpay_payment_id,
+                razorpaySignature: payment.razorpay_signature,
+              }),
+            })
+            const result = await verification.json() as { premium?: boolean; error?: string }
+
+            if (!verification.ok || !result.premium) {
+              throw new Error(result.error ?? 'Payment verification failed.')
+            }
+
+            setIsPremium(true)
+            setPremiumOpen(false)
+          } catch (error) {
+            window.alert(error instanceof Error ? error.message : 'Payment verification failed.')
+          }
+        },
+        'payment.failed': (failure: { error?: { description?: string } }) => {
+          window.alert(failure.error?.description ?? 'Razorpay payment failed.')
+          setPaymentLoading(false)
+        },
+        modal: { ondismiss: () => setPaymentLoading(false) },
+      })
+      checkout.open()
+    } catch (error) {
+      window.alert(error instanceof Error ? error.message : 'Unable to start checkout.')
+    } finally {
+      setPaymentLoading(false)
+    }
+  }
+
+  return (
+    <main className="app-shell">
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive" />
+      <aside className="sidebar">
+        <div className="brand"><div className="brand-mark"><Sparkles /></div><span>prepwise</span><span className="brand-beta">BETA</span></div>
+        <div className="workspace-switcher"><div className="avatar avatar-coral">AK</div><div><p className="text-sm font-medium">Student</p><p className="text-xs text-muted-foreground">Workspace</p></div><MoreHorizontal className="ml-auto size-4 text-muted-foreground" /></div>
+        <nav className="mt-8 flex flex-col gap-1" aria-label="Main navigation">
+          <p className="nav-label">Workspace</p>
+          <a className="nav-item nav-item-active" href="#dashboard"><Home /> Dashboard</a>
+          <a className="nav-item" href="#journey"><Target /> Assessment journey <span className="nav-count">5</span></a>
+          <a className="nav-item" href="#progress"><LineChart /> My progress</a>
+          <a className="nav-item" href="#history"><Timer /> Attempt history</a>
+          <p className="nav-label mt-7">Resources</p>
+          <a className="nav-item" href="#library"><LibraryBig /> Learning library</a>
+          <a className="nav-item" href="#tutor" onClick={() => setTutorOpen(true)}><MessageCircle /> AI tutor <span className="status-dot" /></a>
+          <a className="nav-item" href="#bookmarks"><Trophy /> Bookmarks</a>
+        </nav>
+        <div className="sidebar-bottom"><a className="nav-item" href="#settings"><Settings2 /> Settings</a><div className="support-card"><div className="flex items-center gap-2"><div className="grid size-7 place-items-center rounded-full bg-ink text-background"><CircleHelp className="size-4" /></div><span className="text-sm font-medium">Need a hand?</span></div><p className="mt-2 text-xs leading-relaxed text-muted-foreground">Your AI coach is ready whenever you are.</p><button onClick={() => setTutorOpen(true)} className="mt-3 text-xs font-semibold underline underline-offset-4">Open tutor</button></div></div>
+      </aside>
+
+      <section className="content-area" id="dashboard">
+        <header className="topbar"><div className="mobile-brand brand"><div className="brand-mark"><Sparkles /></div><span>prepwise</span></div><div className="search-box"><Search className="size-4" /><span>Search practice, topics, or concepts</span><kbd>⌘ K</kbd></div><div className="top-actions"><button className="icon-button" aria-label="Notifications"><Flame /></button><AuthControls /></div></header>
+        <div className="page-wrap">
+          <div className="welcome-row"><div><p className="eyebrow">Tuesday, September 18, 2026</p><h1 className="page-title">Good morning, {currentUser?.name?.split(' ')[0] ?? 'there'}<span className="text-coral">.</span></h1><p className="mt-2 text-muted-foreground">Small steps today compound into confident assessment days.</p></div><button className="primary-button" onClick={() => setTutorOpen(true)}><Sparkles /> Ask your AI coach <ArrowUpRight /></button></div>
+
+          {technicalSet ? <TechnicalAssessment setNumber={technicalSet} setName={practiceNames[technicalSet - 1]} onBack={() => setTechnicalSet(null)} /> : englishAssessment ? <EnglishAssessment onBack={() => setEnglishAssessment(false)} /> : moduleOpen ? <ModuleView stage={selected} backendModule={catalogModules.find((module) => module.slug === selected.id)} onBack={() => setModuleOpen(false)} onTutor={() => setTutorOpen(true)} onAssessment={() => setEnglishAssessment(true)} onSet={(set) => setTechnicalSet(set)} isPremium={isPremium} onPremium={() => setPremiumOpen(true)} /> : <>
+          {userLoaded && (!isPremium ? <section className="premium-banner"><div><p className="eyebrow">One subscription, complete preparation</p><h2>Unlock your full assessment journey</h2><p>100 practice sets · Advanced AI analysis · Personalized learning</p></div><div className="premium-banner-action"><strong>₹{premiumPrice}</strong><button className="primary-button" onClick={() => setPremiumOpen(true)}>Unlock Premium <ArrowUpRight /></button></div></section> : <div className="premium-active"><Check /> <strong>Premium active</strong><span>{unlockedSetCount} practice sets unlocked across PrepWise</span></div>)}
+
+          <section className="hero-grid mt-8">
+            <div className="readiness-card"><div><p className="eyebrow text-muted-foreground">Overall readiness</p><h2 className="mt-3 font-display text-3xl font-semibold tracking-tight">{overallReadiness > 0 ? "You're building momentum." : "Ready to begin your journey."}</h2><p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">Your practice progress is a snapshot of your preparation — not a prediction of hiring outcomes.</p></div><div className="mt-8 flex items-end gap-7"><ProgressRing value={overallReadiness} /><div className="flex-1 pb-1"><div className="flex items-center justify-between text-xs"><span className="text-muted-foreground">This week</span><span className="text-muted-foreground">{weeklyProgress.length ? `${weeklyProgress[weeklyProgress.length - 1]}%` : '—'}</span></div><div className="mt-2 flex h-14 items-end gap-1.5">{weeklyProgress.length ? weeklyProgress.map((height, index) => <div key={index} className="chart-bar" style={{ height: `${Math.min(height, 100)}%`, opacity: index < 4 ? .35 : index < 8 ? .6 : 1 }} />) : <div className="chart-bar" style={{ height: "4px" }} />}</div><div className="mt-2 flex gap-1.5">{weeklyProgress.slice(-5).map((score, index) => <span key={index} className="text-xs text-muted-foreground">{score}%</span>)}</div></div></div></div>
+            <div className="focus-card"><div className="flex items-start justify-between"><div><p className="eyebrow text-muted-foreground">Focus today</p><p className="mt-3 font-display text-2xl font-semibold">{weakestStage ? weakestStage.name + ' ' + weakestStage.label : 'Start with any module.'}</p></div><div className="focus-icon"><Zap /></div></div><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{weakestStage ? `Your progress in ${weakestStage.name} needs attention. Focus here first.` : 'Complete a few practice sets to get a personalized focus recommendation.'}</p>{weakestStage && <div className="mt-6 flex items-center gap-3"><div className={`avatar stage-${weakestStage.color}`}></div><div className="flex-1"><p className="text-sm font-semibold">{weakestStage.name} · {weakestStage.label}</p><button className="secondary-button mt-2" onClick={() => { setActiveStage(weakestStage.id); setModuleOpen(true) }}>Go to ${weakestStage.name} <ArrowUpRight /></button></div></div>}</div>
+          </section>
+
+          <section className="mt-10" id="journey"><div className="section-heading"><div><p className="eyebrow text-muted-foreground">Your roadmap</p><h2 className="section-title">Assessment journey</h2></div><button className="text-button">View full journey <ArrowUpRight /></button></div><div className="journey-track">{stages.map((stage) => <StageCard key={stage.id} stage={stage} active={selected.id === stage.id} onSelect={() => { setActiveStage(stage.id); setModuleOpen(true) }} />)}</div><div className="stage-detail"><div className="stage-detail-main"><div className={`detail-icon stage-${selected.color}`}><selected.icon /></div><div><p className="eyebrow text-muted-foreground">Selected stage · {selected.number}</p><h3 className="mt-1 font-display text-2xl font-semibold">{selected.name}{' '}{selected.label}</h3><p className="mt-2 text-sm text-muted-foreground">{selected.meta} · Unlimited practice attempts</p></div></div><div className="stage-detail-stats"><div><span className="stat-value">{selected.progress}%</span><span className="stat-label">best score</span></div><div><span className="stat-value">12</span><span className="stat-label">attempts</span></div><button className="primary-button primary-button-small"><Play /> Continue</button></div></div></section>
+
+          <section className="bottom-grid mt-10"><div className="activity-card" id="history"><div className="section-heading"><div><p className="eyebrow text-muted-foreground">Recent practice</p><h2 className="section-title">Keep the streak going</h2></div><button className="text-button">See history <ArrowUpRight /></button></div><div className="activity-list">{activityItems.map((item) => <div className="activity-row" key={item.title}><div className={`activity-icon stage-${item.tone}`}><Check /></div><div className="min-w-0 flex-1"><p className="truncate text-sm font-semibold">{item.title}</p><p className="mt-1 text-xs text-muted-foreground">{item.stage} · {item.time}</p></div><span className="score-pill">{item.score}</span><ChevronRight className="size-4 text-muted-foreground" /></div>)}</div></div><div className="recommendation-card"><div className="flex items-center gap-2"><Sparkles className="size-4 text-coral" /><p className="eyebrow">AI recommendation</p></div><h3 className="mt-5 font-display text-xl font-semibold leading-tight">Turn your mistakes into your next advantage.</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">Review <strong className="font-semibold text-foreground">boundary conditions</strong> for 8 minutes, then reattempt the focused set while the pattern is fresh.</p><button className="secondary-button mt-6">Start targeted practice <ArrowUpRight /></button></div></section>
+          </>}
+        </div>
+      </section>
+
+      {premiumOpen && <PremiumModal onClose={() => setPremiumOpen(false)} onUnlock={beginPremiumCheckout} />}
+      {tutorOpen && <div className="tutor-panel" id="tutor"><div className="tutor-header"><div className="flex items-center gap-3"><div className="brand-mark"><Sparkles /></div><div><p className="font-display font-semibold">Prepwise coach</p><p className="text-xs text-muted-foreground">Context-aware guidance</p></div></div><button className="icon-button" onClick={() => setTutorOpen(false)} aria-label="Close tutor">×</button></div><div className="tutor-body"><div className="coach-message"><Sparkles className="size-4 shrink-0 text-coral" /><p>I noticed you&apos;re working on <strong>Debugging · Loops</strong>. Want a conceptual hint, a worked example, or a quick practice set?</p></div>{sent && <div className="coach-message coach-message-user"><UserRound className="size-4 shrink-0" /><p>{assistantLoading ? 'Thinking through that with you…' : message || 'I&apos;ll help you work through that step by step.'}</p></div>}{assistantReply && <div className="coach-message"><Sparkles className="size-4 shrink-0 text-coral" /><p>{assistantReply}</p></div>}</div><div className="tutor-suggestions"><button onClick={() => setMessage('Give me a hint about boundary conditions')}>Give me a hint</button><button onClick={() => setMessage('Create 5 questions from my mistakes')}>Create practice</button></div><div className="tutor-input"><input value={message} onChange={(event) => setMessage(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter' && !event.nativeEvent.isComposing && event.keyCode !== 229) sendMessage() }} placeholder="Ask anything about your practice..." /><button onClick={sendMessage} aria-label="Send message"><ArrowUpRight /></button></div></div>}
+    </main>
+  )
+}
+
+// The dashboard uses demo data so the product experience can be explored immediately.
+// Scores are practice-progress indicators, not hiring predictions.
+
+const _ = Gauge
+const __ = UserRound
+const ___ = MessageCircle
+export { _, __, ___ }
