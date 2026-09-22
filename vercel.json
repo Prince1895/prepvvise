@@ -1,4 +1,5 @@
 {
   "installCommand": "pnpm install --no-frozen-lockfile",
-  "buildCommand": "next build"
+  "buildCommand": "pnpm run build",
+  "nodeVersion": "22.18.0"
 }
